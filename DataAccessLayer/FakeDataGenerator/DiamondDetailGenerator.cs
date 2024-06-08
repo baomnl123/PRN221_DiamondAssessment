@@ -1,7 +1,7 @@
 using Bogus;
 using Entities.Models;
 
-namespace Repository.FakeDataGenerator;
+namespace DataAccessLayer.FakeDataGenerator;
 
 public static class DiamondDetailGenerator
 {

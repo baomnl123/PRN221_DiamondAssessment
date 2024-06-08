@@ -1,4 +1,4 @@
-using CompanyEmployees.Extensions;
+using DiamondAssessment.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

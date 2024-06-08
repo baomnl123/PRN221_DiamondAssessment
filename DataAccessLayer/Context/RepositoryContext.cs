@@ -1,8 +1,8 @@
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Repository.FakeDataGenerator;
+using DataAccessLayer.FakeDataGenerator;
 
-namespace Repository.Context;
+namespace DataAccessLayer.Context;
 
 public class RepositoryContext(DbContextOptions options) : DbContext(options)
 {

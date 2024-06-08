@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Repository.Context;
+using DataAccessLayer.Context;
 
-namespace CompanyEmployees.Extensions;
+namespace DiamondAssessment.Extensions;
 
 public static class ServiceExtensions
 {
