@@ -1,7 +1,13 @@
+using CompanyEmployees.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// builder.Services.ConfigureRepositoryManager();
+// builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureSqlContext(builder.Configuration);
 
 var app = builder.Build();
 
