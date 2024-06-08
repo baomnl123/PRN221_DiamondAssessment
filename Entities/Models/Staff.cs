@@ -21,7 +21,7 @@ public class Staff
     public string? Email { get; set; }
 
     // Relationships
-    public ICollection<AssessmentPaper> AssessmentPapers { get; set; } = null!;
-    public ICollection<RegisterForm> RegisterForms { get; set; } = null!;
-    public ICollection<DiamondDetail> DiamondDetails { get; set; } = null!;
+    public ICollection<AssessmentPaper> AssessmentPapers { get; set; } = [];
+    public ICollection<RegisterForm> RegisterForms { get; set; } = [];
+    public ICollection<DiamondDetail> DiamondDetails { get; set; } = [];
 }

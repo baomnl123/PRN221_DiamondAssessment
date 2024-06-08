@@ -26,5 +26,8 @@ public class Ticket
     // Relationships
     [ForeignKey(nameof(RegisterFormId))]
     public RegisterForm RegisterForm { get; set; } = null!;
-    public ICollection<DiamondDetail> DiamondDetails { get; set; } = null!;
+
+    public ICollection<DiamondDetail> DiamondDetails { get; set; } = [];
+
+    public ICollection<AssessmentPaper> AssessmentPapers { get; set; } = [];
 }

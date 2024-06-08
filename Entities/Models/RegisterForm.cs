@@ -19,16 +19,10 @@ public class RegisterForm
     [Required(ErrorMessage = "Email is a required field.")]
     public string? Email { get; set; }
     public Guid StaffId { get; set; }
-
-    // public Guid TicketId { get; set; }
     public bool Status { get; set; }
 
     // Relationships
     [ForeignKey(nameof(StaffId))]
     public Staff Staff { get; set; } = null!;
-
-    // [ForeignKey(nameof(TicketId))]
-    // public Ticket Ticket { get; set; } = null!;
-
-    public ICollection<Ticket> Tickets { get; set; } = null!;
+    public ICollection<Ticket> Tickets { get; set; } = [];
 }
