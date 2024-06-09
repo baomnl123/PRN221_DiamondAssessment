@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Repository;
+namespace DataAccessLayer;
 
 public static class AssemblyReference
 {

@@ -1,4 +1,4 @@
-namespace Repository.Constants;
+namespace DataAccessLayer.Constants;
 
 internal static class TableNames
 {

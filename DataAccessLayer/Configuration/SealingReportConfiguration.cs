@@ -1,15 +1,15 @@
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Repository.Constants;
+using DataAccessLayer.Constants;
 
-namespace Repository.Configuration;
+namespace DataAccessLayer.Configuration;
 
-public class CommitmentFormConfiguration : IEntityTypeConfiguration<CommitmentForm>
+public class SealingReportConfiguration : IEntityTypeConfiguration<SealingReport>
 {
-    public void Configure(EntityTypeBuilder<CommitmentForm> builder)
+    public void Configure(EntityTypeBuilder<SealingReport> builder)
     {
-        builder.ToTable(TableNames.CommitmentForm);
+        builder.ToTable(TableNames.SealingReport);
 
         builder.HasKey(c => c.Id);
 

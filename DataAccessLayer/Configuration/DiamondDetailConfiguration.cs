@@ -1,9 +1,9 @@
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Repository.Constants;
+using DataAccessLayer.Constants;
 
-namespace Repository.Configuration;
+namespace DataAccessLayer.Configuration;
 
 public class DiamondDetailConfiguration : IEntityTypeConfiguration<DiamondDetail>
 {
