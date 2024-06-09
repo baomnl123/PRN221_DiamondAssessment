@@ -1,8 +1,7 @@
 ﻿using Entities.Models;
 
-namespace DataAccessLayer.Abstractions;
+namespace Repository.Abstractions;
 
-public interface IAssessmentPaperRepository
+public interface IAssessmentPaperRepository : IRepositoryBase<AssessmentPaper>
 {
-    
 }

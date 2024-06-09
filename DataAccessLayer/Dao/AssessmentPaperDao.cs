@@ -6,7 +6,8 @@ namespace DataAccessLayer.Dao;
 
 public class AssessmentPaperDao : DaoBase<AssessmentPaper>, IAssessmentPaperDao
 {
-    protected AssessmentPaperDao(RepositoryContext repositoryContext) : base(repositoryContext)
+    public AssessmentPaperDao(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }
+
 }
