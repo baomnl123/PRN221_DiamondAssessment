@@ -9,12 +9,23 @@ namespace Repository.FakeDataGenerator
             AssessmentPaper[] assessmentPapers
         )
         {
+            var usedAssessmentPaperIds = new HashSet<Guid>();
+
             return new Faker<CommitmentForm>()
                 .UseSeed(1)
                 .RuleFor(commitmentForm => commitmentForm.Id, f => f.Random.Guid())
                 .RuleFor(
                     commitmentForm => commitmentForm.PaperId,
-                    f => f.PickRandom(assessmentPapers).Id
+                    f =>
+                    {
+                        var ticketId = f.PickRandom(assessmentPapers).Id;
+                        while (usedAssessmentPaperIds.Contains(ticketId))
+                        {
+                            ticketId = f.PickRandom(assessmentPapers).Id;
+                        }
+                        usedAssessmentPaperIds.Add(ticketId);
+                        return ticketId;
+                    }
                 )
                 .RuleFor(commitmentForm => commitmentForm.CreatedAt, f => f.Date.Past())
                 .RuleFor(commitmentForm => commitmentForm.Status, f => f.Random.Bool())

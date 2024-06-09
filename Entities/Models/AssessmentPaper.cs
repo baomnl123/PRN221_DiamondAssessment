@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Entities.Models;
 
 public class AssessmentPaper
@@ -22,9 +20,8 @@ public class AssessmentPaper
     public bool Status { get; set; }
 
     // Relationships
-    [ForeignKey(nameof(TicketId))]
     public Ticket Ticket { get; set; } = null!;
-
-    [ForeignKey(nameof(StaffId))]
     public Staff Staff { get; set; } = null!;
+    public CommitmentForm CommitmentForm { get; set; } = null!;
+    public SealingReport SealingReport { get; set; } = null!;
 }

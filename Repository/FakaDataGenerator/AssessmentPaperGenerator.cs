@@ -10,10 +10,24 @@ public static class AssessmentPaperGenerator
         Staff[] staffs
     )
     {
+        var usedTicketIds = new HashSet<Guid>();
+
         return new Faker<AssessmentPaper>()
             .UseSeed(1)
             .RuleFor(assessmentPaper => assessmentPaper.Id, f => f.Random.Guid())
-            .RuleFor(assessmentPaper => assessmentPaper.TicketId, f => f.PickRandom(tickets).Id)
+            .RuleFor(
+                assessmentPaper => assessmentPaper.TicketId,
+                f =>
+                {
+                    var ticketId = f.PickRandom(tickets).Id;
+                    while (usedTicketIds.Contains(ticketId))
+                    {
+                        ticketId = f.PickRandom(tickets).Id;
+                    }
+                    usedTicketIds.Add(ticketId);
+                    return ticketId;
+                }
+            )
             .RuleFor(assessmentPaper => assessmentPaper.StaffId, f => f.PickRandom(staffs).Id)
             .RuleFor(assessmentPaper => assessmentPaper.PaperCode, f => f.Lorem.Paragraph())
             .RuleFor(assessmentPaper => assessmentPaper.CreatedAt, f => f.Date.Past())
