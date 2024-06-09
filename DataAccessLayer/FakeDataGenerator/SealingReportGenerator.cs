@@ -1,4 +1,4 @@
-namespace Repository.FakeDataGenerator
+namespace DataAccessLayer.FakeDataGenerator
 {
     using Bogus;
     using Entities.Models;

@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiamondAssessment", "Diamon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{674EE67C-6272-4B50-A5D2-18E05F7BD29B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{8E894C41-50B5-4A49-8CD8-6C9C0FBB0EB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{8E894C41-50B5-4A49-8CD8-6C9C0FBB0EB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{6ABB9F82-E397-49CD-83E8-D77B5D09ECDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{99D9694C-F7E3-46E3-B2B4-04F6D00B6B90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +38,9 @@ Global
 		{6ABB9F82-E397-49CD-83E8-D77B5D09ECDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ABB9F82-E397-49CD-83E8-D77B5D09ECDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ABB9F82-E397-49CD-83E8-D77B5D09ECDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99D9694C-F7E3-46E3-B2B4-04F6D00B6B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D9694C-F7E3-46E3-B2B4-04F6D00B6B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D9694C-F7E3-46E3-B2B4-04F6D00B6B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D9694C-F7E3-46E3-B2B4-04F6D00B6B90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

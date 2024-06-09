@@ -1,4 +1,10 @@
-using CompanyEmployees.Extensions;
+using DataAccessLayer.Dao;
+using DataAccessLayer.Dao.Abstractions;
+using DiamondAssessment.Extensions;
+using Entities.Models;
+using Repository.Abstractions;
+using Repository.Repositories;
+using Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +14,9 @@ builder.Services.AddRazorPages();
 // builder.Services.ConfigureRepositoryManager();
 // builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureDaos();
+builder.Services.ConfigureRepositories();
+builder.Services.ConfigureServices();
 
 var app = builder.Build();
 
