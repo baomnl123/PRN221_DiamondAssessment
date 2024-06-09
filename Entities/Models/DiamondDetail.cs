@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Entities.Models;
 
 public class DiamondDetail
@@ -19,9 +17,6 @@ public class DiamondDetail
     public string? Fluorescence { get; set; }
 
     // Relationships
-    [ForeignKey(nameof(StaffId))]
     public Staff Staff { get; set; } = null!;
-
-    [ForeignKey(nameof(TicketId))]
     public Ticket Ticket { get; set; } = null!;
 }

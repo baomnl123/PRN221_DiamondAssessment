@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Entities.Models;
 
 public class SealingReport
@@ -10,6 +8,5 @@ public class SealingReport
     public bool Status { get; set; }
 
     // Relationships
-    [ForeignKey(nameof(PaperId))]
     public AssessmentPaper AssessmentPaper { get; set; } = null!;
 }

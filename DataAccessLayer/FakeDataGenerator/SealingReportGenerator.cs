@@ -9,12 +9,23 @@ namespace DataAccessLayer.FakeDataGenerator
             AssessmentPaper[] assessmentPapers
         )
         {
+            var usedAssessmentPaperIds = new HashSet<Guid>();
+
             return new Faker<SealingReport>()
                 .UseSeed(1)
                 .RuleFor(sealingReport => sealingReport.Id, f => f.Random.Guid())
                 .RuleFor(
                     sealingReport => sealingReport.PaperId,
-                    f => f.PickRandom(assessmentPapers).Id
+                    f =>
+                    {
+                        var ticketId = f.PickRandom(assessmentPapers).Id;
+                        while (usedAssessmentPaperIds.Contains(ticketId))
+                        {
+                            ticketId = f.PickRandom(assessmentPapers).Id;
+                        }
+                        usedAssessmentPaperIds.Add(ticketId);
+                        return ticketId;
+                    }
                 )
                 .RuleFor(sealingReport => sealingReport.CreatedAt, f => f.Date.Past())
                 .RuleFor(sealingReport => sealingReport.Status, f => f.Random.Bool())
