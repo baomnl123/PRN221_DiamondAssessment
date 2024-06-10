@@ -9,5 +9,4 @@ public interface IRepositoryBase<TEntity>
     Task<bool> Create(TEntity entity);
     Task<bool> Update(TEntity entity);
     Task<bool> Delete(TEntity entity);
-    string TestRepo();
 }

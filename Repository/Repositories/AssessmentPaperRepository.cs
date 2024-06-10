@@ -25,6 +25,5 @@ public class AssessmentPaperRepository : IAssessmentPaperRepository
     public async Task<bool> Update(AssessmentPaper entity) => await _assessmentPaperDao.Update(entity);
 
     public async Task<bool> Delete(AssessmentPaper entity) => await _assessmentPaperDao.Delete(entity);
-
-    public string TestRepo() => _assessmentPaperDao.TestDao();
+    
 }

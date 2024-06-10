@@ -1,6 +1,9 @@
-﻿namespace Service.Abstractions;
+﻿using Entities.Models;
+
+namespace Service.Abstractions;
 
 public interface IAssessmentPaperService
 {
-    string TestService();
+    List<AssessmentPaper> FindAll();
+
 }

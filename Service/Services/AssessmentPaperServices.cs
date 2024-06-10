@@ -1,10 +1,5 @@
 ﻿using Repository.Abstractions;
-using Repository.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Entities.Models;
 using Service.Abstractions;
 
 namespace Service.Services
@@ -16,9 +11,9 @@ namespace Service.Services
         {
             _assessmentPaperRepository = assessmentPaperRepository;
         }
-        public string TestService()
-        {
-            return _assessmentPaperRepository.TestRepo();
-        }
+
+        public List<AssessmentPaper> FindAll() => _assessmentPaperRepository.FindAll().ToList();
+        
+        
     }
 }

@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Service.Services;
+using Service.Abstractions;
 
 namespace DiamondAssessment.Pages;
 
 public class PrivacyModel : PageModel
 {
     private readonly ILogger<PrivacyModel> _logger;
-    private readonly AssessmentPaperServices _assessmentPaperServices;
-    public string Test { get; set; }
+    private readonly IAssessmentPaperService _assessmentPaperServices;
+    public List<AssessmentPaper> listPaper { get; set; }
 
-    public PrivacyModel(ILogger<PrivacyModel> logger, AssessmentPaperServices assessmentPaperServices)
+    public PrivacyModel(ILogger<PrivacyModel> logger, IAssessmentPaperService assessmentPaperServices)
     {
         _logger = logger;
         _assessmentPaperServices = assessmentPaperServices;
@@ -18,7 +19,7 @@ public class PrivacyModel : PageModel
 
     public void OnGet()
     {
-        Test = _assessmentPaperServices.TestService();
+        listPaper = _assessmentPaperServices.FindAll();
     }
 }
 

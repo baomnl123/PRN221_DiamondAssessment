@@ -14,11 +14,6 @@ public class DaoBase<TEntity> : IDaoBase<TEntity>
     {
         _repositoryContext = repositoryContext;
     }
-
-    public string TestDao()
-    {
-        return "Dao tested";
-    }
     
     public IQueryable<TEntity> FindAll()
     {

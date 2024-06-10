@@ -9,5 +9,5 @@ public interface IDaoBase<TEntity>
     Task<bool> Create(TEntity entity);
     Task<bool> Update(TEntity entity);
     Task<bool> Delete(TEntity entity);
-    string TestDao();
+    
 }
