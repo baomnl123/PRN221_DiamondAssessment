@@ -14,6 +14,7 @@ builder.Services.ConfigureDaos();
 builder.Services.ConfigureRepositories();
 builder.Services.ConfigureServices();
 
+builder.Services.AddScoped<IRegisterFormService,RegisterFormServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

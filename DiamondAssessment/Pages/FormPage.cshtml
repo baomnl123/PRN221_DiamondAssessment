@@ -1,0 +1,32 @@
+﻿@page
+@model DiamondAssessment.Pages.FormPageModel
+@{
+    ViewData["Title"] = "FormPage";
+}
+<a asp-page="Create">Create New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Forms[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Forms[0].PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Forms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

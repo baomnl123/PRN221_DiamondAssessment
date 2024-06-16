@@ -6,6 +6,7 @@ namespace DataAccessLayer.Context;
 
 public class RepositoryContext(DbContextOptions options) : DbContext(options)
 {
+
     public DbSet<AssessmentPaper>? AssessmentPapers { get; set; }
     public DbSet<CommitmentForm>? CommitmentForms { get; set; }
     public DbSet<DiamondDetail>? DiamondDetails { get; set; }

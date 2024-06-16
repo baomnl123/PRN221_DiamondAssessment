@@ -1,5 +1,6 @@
 using Service.Abstractions;
 using Service.Services;
+using Service.Abstractions;
 
 
 namespace DiamondAssessment.Extensions;
