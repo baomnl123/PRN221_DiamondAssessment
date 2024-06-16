@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var accountId = HttpContextAccessor.HttpContext?.Session.GetString("AccountId");
+    var role = HttpContextAccessor.HttpContext?.Session.GetString("Role");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,15 +26,45 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @switch (role)
+                        {
+                            case "1":
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Staff/RegisterForm/FormPage">Form List</a>
+                                </li>
+                                break;
+                            case "2":
+                                <li class="nav-item">
+                                    @*TODO: Change to the right address after create that page*@
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Index">Report List</a>
+                                </li>
+                                break;
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            @*TODO: Change to the right address after create that page*@
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Register an assessment</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/FormPage">Form</a>
-                        </li>
+                    </ul>
+                    
+                    <ul class="navbar-nav">
+                        @if (string.IsNullOrEmpty(accountId))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            if (role != "2")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/Staff/Profile" asp-route-id="@accountId">Profile</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

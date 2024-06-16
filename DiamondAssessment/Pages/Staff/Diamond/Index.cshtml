@@ -2,6 +2,8 @@
 @model DiamondAssessment.Pages.Diamond.IndexModel
 @{
     ViewData["Title"] = "Diamond Manager";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "1") Response.Redirect("/Login");
 }
 
 <h1>@ViewData["Title"]</h1>

@@ -1,7 +1,9 @@
 ﻿@page
 @model DiamondAssessment.Pages.FormPageModel
 @{
-    ViewData["Title"] = "FormPage";
+    ViewData["Title"] = "Register Form Manager";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "1") Response.Redirect("/Login");
 }
 <a asp-page="Create">Create New</a>
 <table class="table">

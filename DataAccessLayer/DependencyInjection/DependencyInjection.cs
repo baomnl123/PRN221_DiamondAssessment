@@ -20,5 +20,6 @@ public static class DependencyInjection
     {
         services.AddScoped<IAssessmentPaperDao, AssessmentPaperDao>();
         services.AddScoped<IRegisterFormDao, RegisterFormDao>();
+        //services.AddScoped<IDiamondDetailDao, DiamondDetailDao>();
     }
 }

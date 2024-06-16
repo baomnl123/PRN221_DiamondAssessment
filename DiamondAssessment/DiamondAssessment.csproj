@@ -21,8 +21,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\AssessmentPaper\" />
-    <Folder Include="Pages\Staff\" />
+    <Folder Include="Pages\Staff\AssessmentPaper\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Diamond\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Pages\Staff\Diamond\Index.cshtml" />
   </ItemGroup>
 
   <PropertyGroup>
