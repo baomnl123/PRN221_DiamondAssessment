@@ -9,5 +9,6 @@ public static class RepositoryExtensions
     public static void ConfigureRepositories(this IServiceCollection services)
     {
         services.AddScoped<IAssessmentPaperRepository, AssessmentPaperRepository>();
+        services.AddScoped<IStaffRepository, StaffRepository>();
     }
 }
