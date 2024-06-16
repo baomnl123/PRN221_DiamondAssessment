@@ -1,0 +1,49 @@
+@page
+@model DiamondAssessment.Pages.Diamond.IndexModel
+@{
+    ViewData["Title"] = "Diamond Manager";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="row">Id</th>
+            <th scope="row">Origin</th>
+            <th scope="row">Measurement</th>
+            <th scope="row">CaratWeight</th>
+            <th scope="row">Clarity</th>
+            <th scope="row">Cut</th>
+            <th scope="row">Proportions</th>
+            <th scope="row">Color</th>
+            <th scope="row">Polish</th>
+            <th scope="row">Symmetry</th>
+            <th scope="row">Flourescence</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diamond in Model.Diamonds)
+        {
+            <tr>
+                <th scope="row">@diamond.Id</th>
+                <th scope="row">@diamond.Origin</th>
+                <th scope="row">@diamond.Measurement</th>
+                <th scope="row">@diamond.CaratWeight</th>
+                <th scope="row">@diamond.Clarity</th>
+                <th scope="row">@diamond.Cut</th>
+                <th scope="row">@diamond.Proportions</th>
+                <th scope="row">@diamond.Color</th>
+                <th scope="row">@diamond.Polish</th>
+                <th scope="row">@diamond.Symmetry</th>
+                <th scope="row">@diamond.Fluorescence</th>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@diamond.Id">Edit</a> |
+                    <a asp-page="Delete" asp-route-id="@diamond.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="Create" class="btn btn-primary">Create New Diamond</a>
