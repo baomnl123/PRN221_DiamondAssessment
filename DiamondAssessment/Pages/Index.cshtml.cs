@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Service.Abstractions;
 using Service.Services;
 
 namespace DiamondAssessment.Pages;
@@ -7,9 +8,9 @@ namespace DiamondAssessment.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    private readonly AssessmentPaperServices _assessmentPaperServices;
+    private readonly IAssessmentPaperService _assessmentPaperServices;
 
-    public IndexModel(ILogger<IndexModel> logger, AssessmentPaperServices assessmentPaperServices)
+    public IndexModel(ILogger<IndexModel> logger, IAssessmentPaperService assessmentPaperServices)
     {
         _logger = logger;
         _assessmentPaperServices = assessmentPaperServices;

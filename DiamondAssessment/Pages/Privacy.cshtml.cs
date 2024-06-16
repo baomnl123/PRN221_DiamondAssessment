@@ -19,7 +19,7 @@ public class PrivacyModel : PageModel
 
     public void OnGet()
     {
-        listPaper = _assessmentPaperServices.FindAll();
+        listPaper = _assessmentPaperServices.FindAll(); 
     }
 }
 

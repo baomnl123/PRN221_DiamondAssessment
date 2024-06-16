@@ -1,10 +1,6 @@
-using DataAccessLayer.Dao;
-using DataAccessLayer.Dao.Abstractions;
+using DataAccessLayer.DependencyInjection;
 using DiamondAssessment.Extensions;
-using Entities.Models;
-using Repository.Abstractions;
-using Repository.Repositories;
-using Service.Services;
+using Repository.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
