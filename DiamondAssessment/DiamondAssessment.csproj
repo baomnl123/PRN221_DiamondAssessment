@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <AdditionalFiles Include="Pages\Staff\Diamond\Index.cshtml" />
+    <Folder Include="Pages\AssessmentPaper\" />
   </ItemGroup>
 
   <PropertyGroup>

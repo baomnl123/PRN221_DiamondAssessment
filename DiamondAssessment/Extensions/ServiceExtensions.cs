@@ -1,6 +1,5 @@
 using Service.Abstractions;
 using Service.Services;
-using Service.Abstractions;
 
 
 namespace DiamondAssessment.Extensions;
@@ -15,6 +14,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IAssessmentPaperService, AssessmentPaperServices>();
         services.AddScoped<IRegisterFormService, RegisterFormServices>();
+        services.AddScoped<IStaffService, StaffServices>();
     }
     
     //public static void ConfigureServiceManager(this IServiceCollection services) =>

@@ -10,5 +10,6 @@ public static class RepositoryExtensions
     {
         services.AddScoped<IAssessmentPaperRepository, AssessmentPaperRepository>();
         services.AddScoped<IRegisterFormRepository, RegisterFormRepository>();
+        services.AddScoped<IStaffRepository, StaffRepository>();
     }
 }
