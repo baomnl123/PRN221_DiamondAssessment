@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\AssessmentPaper\" />
-    <Folder Include="Pages\Staff\" />
   </ItemGroup>
 
   <PropertyGroup>
