@@ -5,29 +5,54 @@
     ViewData["Title"] = "Staff Manager";
     Layout = "Shared/_Layout";
 }
-<h1>@ViewData["Title"]</h1>
+<h1 class="my-4">@ViewData["Title"]</h1>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="row">Id</th>
-        <th scope="row">Name</th>
-        <th scope="row">Role</th>
-        <th scope="row">Phone Number</th>
-        <th scope="row">Email</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var staff in Model.Staffs)
-    {
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
         <tr>
-            <th scope="row">@staff.Id</th>
-            <th scope="row">@staff.Name</th>
-            <th scope="row">@staff.Role</th>
-            <th scope="row">@staff.PhoneNumber</th>
-            <th scope="row">@staff.Email</th>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var staff in Model.Staffs)
+        {
+            <tr>
+                <td>@staff.Id</td>
+                <td>@staff.Name</td>
+                <td>
+                    @switch (staff.Role.ToString())
+                    {
+                    case "Admin":
+                    <span class="badge bg-info">Admin</span>
+                    break;
+                    case "Manager":
+                    <span class="badge bg-warning">Manager</span>
+                    break;
+                    case "Staff":
+                    <span class="badge bg-danger">Staff</span>
+                    break;
+                    case "Employee":
+                        <span class="badge bg-primary">Employee</span>
+                        break;
+                    default:
+                    <span class="badge bg-secondary">Unknown</span>
+                    break;
+                    }
+                </td>
+                <td>@staff.PhoneNumber</td>
+                <td>@staff.Email</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="#">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="#">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

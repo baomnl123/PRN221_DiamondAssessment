@@ -13,7 +13,7 @@ public static class ServiceExtensions
     public static void ConfigureServices(this IServiceCollection services)
     {
         services.AddScoped<IAssessmentPaperService, AssessmentPaperServices>();
-
+        services.AddScoped<IStaffService, StaffServices>();
     }
     
     //public static void ConfigureServiceManager(this IServiceCollection services) =>
