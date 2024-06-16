@@ -19,6 +19,6 @@ public static class DependencyInjection
     public static void ConfigureDaos(this IServiceCollection services)
     {
         services.AddScoped<IAssessmentPaperDao, AssessmentPaperDao>();
-
+        services.AddScoped<IRegisterFormDao, RegisterFormDao>();
     }
 }

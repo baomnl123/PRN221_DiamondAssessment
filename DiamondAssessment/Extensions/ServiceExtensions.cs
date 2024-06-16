@@ -14,7 +14,7 @@ public static class ServiceExtensions
     public static void ConfigureServices(this IServiceCollection services)
     {
         services.AddScoped<IAssessmentPaperService, AssessmentPaperServices>();
-
+        services.AddScoped<IRegisterFormService, RegisterFormServices>();
     }
     
     //public static void ConfigureServiceManager(this IServiceCollection services) =>
