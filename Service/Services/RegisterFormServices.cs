@@ -22,6 +22,12 @@ namespace Service.Services
             _registerFormRepository = registerFormRepository;
         }
 
+        public async Task Delete(RegisterForm registerForm)
+        {
+            await _registerFormRepository.Delete(registerForm);
+        }
+
+
         public List<RegisterForm> FindAll() => _registerFormRepository.FindAll().ToList();
         public IQueryable<RegisterForm> FindByCondition(Expression<Func<RegisterForm, bool>> expression, bool trackChanges)
         {

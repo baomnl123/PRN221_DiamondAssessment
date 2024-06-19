@@ -5,7 +5,6 @@
     var role = HttpContext.Session.GetString("Role");
     if (role is not "3") Response.Redirect("/Error");
 }
-<a asp-page="Create">Create New</a>
 <table class="table">
     <thead>
     <tr>
@@ -30,7 +29,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
+                <td>
+                    <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm" asp-route-id="@item.Id">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
+
 </table>
