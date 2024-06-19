@@ -32,7 +32,7 @@ public class Login : PageModel
                     Response.Redirect("/Staff/RegisterForm/FormPage");
                     break;
                 case 2:
-                    Response.Redirect("/Admin/Index");
+                    Response.Redirect("/Admin/Account/Index");
                     break;
             }
         }

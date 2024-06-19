@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Admin\AssessmentPaper\" />
+    <Folder Include="Pages\Admin\CommitmentForm\" />
+    <Folder Include="Pages\Admin\SealingReport\" />
     <Folder Include="Pages\Staff\AssessmentPaper\" />
   </ItemGroup>
 
@@ -30,7 +33,6 @@
 
   <ItemGroup>
     <AdditionalFiles Include="Pages\Staff\Diamond\Index.cshtml" />
-    <Folder Include="Pages\AssessmentPaper\" />
   </ItemGroup>
 
   <ItemGroup>

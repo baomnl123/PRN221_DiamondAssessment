@@ -52,66 +52,73 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto" asp-page="/Login">Portfolio</a></li>
-                    <li><a class="nav-link scrollto" asp-page="/Staff/RegisterForm/FormPage">Team</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown">
-                                <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="nav-link scrollto" asp-page="/Index">Home</a></li>
                     <li class="dropdown megamenu">
-                        <a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li>
-                                <strong>Column 1</strong>
-                                <a href="#">Column 1 link 1</a>
-                                <a href="#">Column 1 link 2</a>
-                                <a href="#">Column 1 link 3</a>
-                            </li>
-                            <li>
-                                <strong>Column 2</strong>
-                                <a href="#">Column 2 link 1</a>
-                                <a href="#">Column 2 link 2</a>
-                                <a href="#">Column 3 link 3</a>
-                            </li>
-                            <li>
-                                <strong>Column 3</strong>
-                                <a href="#">Column 3 link 1</a>
-                                <a href="#">Column 3 link 2</a>
-                                <a href="#">Column 3 link 3</a>
-                            </li>
-                            <li>
-                                <strong>Column 4</strong>
-                                <a href="#">Column 4 link 1</a>
-                                <a href="#">Column 4 link 2</a>
-                                <a href="#">Column 4 link 3</a>
-                            </li>
-                            <li>
-                                <strong>Column 5</strong>
-                                <a href="#">Column 5 link 1</a>
-                                <a href="#">Column 5 link 2</a>
-                                <a href="#">Column 5 link 3</a>
-                            </li>
-                        </ul>
+                        @switch (role)
+                        {
+                            case "1":
+                                <a href="#" disabled="true"><span>Staff Control</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li>
+                                        <strong>Register Form</strong>
+                                        <a asp-page="/Staff/RegisterForm/FormPage">View all register forms</a>
+                                        <a asp-page="/Staff/RegisterForm/Create">Create a new register form</a>
+                                    </li>
+                                    <li>
+                                        <strong>Assessment Paper</strong>
+                                        <a asp-page="/Staff/AssessmentPaper/Index">View all assessment paper</a>
+                                        <a asp-page="/Staff/AssessmentPaper/Create">Create new paper</a>
+                                    </li>
+                                    <li>
+                                        <strong>Ticket</strong>
+                                        <a asp-page="/Staff/Ticket/Index">View all tickets</a>
+                                        <a asp-page="/Staff/Ticket/Create">Create a new ticket</a>
+                                    </li>
+                                    <li>
+                                        <strong>Diamond</strong>
+                                        <a asp-page="/Staff/Diamond/Index">View all diamond information</a>
+                                        <a asp-page="/Staff/Diamond/Create">Create a new diamond</a>
+                                    </li>
+                                </ul>
+                                break;
+                            case "2":
+                                <a href="#" disabled="true"><span>Admin Control</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li>
+                                        <strong>Accounts</strong>
+                                        <a asp-page="/Admin/Account/Index">View all accounts</a>
+                                        <a asp-page="/Admin/Account/Create">Create a new account</a>
+                                    </li>
+                                    <li>
+                                        <strong>Report</strong>
+                                        <a asp-page="/Admin/SealingReport">View all sealing reports</a>
+                                        <a asp-page="/Admin/CommitmentForm">View all commitment forms</a>
+                                        <a asp-page="/Admin/AssessmentPaper">View all assessment papers</a>
+                                    </li>
+                                </ul>
+                                break;
+                        }
                     </li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                </ul>
+                <ul>
+                    @if (string.IsNullOrEmpty(accountId))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Login">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        if (role != "2")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-page="/Staff/Profile" asp-route-id="@accountId">Profile</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Logout">Logout</a>
+                        </li>
+                    }
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
