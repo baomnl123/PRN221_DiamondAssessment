@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 
 namespace Service.Services
 {
@@ -22,5 +23,37 @@ namespace Service.Services
         }
 
         public List<RegisterForm> FindAll() => _registerFormRepository.FindAll().ToList();
+        public IQueryable<RegisterForm> FindByCondition(Expression<Func<RegisterForm, bool>> expression, bool trackChanges)
+        {
+            return _registerFormRepository.FindByCondition(expression, trackChanges);
+        }
+
+        public Task<bool> Create(RegisterForm entity)
+        {
+            return _registerFormRepository.Create(entity);
+        }
+
+        public Task<bool> Update(RegisterForm entity)
+        {
+            return _registerFormRepository.Update(entity);
+        }
+
+        public Task<bool> Delete(RegisterForm entity)
+        {
+            return _registerFormRepository.Delete(entity);
+        }
+
+        public Task<bool> ApplyForm(RegisterForm entity, string staffId, bool isApproved)
+        {
+            if (!isApproved)
+            {
+                return Delete(entity);
+            }
+            
+            entity.StaffId = Guid.Parse(staffId);
+            entity.Status = true;
+            
+            return Update(entity);
+        }
     }
 }
