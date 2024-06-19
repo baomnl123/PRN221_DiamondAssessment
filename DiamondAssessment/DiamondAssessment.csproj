@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\AssessmentPaper\" />
-    <Folder Include="Pages\Admin\CommitmentForm\" />
-    <Folder Include="Pages\Admin\SealingReport\" />
+    <Folder Include="Pages\Manager\AssessmentPaper\" />
+    <Folder Include="Pages\Manager\CommitmentForm\" />
+    <Folder Include="Pages\Manager\SealingReport\" />
     <Folder Include="Pages\Staff\AssessmentPaper\" />
   </ItemGroup>
 

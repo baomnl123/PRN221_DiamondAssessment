@@ -1,9 +1,12 @@
 @page
-@model DiamondAssessment.Pages.Staff.IndexModel
+@model DiamondAssessment.Pages.Admin.Account.IndexModel
 
 @{
     ViewData["Title"] = "Staff Manager";
     Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "1") Response.Redirect("/Error");
+    
 }
 <h1 class="my-4">@ViewData["Title"]</h1>
 
@@ -48,8 +51,8 @@
                 <td>@staff.PhoneNumber</td>
                 <td>@staff.Email</td>
                 <td>
-                    <a class="btn btn-sm btn-primary" href="#">Edit</a>
-                    <a class="btn btn-sm btn-danger" href="#">Delete</a>
+                    <a class="btn btn-sm btn-primary" asp-page="./Update" asp-route-id="@staff.Id.ToString()">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@staff.Id.ToString()">Delete</a>
                 </td>
             </tr>
         }

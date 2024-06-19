@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.Abstractions;
 
-namespace DiamondAssessment.Pages.Staff;
+namespace DiamondAssessment.Pages.Admin.Account;
 
 
 

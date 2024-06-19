@@ -56,7 +56,8 @@
                     <li class="dropdown megamenu">
                         @switch (role)
                         {
-                            case "1":
+                            //Staff
+                            case "3":
                                 <a href="#" disabled="true"><span>Staff Control</span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
                                     <li>
@@ -81,19 +82,36 @@
                                     </li>
                                 </ul>
                                 break;
+                            //Manager
                             case "2":
+                                <a href="#" disabled="true"><span>Manager Control</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li>
+                                        <strong>Sealing Report</strong>
+                                        <a asp-page="/Manager/SealingReport">View all sealing reports</a>
+                                        <a asp-page="/Manager/SealingReport/Create">Create a new sealing report</a>
+                                    </li>
+                                    <li>
+                                        <strong>Commitment Form</strong>
+                                        <a asp-page="/Manager/CommitmentForm">View all commitment forms</a>
+                                        <a asp-page="/Manager/CommitmentForm/Create">Create a new commitment form</a>
+                                    </li>
+                                    <li>
+                                        <strong>Assessment Paper</strong>
+                                        <a asp-page="/Manager/AssessmentPaper">View all assessment papers</a>
+                                        <a asp-page="/Manager/AssessmentPaper/Create">Create a new assessment paper</a>
+                                    </li>
+                                    
+                                </ul>
+                                break;
+                            //Admin
+                            case "1":
                                 <a href="#" disabled="true"><span>Admin Control</span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
                                     <li>
                                         <strong>Accounts</strong>
                                         <a asp-page="/Admin/Account/Index">View all accounts</a>
                                         <a asp-page="/Admin/Account/Create">Create a new account</a>
-                                    </li>
-                                    <li>
-                                        <strong>Report</strong>
-                                        <a asp-page="/Admin/SealingReport">View all sealing reports</a>
-                                        <a asp-page="/Admin/CommitmentForm">View all commitment forms</a>
-                                        <a asp-page="/Admin/AssessmentPaper">View all assessment papers</a>
                                     </li>
                                 </ul>
                                 break;

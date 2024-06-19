@@ -19,7 +19,7 @@ public class DaoBase<TEntity> : IDaoBase<TEntity>
     {
         return _repositoryContext.Set<TEntity>().AsNoTracking();
     }
-    public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression, bool trackChanges) =>
+    public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression, bool trackChanges = false) =>
         !trackChanges
             ? _repositoryContext.Set<TEntity>().Where(expression).AsNoTracking()
             : _repositoryContext.Set<TEntity>().Where(expression);
