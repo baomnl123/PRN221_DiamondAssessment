@@ -9,6 +9,6 @@ namespace Repository.Abstractions
 {
     public interface IRegisterFormRepository : IRepositoryBase<RegisterForm>
     {
-         
+        
     }
 }

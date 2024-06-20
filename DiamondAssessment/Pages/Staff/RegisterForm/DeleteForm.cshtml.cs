@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.Abstractions;
+using Entities.Models;
 
-namespace DiamondAssessment.Pages.Staff.RegisterForm
+namespace DiamondAssessment.Pages
 {
     public class DeleteFormModel : PageModel
     {
@@ -13,15 +14,34 @@ namespace DiamondAssessment.Pages.Staff.RegisterForm
             _registerFormService = registerFormService;
         }
 
-        public Entities.Models.RegisterForm registerForm {  get; set; }
-        public async Task<IActionResult> OnGetAsync(string id)
+        public RegisterForm registerForm {  get; set; }
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
+            
+            var form = _registerFormService.FindByCondition(x => x.Id == id, true).FirstOrDefault();
+            if (form == null)
             {
                 return NotFound();
             }
-            
+            else
+            {
+                registerForm = (RegisterForm)form;
+            }
             return Page();
+        }
+        public async Task<IActionResult> OnPostAsync(Guid id)
+        {
+            
+            var form = _registerFormService.FindByCondition(x => x.Id == id, true).FirstOrDefault();
+            if (form != null)
+            {
+                registerForm = (RegisterForm)form;
+
+                await _registerFormService.Delete(registerForm);
+
+            }
+
+            return RedirectToPage("/Staff/RegisterForm/FormPage");
         }
     }
 }

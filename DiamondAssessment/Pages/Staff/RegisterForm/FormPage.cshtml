@@ -30,6 +30,9 @@
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
+                    <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/UpdateForm" asp-route-id="@item.Id">Update</a>
+                </td>
+                <td>
                     <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
