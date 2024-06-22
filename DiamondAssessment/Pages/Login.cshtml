@@ -19,7 +19,6 @@
             @if (ModelState["LoginFailed"] != null)
             {
                 <div class="text-danger">@ModelState["LoginFailed"]!.Errors[0].ErrorMessage</div>
-                ModelState["LoginFailed"].Errors.Clear();
             }
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>

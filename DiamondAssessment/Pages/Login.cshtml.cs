@@ -20,8 +20,25 @@ public class Login : PageModel
             {
                 AccountId = 1,
                 AccountEmail = "mail@mail.com",
-                AccountRole = 1
+                AccountRole = 3
             };
+            if (Username == "admin")
+            {
+                loginAccount = new
+                {
+                    AccountId = 1,
+                    AccountEmail = "mail@mail.com",
+                    AccountRole = 1
+                };
+            } else if (Username == "manager")
+            {
+                loginAccount = new
+                {
+                    AccountId = 1,
+                    AccountEmail = "mail@mail.com",
+                    AccountRole = 2
+                };
+            }
             System.Diagnostics.Debug.WriteLine(loginAccount);
             HttpContext.Session.SetString("AccountId", loginAccount.AccountId.ToString());
             HttpContext.Session.SetString("AccountEmail", loginAccount.AccountEmail!);
@@ -29,11 +46,15 @@ public class Login : PageModel
             switch (loginAccount.AccountRole)
             {
                 case 1:
-                    Response.Redirect("/Staff/RegisterForm/FormPage");
+                    Response.Redirect("/Admin/Account/Index");
                     break;
                 case 2:
-                    Response.Redirect("/Admin/Index");
+                    Response.Redirect("/Manager/AssessmentPaper/Index");
                     break;
+                case 3:
+                    Response.Redirect("/Staff/RegisterForm/FormPage");
+                    break;
+                
             }
         }
         catch (Exception e)

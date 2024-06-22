@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Entities.Models;
 using Repository.Abstractions;
 using Service.Abstractions;
@@ -14,4 +15,23 @@ public class StaffServices : IStaffService
     }
 
     public List<Staff> FindAll() => _staffRepository.FindAll().ToList();
+    public IQueryable<Staff> FindByCondition(Expression<Func<Staff, bool>> expression, bool trackChanges)
+    {
+        return _staffRepository.FindByCondition(expression, trackChanges);
+    }
+
+    public Task<bool> Create(Staff entity)
+    {
+        return _staffRepository.Create(entity);
+    }
+
+    public Task<bool> Update(Staff entity)
+    {
+        return _staffRepository.Update(entity);
+    }
+
+    public Task<bool> Delete(Staff entity)
+    {
+        return _staffRepository.Delete(entity);
+    }
 }

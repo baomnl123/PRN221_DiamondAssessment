@@ -1,0 +1,51 @@
+﻿@page
+@model DiamondAssessment.Pages.UpdateFormModel
+@{
+    ViewData["Title"] = "UpdateForm";
+}
+
+<h1>Edit</h1>
+
+<h4>RegisterForm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="registerForm.Id" />
+            <div class="form-group">
+                <label asp-for="registerForm.Name" class="control-label"></label>
+                <input asp-for="registerForm.Name" class="form-control" />
+                <span asp-validation-for="registerForm.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="registerForm.Description" class="control-label"></label>
+                <input asp-for="registerForm.Description" class="form-control" />
+                <span asp-validation-for="registerForm.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="registerForm.PhoneNumber" class="control-label"></label>
+                <input asp-for="registerForm.PhoneNumber" class="form-control" />
+                <span asp-validation-for="registerForm.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="registerForm.Email" class="control-label"></label>
+                <input asp-for="registerForm.Email" class="form-control" />
+                <span asp-validation-for="registerForm.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Staff/RegisterForm/FormPage">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

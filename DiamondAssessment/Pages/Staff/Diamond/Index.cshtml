@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Diamond Manager";
     var role = HttpContext.Session.GetString("Role");
-    if (role is not "1") Response.Redirect("/Login");
+    if (role is not "3") Response.Redirect("/Error");
 }
 
 <h1 class="my-4">@ViewData["Title"]</h1>
