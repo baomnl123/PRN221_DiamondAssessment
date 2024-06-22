@@ -14,13 +14,17 @@ public static class DependencyInjection
         IConfiguration configuration
     ) =>
         services.AddDbContext<RepositoryContext>(opts =>
-            opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b => b.MigrationsAssembly("DiamondAssessment"))
+            opts.UseSqlServer(
+                configuration.GetConnectionString("sqlConnection"),
+                b => b.MigrationsAssembly("DataAccessLayer")
+            )
         );
+
     public static void ConfigureDaos(this IServiceCollection services)
     {
         services.AddScoped<IAssessmentPaperDao, AssessmentPaperDao>();
         services.AddScoped<IRegisterFormDao, RegisterFormDao>();
-        //services.AddScoped<IDiamondDetailDao, DiamondDetailDao>();
+        services.AddScoped<IDiamondDetailDao, DiamondDetailDao>();
         services.AddScoped<IStaffDao, StaffDao>();
     }
 }

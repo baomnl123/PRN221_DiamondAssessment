@@ -6,39 +6,39 @@
     if (role is not "1") Response.Redirect("/Login");
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="my-4">@ViewData["Title"]</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="row">Id</th>
-            <th scope="row">Origin</th>
-            <th scope="row">Measurement</th>
-            <th scope="row">CaratWeight</th>
-            <th scope="row">Clarity</th>
-            <th scope="row">Cut</th>
-            <th scope="row">Proportions</th>
-            <th scope="row">Color</th>
-            <th scope="row">Polish</th>
-            <th scope="row">Symmetry</th>
-            <th scope="row">Flourescence</th>
+            <th scope="col">Id</th>
+            <th scope="col">Origin</th>
+            <th scope="col">Measurement</th>
+            <th scope="col">CaratWeight</th>
+            <th scope="col">Clarity</th>
+            <th scope="col">Cut</th>
+            <th scope="col">Proportions</th>
+            <th scope="col">Color</th>
+            <th scope="col">Polish</th>
+            <th scope="col">Symmetry</th>
+            <th scope="col">Flourescence</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var diamond in Model.Diamonds)
         {
             <tr>
-                <th scope="row">@diamond.Id</th>
-                <th scope="row">@diamond.Origin</th>
-                <th scope="row">@diamond.Measurement</th>
-                <th scope="row">@diamond.CaratWeight</th>
-                <th scope="row">@diamond.Clarity</th>
-                <th scope="row">@diamond.Cut</th>
-                <th scope="row">@diamond.Proportions</th>
-                <th scope="row">@diamond.Color</th>
-                <th scope="row">@diamond.Polish</th>
-                <th scope="row">@diamond.Symmetry</th>
-                <th scope="row">@diamond.Fluorescence</th>
+                <th scope="col">@diamond.Id</th>
+                <th scope="col">@diamond.Origin</th>
+                <th scope="col">@diamond.Measurement</th>
+                <th scope="col">@diamond.CaratWeight</th>
+                <th scope="col">@diamond.Clarity</th>
+                <th scope="col">@diamond.Cut</th>
+                <th scope="col">@diamond.Proportions</th>
+                <th scope="col">@diamond.Color</th>
+                <th scope="col">@diamond.Polish</th>
+                <th scope="col">@diamond.Symmetry</th>
+                <th scope="col">@diamond.Fluorescence</th>
                 <td>
                     <a asp-page="Edit" asp-route-id="@diamond.Id">Edit</a> |
                     <a asp-page="Delete" asp-route-id="@diamond.Id">Delete</a>

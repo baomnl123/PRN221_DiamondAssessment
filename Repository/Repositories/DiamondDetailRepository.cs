@@ -3,7 +3,7 @@ using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository.Abstractions;
 
-namespace Repository.Implementation;
+namespace Repository.Repositories;
 
 public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiamondDetailRepository
 {
