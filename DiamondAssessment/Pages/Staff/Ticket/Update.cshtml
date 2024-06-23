@@ -1,0 +1,46 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.Ticket.Update
+
+@{
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "3") Response.Redirect("/Error");
+}
+
+<h1>Edit <strong class="text-warning">Ticket</strong></h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Ticket.Id" />
+            <div class="form-group">
+                <input asp-for="Ticket.Id" class="form-control" value=@Model.Ticket.Id hidden/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ticket.TicketName" class="control-label">Ticket Name</label>
+                <input asp-for="Ticket.TicketName" class="form-control" />
+                <span asp-validation-for="Ticket.TicketName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ticket.Name" class="form-control" value=@Model.Ticket.Name hidden/>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ticket.PhoneNumber" class="form-control" value=@Model.Ticket.PhoneNumber hidden/>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ticket.Email" class="form-control" value=@Model.Ticket.Email hidden/>
+            </div>
+            <div class="form-group">
+                <input asp-for="Ticket.IsDelete" class="form-control" value="false" hidden/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

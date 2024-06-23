@@ -25,7 +25,6 @@
     <Folder Include="Pages\Manager\CommitmentForm\" />
     <Folder Include="Pages\Manager\SealingReport\" />
     <Folder Include="Pages\Staff\AssessmentPaper\" />
-    <Folder Include="Pages\Staff\Ticket\" />
   </ItemGroup>
 
   <ItemGroup>

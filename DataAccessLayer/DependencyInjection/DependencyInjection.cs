@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Context;
 using DataAccessLayer.Dao;
 using DataAccessLayer.Dao.Abstractions;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,5 +27,6 @@ public static class DependencyInjection
         services.AddScoped<IRegisterFormDao, RegisterFormDao>();
         services.AddScoped<IDiamondDetailDao, DiamondDetailDao>();
         services.AddScoped<IStaffDao, StaffDao>();
+        services.AddScoped<ITicketDao, TicketDao>();
     }
 }

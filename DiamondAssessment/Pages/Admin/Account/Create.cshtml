@@ -2,8 +2,8 @@
 @model DiamondAssessment.Pages.Admin.Account.Create
 
 @{
-    Layout = "Shared/_Layout";
     ViewData["Title"] = "Create Staff";
+    Layout = "Shared/_Layout";
     var role = HttpContext.Session.GetString("Role");
     if (role is not "1") Response.Redirect("/Error");
 }

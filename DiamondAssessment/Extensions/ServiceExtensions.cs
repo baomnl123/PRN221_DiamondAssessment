@@ -15,6 +15,7 @@ public static class ServiceExtensions
         services.AddScoped<IDiamondDetailService, DiamondDetailService>();
         services.AddScoped<IRegisterFormService, RegisterFormServices>();
         services.AddScoped<IStaffService, StaffServices>();
+        services.AddScoped<ITicketService, TicketService>();
     }
 
     //public static void ConfigureServiceManager(this IServiceCollection services) =>

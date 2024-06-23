@@ -9,7 +9,10 @@ public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiam
 {
     public async Task<IEnumerable<DiamondDetail>> GetAllDiamondDetailsAsync()
     {
-        return await diamondDetailDao.FindAll().ToListAsync();
+        return await diamondDetailDao
+            .FindAll()
+            .Where(e => e.IsDelete == false)
+            .ToListAsync();
     }
 
     public async Task<DiamondDetail?> GetDiamondDetailAsync(Guid diamondId)

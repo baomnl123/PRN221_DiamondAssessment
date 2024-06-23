@@ -1,0 +1,47 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.Ticket.Index
+
+@{
+    ViewData["Title"] = "Ticket Management";
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "3") Response.Redirect("/Error");
+}
+
+<h1 class="my-4">@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Ticket Name</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Tickets)
+            {
+                <tr>
+                    <td>@item.TicketName</td>
+                    <td>@item.Name</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-page="./Detail" asp-route-id="@item.Id.ToString()">Detail</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-page="./Update" asp-route-id="@item.Id.ToString()">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@item.Id.ToString()">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

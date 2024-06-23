@@ -14,7 +14,7 @@ public class StaffRepository : IStaffRepository
         _staffDao = staffDao;
     }
 
-    public IQueryable<Staff> FindAll() => _staffDao.FindAll();
+    public IQueryable<Staff> FindAll() => _staffDao.FindAll().Where(e => e.IsDelete == false);
 
     public IQueryable<Staff> FindByCondition(Expression<Func<Staff, bool>> expression,
         bool trackChanges)

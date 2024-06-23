@@ -35,7 +35,7 @@ namespace DiamondAssessment.Pages
             var form = _registerFormService.FindByCondition(x => x.Id == id, true).FirstOrDefault();
             if (form != null)
             {
-                registerForm = (RegisterForm)form;
+                registerForm = form;
 
                 await _registerFormService.Delete(registerForm);
 

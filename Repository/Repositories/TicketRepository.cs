@@ -1,4 +1,6 @@
 ﻿using System.Linq.Expressions;
+using DataAccessLayer.Dao;
+using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
 using Repository.Abstractions;
 
@@ -6,28 +8,21 @@ namespace Repository.Repositories;
 
 public class TicketRepository : ITicketRepository
 {
-    public IQueryable<Ticket> FindAll()
+    private readonly ITicketDao _ticketDao;
+
+    public TicketRepository(ITicketDao ticketDao)
     {
-        throw new NotImplementedException();
+        _ticketDao = ticketDao;
     }
+
+    public IQueryable<Ticket> FindAll() => _ticketDao.FindAll().Where(e => e.IsDelete == false);
 
     public IQueryable<Ticket> FindByCondition(Expression<Func<Ticket, bool>> expression, bool trackChanges)
-    {
-        throw new NotImplementedException();
-    }
+        => _ticketDao.FindByCondition(expression, trackChanges);
 
-    public Task<bool> Create(Ticket entity)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<bool> Create(Ticket entity) => _ticketDao.Create(entity);
 
-    public Task<bool> Update(Ticket entity)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<bool> Update(Ticket entity) => _ticketDao.Update(entity);
 
-    public Task<bool> Delete(Ticket entity)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<bool> Delete(Ticket entity) => _ticketDao.Delete(entity);
 }

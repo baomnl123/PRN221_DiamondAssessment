@@ -14,7 +14,7 @@ public class AssessmentPaperRepository : IAssessmentPaperRepository
         _assessmentPaperDao = assessmentPaperDao;
     }
 
-    public IQueryable<AssessmentPaper> FindAll() => _assessmentPaperDao.FindAll();
+    public IQueryable<AssessmentPaper> FindAll() => _assessmentPaperDao.FindAll().Where(e => e.IsDelete == false);
 
     public IQueryable<AssessmentPaper> FindByCondition(Expression<Func<AssessmentPaper, bool>> expression,
         bool trackChanges)

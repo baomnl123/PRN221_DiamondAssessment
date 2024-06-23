@@ -1,11 +1,12 @@
 ﻿using DataAccessLayer.Context;
+using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
 
 namespace DataAccessLayer.Dao;
 
-public class TicketDao : DaoBase<Ticket>
+public class TicketDao : DaoBase<Ticket>, ITicketDao
 {
-    protected TicketDao(RepositoryContext repositoryContext) : base(repositoryContext)
+    public TicketDao(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }
 }

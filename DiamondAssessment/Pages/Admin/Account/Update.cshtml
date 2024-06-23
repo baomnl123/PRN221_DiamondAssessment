@@ -2,12 +2,13 @@
 @model DiamondAssessment.Pages.Admin.Account.Update
 
 @{
-    Layout = null;
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "1") Response.Redirect("/Error");
 }
 
-<h1>Edit</h1>
+<h1>Edit <strong class="text-warning">Account</strong></h1>
 
-<h4>NewsArticle</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -28,6 +29,11 @@
                 <label asp-for="Staff.PhoneNumber" class="control-label">Phone Number</label>
                 <input asp-for="Staff.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Staff.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Staff.Password" class="control-label">Password</label>
+                <input asp-for="Staff.Password" class="form-control" />
+                <span asp-validation-for="Staff.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Staff.Role" class="control-label"></label>

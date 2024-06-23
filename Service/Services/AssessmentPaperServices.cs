@@ -17,7 +17,6 @@ namespace Service.Services
         {
             var list = _assessmentPaperRepository
                 .FindAll()
-                .Where(p => p.IsDelete == false)
                 .ToList();
             return list;
         }
@@ -39,7 +38,8 @@ namespace Service.Services
 
         public Task<bool> Delete(AssessmentPaper entity)
         {
-            throw new NotImplementedException();
+            entity.IsDelete = true;
+            return _assessmentPaperRepository.Update(entity);
         }
     }
 }

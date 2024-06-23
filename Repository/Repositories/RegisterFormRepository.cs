@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository.Repositories
 {
@@ -19,7 +20,11 @@ namespace Repository.Repositories
             _registerFormDao = registerFormDao;
         }
 
-        public IQueryable<RegisterForm> FindAll() => _registerFormDao.FindAll();
+        public IQueryable<RegisterForm> FindAll() 
+            => _registerFormDao
+                .FindAll()
+                .Where(e => e.IsDelete == false)
+                .Include(f => f.Staff);
 
         public IQueryable<RegisterForm> FindByCondition(Expression<Func<RegisterForm, bool>> expression,
             bool trackChanges)

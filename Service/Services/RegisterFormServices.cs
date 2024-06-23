@@ -22,7 +22,10 @@ namespace Service.Services
             _registerFormRepository = registerFormRepository;
         }
 
-        public List<RegisterForm> FindAll() => _registerFormRepository.FindAll().ToList();
+        public List<RegisterForm> FindAll() 
+            => _registerFormRepository
+                .FindAll()
+                .ToList();
 
         public IQueryable<RegisterForm> FindByCondition(
             Expression<Func<RegisterForm, bool>> expression,
@@ -44,7 +47,8 @@ namespace Service.Services
 
         public Task<bool> Delete(RegisterForm entity)
         {
-            return _registerFormRepository.Delete(entity);
+            entity.IsDelete = true;
+            return _registerFormRepository.Update(entity);
         }
 
         public Task<bool> ApplyForm(RegisterForm entity, string staffId, bool isApproved)

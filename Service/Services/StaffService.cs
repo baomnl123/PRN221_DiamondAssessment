@@ -32,6 +32,7 @@ public class StaffServices : IStaffService
 
     public Task<bool> Delete(Staff entity)
     {
-        return _staffRepository.Delete(entity);
+        entity.IsDelete = true;
+        return _staffRepository.Update(entity);
     }
 }

@@ -16,23 +16,27 @@
                 <th scope="col">Origin</th>
                 <th scope="col">CaratWeight</th>
                 <th scope="col">Clarity</th>
-                <th scope="col">Action</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var diamond in Model.Diamonds)
             {
                 <tr>
-                    <th scope="col">@diamond.Id</th>
-                    <th scope="col">@diamond.Origin</th>
-                    <th scope="col">@diamond.CaratWeight</th>
-                    <th scope="col">@diamond.Clarity</th>
+                    <td>@diamond.Id</td>
+                    <td>@diamond.Origin</td>
+                    <td>@diamond.CaratWeight</td>
+                    <td>@diamond.Clarity</td>
                     <td>
-                        <a class="btn btn-sm btn-primary" asp-page="./Detail"
-                            asp-route-id="@diamond.Id.ToString()">Detail</a>
+                        <a class="btn btn-sm btn-primary" asp-page="./Detail" asp-route-id="@diamond.Id.ToString()">Detail</a>
+                    </td>       
+                    <td>
                         <a class="btn btn-sm btn-primary" asp-page="./Update" asp-route-id="@diamond.Id.ToString()">Edit</a>
-                        <a class="btn btn-sm btn-danger" asp-page="./Delete"
-                            asp-route-id="@diamond.Id.ToString()">Delete</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@diamond.Id.ToString()">Delete</a>
                     </td>
                 </tr>
             }

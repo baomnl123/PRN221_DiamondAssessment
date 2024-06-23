@@ -12,5 +12,6 @@ public static class RepositoryExtensions
         services.AddScoped<IDiamondDetailRepository, DiamondDetailRepository>();
         services.AddScoped<IRegisterFormRepository, RegisterFormRepository>();
         services.AddScoped<IStaffRepository, StaffRepository>();
+        services.AddScoped<ITicketRepository, TicketRepository>();
     }
 }
