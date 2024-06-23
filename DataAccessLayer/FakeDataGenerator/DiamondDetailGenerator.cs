@@ -1,5 +1,6 @@
 using Bogus;
 using Entities.Models;
+using Entities.Models.Enum;
 
 namespace DataAccessLayer.FakeDataGenerator;
 
@@ -13,15 +14,18 @@ public static class DiamondDetailGenerator
             .RuleFor(diamondDetail => diamondDetail.StaffId, f => f.PickRandom(staffs).Id)
             .RuleFor(diamondDetail => diamondDetail.TicketId, f => f.PickRandom(tickets).Id)
             .RuleFor(diamondDetail => diamondDetail.Origin, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Measurement, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.CaratWeight, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Clarity, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Cut, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Proportions, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Color, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Polish, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Symmetry, f => f.Lorem.Paragraph())
-            .RuleFor(diamondDetail => diamondDetail.Fluorescence, f => f.Lorem.Paragraph())
+            .RuleFor(assessmentPaper => assessmentPaper.CaratWeight, f => f.Random.Float(0, 5))
+            .RuleFor(assessmentPaper => assessmentPaper.Clarity, f => f.PickRandom<Quality>())
+            .RuleFor(assessmentPaper => assessmentPaper.Cut, f => f.PickRandom<Quality>())
+            .RuleFor(assessmentPaper => assessmentPaper.Proportions, f => f.PickRandom<Quality>())
+            .RuleFor(assessmentPaper => assessmentPaper.Color, f => f.PickRandom<GlowStrength>())
+            .RuleFor(assessmentPaper => assessmentPaper.Polish, f => f.PickRandom<Quality>())
+            .RuleFor(assessmentPaper => assessmentPaper.Symmetry, f => f.PickRandom<Quality>())
+            .RuleFor(
+                assessmentPaper => assessmentPaper.Fluorescence,
+                f => f.PickRandom<GlowStrength>()
+            )
+            .RuleFor(assessmentPaper => assessmentPaper.IsDelete, f => f.Random.Bool())
             .Generate(50)
             .ToArray();
     }

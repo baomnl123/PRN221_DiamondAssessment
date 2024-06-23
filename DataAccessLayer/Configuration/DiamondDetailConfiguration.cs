@@ -1,7 +1,8 @@
+using DataAccessLayer.Constants;
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using DataAccessLayer.Constants;
 
 namespace DataAccessLayer.Configuration;
 
@@ -19,22 +20,49 @@ public class DiamondDetailConfiguration : IEntityTypeConfiguration<DiamondDetail
 
         builder.Property(c => c.Origin).IsRequired();
 
-        builder.Property(c => c.Measurement).IsRequired();
-
         builder.Property(c => c.CaratWeight).IsRequired();
 
-        builder.Property(c => c.Clarity).IsRequired();
+        builder
+            .Property(c => c.Clarity)
+            .HasConversion(v => v.ToString(), v => (Quality)Enum.Parse(typeof(Quality), v))
+            .IsRequired();
 
-        builder.Property(c => c.Cut).IsRequired();
+        builder
+            .Property(c => c.Cut)
+            .HasConversion(v => v.ToString(), v => (Quality)Enum.Parse(typeof(Quality), v))
+            .IsRequired();
 
-        builder.Property(c => c.Proportions).IsRequired();
+        builder
+            .Property(c => c.Proportions)
+            .HasConversion(v => v.ToString(), v => (Quality)Enum.Parse(typeof(Quality), v))
+            .IsRequired();
 
-        builder.Property(c => c.Color).IsRequired();
+        builder
+            .Property(c => c.Color)
+            .HasConversion(
+                v => v.ToString(),
+                v => (GlowStrength)Enum.Parse(typeof(GlowStrength), v)
+            )
+            .IsRequired();
 
-        builder.Property(c => c.Polish).IsRequired();
+        builder
+            .Property(c => c.Polish)
+            .HasConversion(v => v.ToString(), v => (Quality)Enum.Parse(typeof(Quality), v))
+            .IsRequired();
 
-        builder.Property(c => c.Symmetry).IsRequired();
+        builder
+            .Property(c => c.Symmetry)
+            .HasConversion(v => v.ToString(), v => (Quality)Enum.Parse(typeof(Quality), v))
+            .IsRequired();
 
-        builder.Property(c => c.Fluorescence).IsRequired();
+        builder
+            .Property(c => c.Fluorescence)
+            .HasConversion(
+                v => v.ToString(),
+                v => (GlowStrength)Enum.Parse(typeof(GlowStrength), v)
+            )
+            .IsRequired();
+
+        builder.Property(c => c.IsDelete).IsRequired();
     }
 }
