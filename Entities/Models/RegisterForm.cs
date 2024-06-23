@@ -8,7 +8,7 @@ public class RegisterForm
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public Guid StaffId { get; set; }
-    public bool Status { get; set; }
+    public bool IsDelete { get; set; }
 
     // Relationships
     public Staff Staff { get; set; } = null!;

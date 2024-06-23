@@ -1,7 +1,7 @@
+using DataAccessLayer.Constants;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using DataAccessLayer.Constants;
 
 namespace DataAccessLayer.Configuration;
 
@@ -17,9 +17,16 @@ public class StaffConfiguration : IEntityTypeConfiguration<Staff>
 
         builder.Property(c => c.Email).IsRequired();
 
+        builder.Property(c => c.Password).IsRequired();
+
         builder.Property(c => c.PhoneNumber).IsRequired();
 
-        builder.Property(c => c.Role).IsRequired();
+        builder
+            .Property(c => c.Role)
+            .HasConversion(v => v.ToString(), v => (Role)Enum.Parse(typeof(Role), v))
+            .IsRequired();
+
+        builder.Property(c => c.IsDelete).IsRequired();
 
         builder
             .HasMany(c => c.AssessmentPapers)

@@ -1,7 +1,7 @@
+using DataAccessLayer.Constants;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using DataAccessLayer.Constants;
 
 namespace DataAccessLayer.Configuration;
 
@@ -17,6 +17,6 @@ public class SealingReportConfiguration : IEntityTypeConfiguration<SealingReport
 
         builder.Property(c => c.CreatedAt).IsRequired();
 
-        builder.Property(c => c.Status).IsRequired();
+        builder.Property(c => c.IsDelete).IsRequired();
     }
 }

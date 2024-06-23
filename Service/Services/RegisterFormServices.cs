@@ -1,15 +1,15 @@
-﻿using DataAccessLayer.Dao;
-using DataAccessLayer.Dao.Abstractions;
-using Entities.Models;
-using Repository.Abstractions;
-using Service.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Dao;
+using DataAccessLayer.Dao.Abstractions;
+using Entities.Models;
 using Microsoft.Identity.Client;
+using Repository.Abstractions;
+using Service.Abstractions;
 
 namespace Service.Services
 {
@@ -23,7 +23,11 @@ namespace Service.Services
         }
 
         public List<RegisterForm> FindAll() => _registerFormRepository.FindAll().ToList();
-        public IQueryable<RegisterForm> FindByCondition(Expression<Func<RegisterForm, bool>> expression, bool trackChanges)
+
+        public IQueryable<RegisterForm> FindByCondition(
+            Expression<Func<RegisterForm, bool>> expression,
+            bool trackChanges
+        )
         {
             return _registerFormRepository.FindByCondition(expression, trackChanges);
         }
@@ -49,12 +53,11 @@ namespace Service.Services
             {
                 return Delete(entity);
             }
-            
+
             entity.StaffId = Guid.Parse(staffId);
-            entity.Status = true;
-            
+            entity.IsDelete = true;
+
             return Update(entity);
         }
-
     }
 }
