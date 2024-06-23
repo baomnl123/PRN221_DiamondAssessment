@@ -7,19 +7,6 @@ namespace Repository.Repositories;
 
 public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiamondDetailRepository
 {
-    public async Task<DiamondDetail> AddDiamondDetailAsync(DiamondDetail diamondDetail)
-    {
-        if (await diamondDetailDao.Create(diamondDetail))
-            return diamondDetail;
-
-        throw new Exception("Failed to add diamond detail");
-    }
-
-    public async Task DeleteDiamondDetailAsync(DiamondDetail diamondDetail)
-    {
-        await diamondDetailDao.Delete(diamondDetail);
-    }
-
     public async Task<IEnumerable<DiamondDetail>> GetAllDiamondDetailsAsync()
     {
         return await diamondDetailDao.FindAll().ToListAsync();
@@ -32,11 +19,12 @@ public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiam
             .FirstOrDefaultAsync();
     }
 
-    public async Task<DiamondDetail> UpdateDiamondDetailAsync(DiamondDetail diamondDetail)
-    {
-        if (await diamondDetailDao.Update(diamondDetail))
-            return diamondDetail;
+    public async Task<bool> CreateAsync(DiamondDetail diamondDetail) =>
+        await diamondDetailDao.Create(diamondDetail);
 
-        throw new Exception("Failed to update diamond detail");
-    }
+    public async Task<bool> UpdateAsync(DiamondDetail diamondDetail) =>
+        await diamondDetailDao.Update(diamondDetail);
+
+    public async Task<bool> DeleteAsync(DiamondDetail diamondDetail) =>
+        await diamondDetailDao.Delete(diamondDetail);
 }
