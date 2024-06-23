@@ -17,14 +17,14 @@ namespace Service.Services
         {
             var list = _assessmentPaperRepository
                 .FindAll()
-                .Where(p => p.Status == true)
+                .Where(p => p.IsDelete == false)
                 .ToList();
             return list;
         }
 
         public IQueryable<AssessmentPaper> FindByCondition(Expression<Func<AssessmentPaper, bool>> expression, bool trackChanges)
         {
-            throw new NotImplementedException();
+            return _assessmentPaperRepository.FindByCondition(expression, trackChanges);
         }
 
         public Task<bool> Create(AssessmentPaper entity)

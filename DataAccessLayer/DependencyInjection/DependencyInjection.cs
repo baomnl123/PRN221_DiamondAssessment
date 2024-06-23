@@ -16,7 +16,7 @@ public static class DependencyInjection
         services.AddDbContext<RepositoryContext>(opts =>
             opts.UseSqlServer(
                 configuration.GetConnectionString("sqlConnection"),
-                b => b.MigrationsAssembly("DataAccessLayer")
+                b => b.MigrationsAssembly("DiamondAssessment")
             )
         );
 
