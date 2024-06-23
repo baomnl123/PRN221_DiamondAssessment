@@ -1,0 +1,78 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.Diamond.Detail
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<div>
+<dl class="row">
+    <dt class="col-sm-2">
+        Origin
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Origin)
+    </dd>
+    <hr />
+    <dt class="col-sm-2">
+        Carat Weight
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.CaratWeight)
+    </dd>
+    <hr />
+    <dt class="col-sm-2">
+        Clarity
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Clarity)
+    </dd>
+    <hr />
+    <dt class="col-sm-2">
+        Cut
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Cut)
+    </dd>
+    <hr />
+    <dt class="col-sm-2">
+        Proportions
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Proportions)
+    </dd>
+    <hr />
+    <dt class="col-sm-2">
+        Color
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Color)
+    </dd>
+    <hr />
+    <dt class="col-sm-2">
+        Polish
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Polish)
+    <hr />
+    </dd>
+    <dt class="col-sm-2">
+        Symmetry
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Symmetry)
+    <hr />
+    </dd>
+    <dt class="col-sm-2">
+        Fluorescence
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Diamond.Fluorescence)
+    <hr />
+    </dd>
+</dl>
+
+<a class="btn-secondary" asp-page="./Index">Back to List</a>
+</div>
