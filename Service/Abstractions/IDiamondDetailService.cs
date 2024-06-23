@@ -6,7 +6,7 @@ public interface IDiamondDetailService
 {
     Task<IEnumerable<DiamondDetail>> GetAllDiamondDetailsAsync();
     Task<DiamondDetail?> GetDiamondDetailAsync(Guid diamondId);
-    Task<DiamondDetail> AddDiamondDetailAsync(DiamondDetail diamondDetail);
-    Task<DiamondDetail> UpdateDiamondDetailAsync(DiamondDetail diamondDetail);
-    Task DeleteDiamondDetailAsync(DiamondDetail diamondDetail);
+    Task<bool> CreateAsync(DiamondDetail diamondDetail);
+    Task<bool> UpdateAsync(DiamondDetail diamondDetail);
+    Task<bool> DeleteAsync(DiamondDetail diamondDetail);
 }
