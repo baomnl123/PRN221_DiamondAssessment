@@ -1,0 +1,57 @@
+﻿@page
+@using Entities.Models.Enum
+@model DiamondAssessment.Pages.Staff.Ticket.Detail
+
+@{
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+
+<dl class="row">
+    <dt class="col-sm-2">Id</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Ticket.Id)
+    </dd>
+    <dt class="col-sm-2">Ticket Name</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Ticket.TicketName)
+    </dd>
+    <dt class="col-sm-2">Customer Name</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Ticket.Name)
+    </dd>
+    <dt class="col-sm-2">Email</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Ticket.Email)
+    </dd>
+    <dt class="col-sm-2">Phone Number</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Ticket.PhoneNumber)
+    </dd>
+    
+    <dt class="col-sm-2">Status</dt>
+    <dd class="col-sm-10">
+        @switch (Model.Ticket.TicketStatus)
+        {
+            case TicketStatus.Pending:
+                <span class="text-secondary">@Html.DisplayFor(model => model.Ticket.TicketStatus)</span>
+                break;
+            case TicketStatus.InProgress:
+                <span class="text-warning">@Html.DisplayFor(model => model.Ticket.TicketStatus)</span>
+                break;
+            case TicketStatus.Done:
+                <span class="text-primary">@Html.DisplayFor(model => model.Ticket.TicketStatus)</span>
+                break;
+        }
+    </dd>
+    @if (@Model.haveDiamond)
+    {
+        <a class="btn-primary" asp-page="../Diamond/Detail" asp-route-id="@Model.Ticket.Id">Diamond Detail</a>
+    }
+    else
+    {
+        <a class="btn-primary" asp-page="../Diamond/Create" asp-route-ticketId="@Model.Ticket.Id">Create Diamond</a>
+    }
+</dl>
+<a class="btn-secondary" asp-page="Index">Back to list</a>

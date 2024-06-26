@@ -22,6 +22,13 @@ public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiam
             .FirstOrDefaultAsync();
     }
 
+    public async Task<DiamondDetail?> GetDiamondDetailByTicketIdAsync(Guid ticketId)
+    {
+        return await diamondDetailDao
+            .FindByCondition(d => d.TicketId == ticketId, false)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<bool> CreateAsync(DiamondDetail diamondDetail) =>
         await diamondDetailDao.Create(diamondDetail);
 

@@ -17,6 +17,11 @@ public class DiamondDetailService(IDiamondDetailRepository diamondRepository)
         return diamondRepository.GetDiamondDetailAsync(diamondId);
     }
 
+    public Task<DiamondDetail?> GetDiamondDetailByTicketIdAsync(Guid ticketId)
+    {
+        return diamondRepository.GetDiamondDetailByTicketIdAsync(ticketId);
+    }
+
     public async Task<bool> CreateAsync(DiamondDetail diamondDetail) =>
         await diamondRepository.CreateAsync(diamondDetail);
 

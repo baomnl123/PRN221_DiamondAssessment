@@ -31,28 +31,34 @@ namespace DiamondAssessment.Pages.Staff.Diamond
             _staffService = staffService;
         }
 
-        public async Task<IActionResult> OnGetAsync(Guid Id)
+        public async Task<IActionResult> OnGetAsync(Guid ticketId)
         {
             QualityOptions = GetEnumSelectList<Quality>();
             GlowStrengthOptions = GetEnumSelectList<GlowStrength>();
-            TicketOptions = GetTicketSelectList();
+            //TicketOptions = GetTicketSelectList();
 
-            if (Id == Guid.Empty)
+            // if (Id == Guid.Empty)
+            // {
+            //     DiamondDetail = new DiamondDetail();
+            //     return Page();
+            // }
+            DiamondDetail = new DiamondDetail
             {
-                DiamondDetail = new DiamondDetail();
-                return Page();
-            }
+                TicketId = ticketId
+            };
+            
+            return Page();
 
-            DiamondDetail = await _diamondDetailService.GetDiamondDetailAsync(Id);
-            if (DiamondDetail == null)
-            {
-                return NotFound();
-            }
+            // DiamondDetail = await _diamondDetailService.GetDiamondDetailAsync(Id);
+            // if (DiamondDetail == null)
+            // {
+            //     return NotFound();
+            // }
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid ticketId)
         {
             // if (!ModelState.IsValid)
             // {
@@ -65,14 +71,27 @@ namespace DiamondAssessment.Pages.Staff.Diamond
             //     GlowStrengthOptions = GetEnumSelectList<GlowStrength>();
             //     return Page();
             // }
-
+            DiamondDetail.TicketId = ticketId;
             if (DiamondDetail.Id == Guid.Empty)
             {
-                await _diamondDetailService.CreateAsync(DiamondDetail);
-            }
-            else
-            {
-                await _diamondDetailService.UpdateAsync(DiamondDetail);
+                var ticket = _ticketService
+                    .FindByCondition(t => t.Id == ticketId, false).FirstOrDefault();
+                ticket.TicketStatus = TicketStatus.InProgress;
+                var ticketUpdated = await _ticketService.Update(ticket);
+                if (ticketUpdated)
+                {
+                    var isDiamondCreated = await _diamondDetailService.CreateAsync(DiamondDetail);
+                    if (!isDiamondCreated)
+                    {
+                        ModelState.AddModelError("Error", "Error creating diamond");
+                        ticket.TicketStatus = TicketStatus.Pending;
+                        await _ticketService.Update(ticket);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", "Error updating ticket status");
+                }
             }
 
             return RedirectToPage("./Index");
@@ -95,12 +114,12 @@ namespace DiamondAssessment.Pages.Staff.Diamond
             return list;
         }
 
-        private List<SelectListItem> GetTicketSelectList()
-        {
-            var tickets = _ticketService.FindAll();
-            return tickets
-                .Select(t => new SelectListItem { Text = t.TicketName, Value = t.Id.ToString() })
-                .ToList();
-        }
+        // private List<SelectListItem> GetTicketSelectList()
+        // {
+        //     var tickets = _ticketService.FindAll();
+        //     return tickets
+        //         .Select(t => new SelectListItem { Text = t.TicketName, Value = t.Id.ToString() })
+        //         .ToList();
+        // }
     }
 }

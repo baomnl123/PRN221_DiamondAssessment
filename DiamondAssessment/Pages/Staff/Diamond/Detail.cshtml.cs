@@ -16,14 +16,14 @@ public class Detail : PageModel
     [BindProperty]
     public Entities.Models.DiamondDetail Diamond { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(string? id)
+    public async Task<IActionResult> OnGetAsync(Guid id)
     {
         if (id == null)
         {
             return NotFound();
         }
 
-        var diamond = await _diamondDetailService.GetDiamondDetailAsync(Guid.Parse(id));
+        var diamond = await _diamondDetailService.GetDiamondDetailByTicketIdAsync(id);
 
         if (diamond == null)
         {

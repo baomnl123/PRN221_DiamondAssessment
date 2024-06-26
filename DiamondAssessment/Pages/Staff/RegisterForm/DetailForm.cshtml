@@ -1,8 +1,11 @@
 ﻿@page
+@using Entities.Models.Enum
 @model DiamondAssessment.Pages.DetailForm
 
 @{
     Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
 }
 
 <dl class="row">
@@ -12,19 +15,19 @@
     </dd>
     <dt class="col-sm-2">Name</dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Form.Id)
+        @Html.DisplayFor(model => model.Form.Name)
     </dd>
     <dt class="col-sm-2">Description</dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Form.Id)
+        @Html.DisplayFor(model => model.Form.Description)
     </dd>
     <dt class="col-sm-2">Phone Number</dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Form.Id)
+        @Html.DisplayFor(model => model.Form.PhoneNumber)
     </dd>
     <dt class="col-sm-2">Email</dt>
     <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Form.Id)
+        @Html.DisplayFor(model => model.Form.Email)
     </dd>
     <dt class="col-sm-2">Staff Name</dt>
     <dd class="col-sm-10">
@@ -44,6 +47,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">Ticket Name</th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -55,7 +59,21 @@
             <tr>
                 <td>@item.TicketName</td>
                 <td>
-                    <a class="btn btn-sm btn-primary" asp-page="../Ticket/Detail" asp-route-id="@item.Id.ToString()">Detail</a>
+                    @switch (@item.TicketStatus)
+                    {
+                        case TicketStatus.Pending:
+                            <span class="text-secondary">@item.TicketStatus</span>
+                            break;
+                        case TicketStatus.InProgress:
+                            <span class="text-warning">@item.TicketStatus</span>
+                            break;
+                        case TicketStatus.Done:
+                            <span class="text-primary">@item.TicketStatus</span>
+                            break;
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-page="../Ticket/Detail" asp-route-id="@item.Id">Detail</a>
                 </td>
                 <td>
                     <a class="btn btn-sm btn-warning" asp-page="../Ticket/Update" asp-route-id="@item.Id.ToString()">Edit</a>
