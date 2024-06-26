@@ -13,9 +13,10 @@ public class CreateFormModel : PageModel
     public CreateFormModel(IRegisterFormService registerFormService)
     {
         _registerFormService = registerFormService;
-        registerForm = new RegisterForm();
     }
-    public RegisterForm registerForm { get; set; } = default!;
+    [BindProperty]
+    public RegisterForm RegisterForm { get; set; }
+
     public async Task<IActionResult> OnGetAsync()
     {          
         return Page();
@@ -28,11 +29,11 @@ public class CreateFormModel : PageModel
             return Page();
         }
 
-        registerForm.Id = new Guid();
-        registerForm.RegisterFormStatus = RegisterFormStatus.Registered;
-        registerForm.IsDelete = false;
+        RegisterForm.Id = new Guid();
+        RegisterForm.RegisterFormStatus = RegisterFormStatus.Registered;
+        RegisterForm.IsDelete = false;
         
-        await _registerFormService.Create(registerForm);
+        await _registerFormService.Create(RegisterForm);
 
         return RedirectToPage("/Index");
             
