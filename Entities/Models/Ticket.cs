@@ -1,3 +1,5 @@
+using Entities.Models.Enum;
+
 namespace Entities.Models;
 
 public class Ticket
@@ -8,6 +10,7 @@ public class Ticket
     public string? Name { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
+    public TicketStatus TicketStatus { get; set; }
     public bool IsDelete { get; set; }
 
     // Relationships

@@ -5,7 +5,7 @@
     ViewData["Title"] = "Ticket Management";
     Layout = "Shared/_Layout";
     var role = HttpContext.Session.GetString("Role");
-    if (role is not "3") Response.Redirect("/Error");
+    if (role is not "Staff") Response.Redirect("/Error");
 }
 
 <h1 class="my-4">@ViewData["Title"]</h1>

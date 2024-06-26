@@ -4,7 +4,7 @@
 @{
     Layout = "Shared/_Layout";
     var role = HttpContext.Session.GetString("Role");
-    if (role is not "1") Response.Redirect("/Error");
+    if (role is not "Admin") Response.Redirect("/Error");
 }
 
 <h1>Delete</h1>
@@ -41,7 +41,7 @@ else
             @Html.DisplayFor(model => model.Staff.PhoneNumber)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Staff" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

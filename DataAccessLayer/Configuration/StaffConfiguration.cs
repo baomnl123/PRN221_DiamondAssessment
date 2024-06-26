@@ -1,5 +1,6 @@
 using DataAccessLayer.Constants;
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

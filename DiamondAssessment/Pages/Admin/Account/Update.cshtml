@@ -4,7 +4,7 @@
 @{
     Layout = "Shared/_Layout";
     var role = HttpContext.Session.GetString("Role");
-    if (role is not "1") Response.Redirect("/Error");
+    if (role is not "Admin") Response.Redirect("/Error");
 }
 
 <h1>Edit <strong class="text-warning">Account</strong></h1>

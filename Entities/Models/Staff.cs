@@ -1,3 +1,5 @@
+using Entities.Models.Enum;
+
 namespace Entities.Models;
 
 public class Staff

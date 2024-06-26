@@ -23,6 +23,8 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
 
         builder.Property(c => c.Email).IsRequired();
 
+        builder.Property(c => c.TicketStatus).IsRequired();
+
         builder.Property(c => c.IsDelete).IsRequired();
 
         builder

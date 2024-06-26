@@ -1,0 +1,71 @@
+@page
+@model DiamondAssessment.Pages.Staff.Diamond.Create
+
+@{
+    ViewData["Title"] = "Diamond Manager";
+    var staffId = HttpContext.Session.GetString("AccountId");
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+
+<h1>Create</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Origin"></label>
+        <input asp-for="DiamondDetail.Origin" class="form-control" />
+        <span asp-validation-for="DiamondDetail.Origin" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.CaratWeight"></label>
+        <input asp-for="DiamondDetail.CaratWeight" class="form-control" />
+        <span asp-validation-for="DiamondDetail.CaratWeight" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.TicketId"></label>
+        <select asp-for="DiamondDetail.TicketId" class="form-control" asp-items="Model.TicketOptions"></select>
+        <span asp-validation-for="DiamondDetail.TicketId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Clarity"></label>
+        <select asp-for="DiamondDetail.Clarity" class="form-control" asp-items="Model.QualityOptions"></select>
+        <span asp-validation-for="DiamondDetail.Clarity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Cut"></label>
+        <select asp-for="DiamondDetail.Cut" class="form-control" asp-items="Model.QualityOptions"></select>
+        <span asp-validation-for="DiamondDetail.Cut" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Proportions"></label>
+        <select asp-for="DiamondDetail.Proportions" class="form-control" asp-items="Model.QualityOptions"></select>
+        <span asp-validation-for="DiamondDetail.Proportions" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Color"></label>
+        <select asp-for="DiamondDetail.Color" class="form-control" asp-items="Model.GlowStrengthOptions"></select>
+        <span asp-validation-for="DiamondDetail.Color" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Polish"></label>
+        <select asp-for="DiamondDetail.Polish" class="form-control" asp-items="Model.QualityOptions"></select>
+        <span asp-validation-for="DiamondDetail.Polish" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Symmetry"></label>
+        <select asp-for="DiamondDetail.Symmetry" class="form-control" asp-items="Model.QualityOptions"></select>
+        <span asp-validation-for="DiamondDetail.Symmetry" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiamondDetail.Fluorescence"></label>
+        <select asp-for="DiamondDetail.Fluorescence" class="form-control"
+            asp-items="Model.GlowStrengthOptions"></select>
+        <span asp-validation-for="DiamondDetail.Fluorescence" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="DiamondDetail.StaffId" value="@staffId" />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

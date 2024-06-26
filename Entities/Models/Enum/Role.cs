@@ -1,3 +1,5 @@
+namespace Entities.Models.Enum;
+
 public enum Role
 {
     Admin = 1,
