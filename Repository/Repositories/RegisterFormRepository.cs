@@ -23,8 +23,9 @@ namespace Repository.Repositories
         public IQueryable<RegisterForm> FindAll() 
             => _registerFormDao
                 .FindAll()
-                .Where(e => e.IsDelete == false)
-                .Include(f => f.Staff);
+                .Where(f => f.IsDelete == false)
+                .Include(f => f.Staff)
+                .Include(f => f.Tickets);
 
         public IQueryable<RegisterForm> FindByCondition(Expression<Func<RegisterForm, bool>> expression,
             bool trackChanges)

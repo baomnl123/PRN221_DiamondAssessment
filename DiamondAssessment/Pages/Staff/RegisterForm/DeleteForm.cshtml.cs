@@ -15,10 +15,10 @@ namespace DiamondAssessment.Pages
         }
 
         public RegisterForm registerForm {  get; set; }
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             
-            var form = _registerFormService.FindByCondition(x => x.Id == id, true).FirstOrDefault();
+            var form = _registerFormService.FindByCondition(x => x.Id == Guid.Parse(id), true).FirstOrDefault();
             if (form == null)
             {
                 return NotFound();

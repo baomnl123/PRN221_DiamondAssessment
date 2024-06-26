@@ -45,15 +45,15 @@
                 </td>
                 <td>
                     <a class="btn btn-sm btn-primary" asp-page="/Staff/RegisterForm/DetailForm"
-                        asp-route-id="@item.Id">Detail</a>
+                        asp-route-id="@item.Id.ToString()">Detail</a>
                 </td>
                 <td>
                     <a class="btn btn-sm btn-warning" asp-page="/Staff/RegisterForm/UpdateForm"
-                        asp-route-id="@item.Id">Update</a>
+                        asp-route-id="@item.Id.ToString()">Update</a>
                 </td>
                 <td>
                     <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm"
-                        asp-route-id="@item.Id">Reject</a>
+                        asp-route-id="@item.Id.ToString()">Reject</a>
                 </td>
             </tr>
         }

@@ -1,0 +1,41 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.Ticket.Create
+
+@{
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+
+<!DOCTYPE html>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ticket.TicketName" class="control-label"></label>
+                <input asp-for="Ticket.TicketName" class="form-control" />
+                <span asp-validation-for="Ticket.TicketName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ticket.Name" class="control-label"></label>
+                <input asp-for="Ticket.Name" value="@Model.Form.Name" disabled class="form-control" />
+                <span asp-validation-for="Ticket.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ticket.PhoneNumber" class="control-label"></label>
+                <input asp-for="Ticket.PhoneNumber" value="@Model.Form.PhoneNumber" disabled class="form-control" />
+                <span asp-validation-for="Ticket.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ticket.Email" class="control-label"></label>
+                <input asp-for="Ticket.Email" value="@Model.Form.Email" disabled class="form-control" />
+                <span asp-validation-for="Ticket.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
