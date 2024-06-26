@@ -13,7 +13,7 @@ public class RegisterFormConfiguration : IEntityTypeConfiguration<RegisterForm>
 
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.StaffId).IsRequired();
+        builder.Property(c => c.StaffId).IsRequired(false);
 
         builder.Property(c => c.Name).IsRequired();
 
