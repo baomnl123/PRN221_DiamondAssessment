@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "DeleteForm";
     var role = HttpContext.Session.GetString("Role");
-    if (role is not "3") Response.Redirect("/Error");
+    if (role is not "Staff") Response.Redirect("/Error");
 }
 <h1>Rejecting</h1>
 
@@ -18,10 +18,10 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.registerForm.Name)
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.registerForm.Description)
+                @Html.DisplayNameFor(model => model.registerForm.Description)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.registerForm.Description)
+                @Html.DisplayFor(model => model.registerForm.Description)
         </dd>
     </dl>
 
