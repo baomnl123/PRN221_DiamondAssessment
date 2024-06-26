@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Context;
 
-public class RepositoryContext(DbContextOptions options) : DbContext(options)
+public class RepositoryContext : DbContext
 {
     public DbSet<AssessmentPaper>? AssessmentPapers { get; set; }
     public DbSet<CommitmentForm>? CommitmentForms { get; set; }
@@ -14,6 +14,15 @@ public class RepositoryContext(DbContextOptions options) : DbContext(options)
     public DbSet<Ticket>? Tickets { get; set; }
     public DbSet<Staff>? Staffs { get; set; }
 
+    public RepositoryContext()
+    {
+        
+    }
+    public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)
+    {
+        
+    }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

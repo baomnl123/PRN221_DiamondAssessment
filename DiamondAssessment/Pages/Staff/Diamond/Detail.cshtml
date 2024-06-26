@@ -2,7 +2,9 @@
 @model DiamondAssessment.Pages.Staff.Diamond.Detail
 
 @{
-    Layout = null;
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
 }
 
 <!DOCTYPE html>

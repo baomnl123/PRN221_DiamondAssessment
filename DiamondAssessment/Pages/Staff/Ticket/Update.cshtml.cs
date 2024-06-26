@@ -9,13 +9,13 @@ public class Update : PageModel
 {
     private readonly ITicketService _ticketService;
 
+    [BindProperty]
+    public Entities.Models.Ticket Ticket { get; set; } = default!;
     public Update(ITicketService ticketService)
     {
         _ticketService = ticketService;
     }
     
-    [BindProperty]
-    public Entities.Models.Ticket Ticket { get; set; } = default!;
     
     public async Task<IActionResult> OnGetAsync(string? id)
     {
@@ -24,27 +24,33 @@ public class Update : PageModel
             return NotFound();
         }
 
-        var staff = await _ticketService
+        var ticket = await _ticketService
             .FindByCondition(e => e.Id == Guid.Parse(id), false)
             .FirstOrDefaultAsync();
         
-        if (staff == null)
+        if (ticket == null)
         {
             return NotFound();
         }
-        Ticket = staff;
+        Ticket = ticket;
         return Page();
     }
     
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(string id)
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
-            
         try
         {
+            var ticket = await _ticketService
+                .FindByCondition(e => e.Id == Guid.Parse(id), false)
+                .FirstOrDefaultAsync();
+            Ticket.Id = ticket.Id;
+            Ticket.RegisterFormId = ticket.RegisterFormId;
+            Ticket.Name = ticket.Name;
+            Ticket.Email = ticket.Email;
+            Ticket.PhoneNumber = ticket.PhoneNumber;
+            Ticket.TicketStatus = ticket.TicketStatus;
+            Ticket.IsDelete = false;
+            
             var isUpdated = await _ticketService.Update(Ticket);
             if(!isUpdated) 
                 ModelState.AddModelError("UpdateFailed", "Fail to update this account!");

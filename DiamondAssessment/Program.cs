@@ -1,5 +1,7 @@
+using DataAccessLayer.Context;
 using DataAccessLayer.DependencyInjection;
 using DiamondAssessment.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Repository.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddRazorPages();
 // builder.Services.ConfigureRepositoryManager();
 // builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+
 builder.Services.ConfigureDaos();
 builder.Services.ConfigureRepositories();
 builder.Services.ConfigureServices();

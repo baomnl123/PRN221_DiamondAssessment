@@ -2,6 +2,7 @@
 @model DiamondAssessment.Pages.Diamond.IndexModel
 @{
     ViewData["Title"] = "Diamond Manager";
+    Layout = "Shared/_Layout";
     var role = HttpContext.Session.GetString("Role");
     if (role is not "Staff") Response.Redirect("/Error");
 }
