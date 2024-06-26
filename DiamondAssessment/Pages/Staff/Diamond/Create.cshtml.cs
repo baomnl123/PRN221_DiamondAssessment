@@ -75,6 +75,9 @@ namespace DiamondAssessment.Pages.Staff.Diamond
                 await _diamondDetailService.UpdateAsync(DiamondDetail);
             }
 
+            DiamondDetail.Ticket.TicketStatus = TicketStatus.InProgress;
+            await _ticketService.Update(DiamondDetail.Ticket);
+
             return RedirectToPage("./Index");
         }
 
