@@ -1,3 +1,5 @@
+using Entities.Models.Enum;
+
 namespace Entities.Models;
 
 public class RegisterForm
@@ -8,6 +10,7 @@ public class RegisterForm
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public Guid StaffId { get; set; }
+    public RegisterFormStatus RegisterFormStatus { get; set; }
     public bool IsDelete { get; set; }
 
     // Relationships

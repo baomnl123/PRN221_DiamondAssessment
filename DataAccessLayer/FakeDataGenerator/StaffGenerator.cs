@@ -1,5 +1,6 @@
 using Bogus;
 using Entities.Models;
+using Entities.Models.Enum;
 
 namespace DataAccessLayer.FakeDataGenerator;
 

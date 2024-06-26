@@ -23,6 +23,8 @@ public class RegisterFormConfiguration : IEntityTypeConfiguration<RegisterForm>
 
         builder.Property(c => c.Email).IsRequired();
 
+        builder.Property(c => c.RegisterFormStatus).IsRequired();
+
         builder.Property(c => c.IsDelete).IsRequired();
 
         builder
