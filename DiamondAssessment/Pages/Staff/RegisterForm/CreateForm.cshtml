@@ -6,8 +6,8 @@
     ViewData["Title"] = "CreateForm";
     Layout = "Shared/_Layout";
     var role = HttpContext.Session.GetString("Role");
-    var accountId = HttpContext.Session.GetString("AccountId");
     if (role is not "Staff") Response.Redirect("/Error");
+    var accountId = HttpContext.Session.GetString("AccountId");
 }
 <h1>Create <strong class="text-warning">Register Form</strong></h1>
 

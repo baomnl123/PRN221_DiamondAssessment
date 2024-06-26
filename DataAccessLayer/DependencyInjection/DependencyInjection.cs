@@ -19,6 +19,7 @@ public static class DependencyInjection
                 configuration.GetConnectionString("sqlConnection"),
                 b => b.MigrationsAssembly("DataAccessLayer")
             )
+            //,b => b.MigrationsAssembly("DataAccessLayer")
         );
 
     public static void ConfigureDaos(this IServiceCollection services)
