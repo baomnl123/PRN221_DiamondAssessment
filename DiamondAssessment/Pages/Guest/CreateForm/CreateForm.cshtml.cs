@@ -9,13 +9,14 @@ namespace DiamondAssessment.Pages.Guest.CreateForm;
 public class CreateFormModel : PageModel
 {
     private readonly IRegisterFormService _registerFormService;
+    
+    [BindProperty]
+    public RegisterForm RegisterForm { get; set; }
 
     public CreateFormModel(IRegisterFormService registerFormService)
     {
         _registerFormService = registerFormService;
     }
-    [BindProperty]
-    public RegisterForm RegisterForm { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {          
@@ -24,11 +25,6 @@ public class CreateFormModel : PageModel
     }
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {               
-            return Page();
-        }
-
         RegisterForm.Id = new Guid();
         RegisterForm.RegisterFormStatus = RegisterFormStatus.Registered;
         RegisterForm.IsDelete = false;

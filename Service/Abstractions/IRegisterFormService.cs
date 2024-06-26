@@ -16,6 +16,6 @@ namespace Service.Abstractions
         Task<bool> Update(RegisterForm entity);
         Task<bool> Delete(RegisterForm entity);
         Task<bool> ApplyForm(RegisterForm entity, string staffId, bool isApproved);
-        
+        Task<RegisterForm> FindByEmailOrPhone(string emailOrPhone);
     }
 }

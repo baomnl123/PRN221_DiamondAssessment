@@ -2,7 +2,7 @@
 @model DiamondAssessment.Pages.Guest.CreateForm.CreateFormModel
 
 @{
-    ViewData["Title"] = "CreateForm";
+    ViewData["Title"] = "RegisterForm Guest";
     Layout = "Shared/_Layout";
 }
 @section Styles
@@ -37,3 +37,6 @@
     </div>
     
 </form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
