@@ -1,7 +1,9 @@
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.Abstractions;
+using System.Text;
 
 namespace DiamondAssessment.Pages
 {
@@ -12,9 +14,10 @@ namespace DiamondAssessment.Pages
         public CreateFormModel(IRegisterFormService registerFormService)
         {
             _registerFormService = registerFormService;
-            registerForm = new RegisterForm();
         }
-        public RegisterForm registerForm { get; set; } = default!;
+        [BindProperty]
+        public RegisterForm RegisterForm { get; set; } = default!;
+        public string? accId { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {          
                 return Page();
@@ -22,19 +25,15 @@ namespace DiamondAssessment.Pages
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {               
-                return Page();
-            }
-            registerForm.Name = "Quang";
-            registerForm.Description = "Quang";
-            registerForm.Email = "Quang";
-            registerForm.PhoneNumber = "Quang";
-           
-            await _registerFormService.Create(registerForm);
+            accId = HttpContext.Session.GetString("AccountId");
+            RegisterForm.Id = new Guid();
+            RegisterForm.RegisterFormStatus = RegisterFormStatus.Registered;
+            RegisterForm.IsDelete = false;
+            RegisterForm.StaffId = Guid.Parse(accId);
+            await _registerFormService.Create(RegisterForm);
 
-            
-            return RedirectToPage("/Staff/RegisterForm/FormPage");
+            return RedirectToPage("/Index");
+
         }
     }
 }

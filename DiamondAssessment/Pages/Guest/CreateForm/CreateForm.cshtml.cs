@@ -12,12 +12,12 @@ public class CreateFormModel : PageModel
     
     [BindProperty]
     public RegisterForm RegisterForm { get; set; }
-
+    //public string? accId { get; set; }
     public CreateFormModel(IRegisterFormService registerFormService)
     {
         _registerFormService = registerFormService;
     }
-
+    
     public async Task<IActionResult> OnGetAsync()
     {          
         return Page();
@@ -25,10 +25,11 @@ public class CreateFormModel : PageModel
     }
     public async Task<IActionResult> OnPostAsync()
     {
+        //accId = HttpContext.Session.GetString("AccountId");
         RegisterForm.Id = new Guid();
         RegisterForm.RegisterFormStatus = RegisterFormStatus.Registered;
         RegisterForm.IsDelete = false;
-        
+        //RegisterForm.StaffId=Guid.Parse(accId);
         await _registerFormService.Create(RegisterForm);
 
         return RedirectToPage("/Index");
