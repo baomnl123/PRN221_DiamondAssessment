@@ -1,0 +1,48 @@
+﻿@page
+@model DiamondAssessment.Pages.Manager.SealingReport.IndexModel
+@{
+}
+@{
+    ViewData["Title"] = "Index";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Manager") Response.Redirect("/Error");
+}
+<a class="btn btn-sm btn-secondary" asp-page="/Manager/SealingReport/Create">Create Sealing Report</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SealingReports[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SealingReports[0].CreatedAt)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SealingReports)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-page="/Manager/SealingReport/Detail"
+                       asp-route-id="@item.Id.ToString()">Detail</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-page="/Manager/SealingReport/Update"
+                       asp-route-id="@item.Id.ToString()">Update</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-danger" asp-page="/Manager/SealingReport/Delete"
+                       asp-route-id="@item.Id.ToString()">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

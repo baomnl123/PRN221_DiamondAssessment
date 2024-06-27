@@ -1,0 +1,46 @@
+﻿@page
+@model DiamondAssessment.Pages.Manager.CommitmentForm.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Manager") Response.Redirect("/Error");
+}
+<a class="btn btn-sm btn-secondary" asp-page="/Manager/CommitmentForm/Create">Create Commitment Form</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Commitments[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Commitments[0].CreatedAt)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Commitments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-page="/Manager/CommitmentForm/Detail"
+                       asp-route-id="@item.Id.ToString()">Detail</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-page="/Manager/CommitmentForm/Update"
+                       asp-route-id="@item.Id.ToString()">Update</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-danger" asp-page="/Manager/CommitmentForm/Delete"
+                       asp-route-id="@item.Id.ToString()">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
