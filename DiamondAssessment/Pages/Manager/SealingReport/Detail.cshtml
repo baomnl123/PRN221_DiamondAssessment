@@ -1,4 +1,27 @@
 ﻿@page
 @model DiamondAssessment.Pages.Manager.SealingReport.DetailModel
 @{
+    ViewData["Title"] = "Detail";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Manager") Response.Redirect("/Error");
 }
+<dl class="row">
+    <dt class="col-sm-2">Id</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.SealingReport.Id)
+    </dd>
+    <dt class="col-sm-2">PaperId</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.SealingReport.PaperId)
+    </dd>
+    <dt class="col-sm-2">CreatedAt</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.SealingReport.CreatedAt)
+    </dd>
+    <dt class="col-sm-2">Status</dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.SealingReport.IsDelete)
+    </dd>
+
+
+</dl>

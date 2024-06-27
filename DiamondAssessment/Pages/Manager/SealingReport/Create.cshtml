@@ -1,4 +1,50 @@
 ﻿@page
+@using Entities.Models.Enum
+@using NuGet.Protocol
 @model DiamondAssessment.Pages.Manager.SealingReport.CreateModel
 @{
+    ViewData["Title"] = "Create";
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Manager") Response.Redirect("/Error");
+}
+<h1>Create <strong class="text-warning">Sealing Report</strong></h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="SealingReport.Id" class="form-control" hidden />
+                <span asp-validation-for="SealingReport.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SealingReport.PaperId" class="control-label"></label>
+                <input asp-for="SealingReport.PaperId" class="form-control" />
+                <span asp-validation-for="SealingReport.PaperId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SealingReport.CreatedAt" class="control-label"></label>
+                <input asp-for="SealingReport.CreatedAt" class="form-control" />
+                <span asp-validation-for="SealingReport.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="SealingReport.IsDelete" class="form-control" value="false" hidden />
+                <span asp-validation-for="SealingReport.IsDelete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Manager/SealingReport/Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -5,6 +5,7 @@ namespace DiamondAssessment.Pages.Manager.SealingReport
 {
     public class DetailModel : PageModel
     {
+        public Entities.Models.SealingReport SealingReport { get; set; }
         public void OnGet()
         {
         }
