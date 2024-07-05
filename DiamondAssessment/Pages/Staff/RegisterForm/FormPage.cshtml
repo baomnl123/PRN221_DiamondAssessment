@@ -59,6 +59,12 @@
            disabled="@(Model.PageNumber == 1)">
             Previous
         </a>
+        <div>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <a asp-page="./FormPage" asp-route-PageNumber="@i" class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
+            }
+        </div>
         <a asp-page="./FormPage" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
            disabled="@(Model.PageNumber == Model.TotalPages)">
             Next

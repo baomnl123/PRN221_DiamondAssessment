@@ -20,12 +20,23 @@ namespace DiamondAssessment.Pages
         public async Task<IActionResult> OnGetAsync()
         {
             var totalForms = _registerFormService.FindAll().Count;
-            TotalPages = (int)Math.Ceiling(totalForms / 3.0);
+            TotalPages = (int)Math.Ceiling(totalForms / 2.0);
+
+            
+            if (PageNumber < 1)
+            {
+                PageNumber = 1;
+            }
+            else if (PageNumber > TotalPages)
+            {
+                PageNumber = TotalPages;
+            }
 
             Forms = _registerFormService.FindAll()
-                                         .Skip((PageNumber - 1) * 3)
-                                         .Take(3)
+                                         .Skip((PageNumber - 1) * 2)
+                                         .Take(2)
                                          .ToList();
+
             return Page();
         }
     }
