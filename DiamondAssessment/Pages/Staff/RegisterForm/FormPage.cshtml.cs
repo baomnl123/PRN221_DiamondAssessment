@@ -14,9 +14,18 @@ namespace DiamondAssessment.Pages
             _registerFormService = registerFormService;
         }
         public IList<RegisterForm> Forms { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int PageNumber { get; set; } = 1;
+        public int TotalPages { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
-            Forms = _registerFormService.FindAll();
+            var totalForms = _registerFormService.FindAll().Count;
+            TotalPages = (int)Math.Ceiling(totalForms / 3.0);
+
+            Forms = _registerFormService.FindAll()
+                                         .Skip((PageNumber - 1) * 3)
+                                         .Take(3)
+                                         .ToList();
             return Page();
         }
     }

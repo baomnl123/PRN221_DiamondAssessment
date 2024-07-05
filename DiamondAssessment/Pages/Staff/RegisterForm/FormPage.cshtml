@@ -53,6 +53,17 @@
             </tbody>
         </table>
     </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-page="./FormPage" asp-route-PageNumber="@(Model.PageNumber - 1)" class="btn btn-outline-secondary"
+           disabled="@(Model.PageNumber == 1)">
+            Previous
+        </a>
+        <a asp-page="./FormPage" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
+           disabled="@(Model.PageNumber == Model.TotalPages)">
+            Next
+        </a>
+    </div>
 </div>
 
 @section Scripts {
