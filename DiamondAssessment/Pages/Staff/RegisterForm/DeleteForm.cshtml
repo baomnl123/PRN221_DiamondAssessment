@@ -1,33 +1,53 @@
 ﻿@page
 @model DiamondAssessment.Pages.DeleteFormModel
 @{
-    ViewData["Title"] = "DeleteForm";
+    ViewData["Title"] = "Reject Form";
     var role = HttpContext.Session.GetString("Role");
     if (role is not "Staff") Response.Redirect("/Error");
 }
-<h1>Rejecting</h1>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h1 class="h3">Rejecting Form</h1>
+        </div>
+        <div class="card-body">
+            <h3>Are you sure you want to reject this?</h3>
+            <div class="mt-4">
+                <h4>Register Form Details</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.registerForm.Name)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.registerForm.Name)
+                    </dd>
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.registerForm.Description)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.registerForm.Description)
+                    </dd>
+                </dl>
 
-<h3>Are you sure you want to reject this?</h3>
-<div>
-    <h4>Register Form</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.registerForm.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.registerForm.Name)
-        <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.registerForm.Description)
-        </dt>
-        <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.registerForm.Description)
-        </dd>
-    </dl>
-
-    <form method="post">
-        <input type="hidden" asp-for="registerForm.Id" />
-        <input type="submit" value="Reject" class="btn btn-danger" /> |
-        <a asp-page="/Staff/RegisterForm/FormPage">Back to List</a>
-    </form>
+                <form method="post" class="mt-4">
+                    <input type="hidden" asp-for="registerForm.Id" />
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-x-circle"></i> Reject
+                        </button>
+                        <a class="btn btn-secondary" asp-page="/Staff/RegisterForm/FormPage">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

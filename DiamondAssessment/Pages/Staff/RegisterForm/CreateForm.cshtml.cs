@@ -32,7 +32,7 @@ namespace DiamondAssessment.Pages
             RegisterForm.StaffId = Guid.Parse(accId);
             await _registerFormService.Create(RegisterForm);
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Staff/RegisterForm/FormPage");
 
         }
     }
