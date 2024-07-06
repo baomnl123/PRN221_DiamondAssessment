@@ -1,0 +1,114 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.AssessmentPaper.Detail
+
+@{
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+<form method="post">
+    <button class="btn-primary btn-lg">Print to PDF</button>
+</form>
+
+@* This div will be converted to PDF *@
+<div class="flex-column h-auto align-content-center">
+    <div class="text-center fw-bold" style="font-size: xxx-large">
+        Phiếu xác nhận kiểm định
+    </div>
+    @* Content of the paper *@
+    <div class="flex-column align-content-center">
+        <div class="m-1">
+            <strong>Cơ sở kiểm định: </strong>
+            <text>
+                Trung tâm kiểm định kim cương PPBQ
+            </text>
+        </div>
+        <div class="m-1">
+            <strong>Mã số phiếu: </strong>
+            <text>
+                @Html.DisplayFor(model => model.Paper.PaperCode)
+            </text>
+        </div>
+        <div class="m-1">
+            <strong>Nhân viên kiểm định chất lượng: </strong>
+            <text>
+                @Html.DisplayFor(model => model.Paper.Staff.Name)
+            </text>
+        </div>
+        <div class="m-1">
+            <strong>Khách hàng: </strong>
+            <text>
+                @Html.DisplayFor(model => model.Paper.Ticket.Name)
+            </text>
+        </div>
+        
+        <text class="fw-bolder" style="font-size: x-large">Chi tiết kiểm định</text>
+        <div class="flex-column align-items-center m-1 justify-content-around">
+            <div>
+                <strong>Origin: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Origin)
+                </text>
+            </div>
+            <div>
+                <strong>Carat Weight: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.CaratWeight)
+                </text>
+            </div>
+            <div>
+                <strong>Clarity: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Clarity)
+                </text>
+            </div>
+            <div>
+                <strong>Cut: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Cut)
+                </text>
+            </div>
+            <div>
+                <strong>Proportions: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Proportions)
+                </text>
+            </div>
+            <div>
+                <strong>Color: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Color)
+                </text>
+            </div>
+            <div>
+                <strong>Polish: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Polish)
+                </text>
+            </div>
+            <div>
+                <strong>Symmetry: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Symmetry)
+                </text>
+            </div>
+            <div>
+                <strong>Fluorescence: </strong>
+                <text>
+                    @Html.DisplayFor(model => model.Paper.Fluorescence)
+                </text>
+            </div>
+        </div>
+        @* Phần ký tên, chưa làm được =))) *@
+        <div class="flex-row justify-content-around mt-4 border-2 border-black">
+            <div class="flex-column text-center align-items-center border-2 border-black">
+                <strong>Người nhận</strong>
+                <div class="h-25 w-25"></div>
+            </div>
+            <div class="flex-column text-center align-items-center border-2 border-black">
+                <strong>Người kiểm định</strong>
+                <div class="h-25 w-25"></div>
+            </div>
+        </div>
+    </div>
+</div>

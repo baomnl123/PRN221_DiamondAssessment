@@ -1,0 +1,21 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.AssessmentPaper.Create
+
+@{
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    
+</div>
+</body>
+</html>

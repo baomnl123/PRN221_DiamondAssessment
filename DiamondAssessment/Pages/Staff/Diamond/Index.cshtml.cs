@@ -2,7 +2,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.Abstractions;
 
-namespace DiamondAssessment.Pages.Diamond;
+namespace DiamondAssessment.Pages.Staff.Diamond;
 
 public class IndexModel(IDiamondDetailService diamondService) : PageModel
 {

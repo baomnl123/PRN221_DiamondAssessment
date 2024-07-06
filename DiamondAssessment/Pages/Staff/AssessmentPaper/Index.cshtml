@@ -1,0 +1,78 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.AssessmentPaper.Index
+
+@{
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Register Form Manager</h1>
+        <a class="btn btn-primary" asp-page="/Staff/RegisterForm/CreateForm">
+            <i class="bi bi-plus-lg"></i> Create Form
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Paper Code</th>
+                    <th>Staff Name</th>
+                    <th>Customer Name</th>
+                    <th class="text-center" colspan="3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Papers)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PaperCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Ticket.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-info" asp-page="/Staff/AssessmentPaper/Detail" asp-route-id="@item.Id">
+                                <i class="bi bi-eye"></i> Detail
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-warning" asp-page="/Staff/AssessmentPaper/Update" asp-route-id="@item.Id">
+                                <i class="bi bi-pencil-square"></i> Update
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-danger" asp-page="/Staff/AssessmentPaper/Delete" asp-route-id="@item.Id">
+                                <i class="bi bi-x-circle"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber - 1)" class="btn btn-outline-secondary"
+           disabled="@(Model.PageNumber == 1)">
+            Previous
+        </a>
+        <div>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <a asp-page="./Index" asp-route-PageNumber="@i" class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
+            }
+        </div>
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
+           disabled="@(Model.PageNumber == Model.TotalPages)">
+            Next
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

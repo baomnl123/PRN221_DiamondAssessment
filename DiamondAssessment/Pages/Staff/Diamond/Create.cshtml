@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Diamond Manager";
+    Layout = "Shared/_Layout";
     var staffId = HttpContext.Session.GetString("AccountId");
     var role = HttpContext.Session.GetString("Role");
     if (role is not "Staff") Response.Redirect("/Error");
