@@ -18,21 +18,16 @@ public class Detail : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
-        if (id == null)
-        {
+        if (id == Guid.Empty)
             return NotFound();
-        }
 
-        var diamond = await _diamondDetailService.GetDiamondDetailByTicketIdAsync(id);
+        var diamond = await _diamondDetailService.GetDiamondDetailAsync(id);
 
         if (diamond == null)
-        {
             return NotFound();
-        }
-        else
-        {
-            Diamond = diamond;
-        }
+
+        Diamond = diamond;
+
         return Page();
     }
 }

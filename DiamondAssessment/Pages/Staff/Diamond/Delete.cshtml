@@ -1,0 +1,79 @@
+@page
+@model DiamondAssessment.Pages.Staff.Diamond.Delete
+@{
+    ViewData["Title"] = "Delete Diamond";
+    Layout = "Shared/_Layout";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
+}
+
+<h1 class="my-4">Delete <strong class="text-warning">Diamond</strong></h1>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h1 class="h3">Delete Diamond</h1>
+        </div>
+        <div class="card-body">
+            <h3>Are you sure you want to delete this?</h3>
+            <div class="mt-4">
+                <h4>Diamond Details</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-3">Id</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Id)</dd>
+
+                    <dt class="col-sm-3">Origin</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Origin)</dd>
+
+                    <dt class="col-sm-3">Carat Weight</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.CaratWeight)</dd>
+
+                    <dt class="col-sm-3">Clarity</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Clarity)</dd>
+
+                    <dt class="col-sm-3">Cut</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Cut)</dd>
+
+                    <dt class="col-sm-3">Proportions</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Proportions)</dd>
+
+                    <dt class="col-sm-3">Color</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Color)</dd>
+
+                    <dt class="col-sm-3">Polish</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Polish)</dd>
+
+                    <dt class="col-sm-3">Symmetry</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Symmetry)</dd>
+
+                    <dt class="col-sm-3">Fluorescence</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Fluorescence)</dd>
+
+                    <dt class="col-sm-3">Staff Name</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Diamond.Staff.Name)</dd>
+                </dl>
+
+                <form method="post" class="mt-4">
+                    <input type="hidden" asp-for="Diamond.Id" />
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-x-circle"></i> Delete
+                        </button>
+
+                        <a class="btn btn-secondary" asp-page="/Staff/Diamond/Index">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

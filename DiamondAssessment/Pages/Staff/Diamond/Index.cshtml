@@ -7,45 +7,81 @@
     if (role is not "Staff") Response.Redirect("/Error");
 }
 
-<h1 class="my-4">@ViewData["Title"]</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Diamond Manager</h1>
+        <a class="btn btn-primary" asp-page="/Staff/Diamond/Create">
+            <i class="bi bi-plus-lg"></i> Create Diamond
+        </a>
+    </div>
 
-@* <a asp-page="Create" class="btn btn-primary">Create New Diamond</a> *@
-<div class="table-responsive">
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Origin</th>
-                <th scope="col">CaratWeight</th>
-                <th scope="col">Clarity</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var diamond in Model.Diamonds)
-            {
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
                 <tr>
-                    <td>@diamond.Id</td>
-                    <td>@diamond.Origin</td>
-                    <td>@diamond.CaratWeight</td>
-                    <td>@diamond.Clarity</td>
-                    <td>
-                        <a class="btn btn-sm btn-primary" asp-page="./Detail"
-                            asp-route-id="@diamond.TicketId">Detail</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-sm btn-primary" asp-page="./Update" 
-                           asp-route-id="@diamond.Id.ToString()">Edit</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-sm btn-danger" asp-page="./Delete"
-                            asp-route-id="@diamond.Id.ToString()">Delete</a>
-                    </td>
+                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
+                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
+                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
+                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
+                    <th class="text-center" colspan="3">Actions</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Diamonds)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Origin)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CaratWeight)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Clarity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
+
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-info" asp-page="/Staff/Diamond/Detail"
+                                asp-route-id="@item.Id.ToString()">
+                                <i class="bi bi-eye"></i> Detail
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-warning" asp-page="/Staff/Diamond/Update"
+                                asp-route-id="@item.Id.ToString()">
+                                <i class="bi bi-pencil-square"></i> Update
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-danger" asp-page="/Staff/Diamond/Delete"
+                                asp-route-id="@item.Id.ToString()">
+                                <i class="bi bi-x-circle"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber - 1)" class="btn btn-outline-secondary"
+            disabled="@(Model.PageNumber == 1)">
+            Previous
+        </a>
+
+        <div>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <a asp-page="./Index" asp-route-PageNumber="@i"
+                    class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
             }
-        </tbody>
-    </table>
+        </div>
+
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
+            disabled="@(Model.PageNumber == Model.TotalPages)">
+            Next
+        </a>
+    </div>
 </div>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

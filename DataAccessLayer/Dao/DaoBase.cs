@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Context;
 using DataAccessLayer.Dao.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Dao;
 
@@ -14,12 +14,16 @@ public class DaoBase<TEntity> : IDaoBase<TEntity>
     {
         _repositoryContext = repositoryContext;
     }
-    
+
     public IQueryable<TEntity> FindAll()
     {
         return _repositoryContext.Set<TEntity>().AsNoTracking();
     }
-    public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression, bool trackChanges = false) =>
+
+    public IQueryable<TEntity> FindByCondition(
+        Expression<Func<TEntity, bool>> expression,
+        bool trackChanges = false
+    ) =>
         !trackChanges
             ? _repositoryContext.Set<TEntity>().Where(expression).AsNoTracking()
             : _repositoryContext.Set<TEntity>().Where(expression);
@@ -38,7 +42,9 @@ public class DaoBase<TEntity> : IDaoBase<TEntity>
 
     public async Task<bool> Delete(TEntity entity)
     {
-        _repositoryContext.Set<TEntity>().Remove(entity);
+        var entityEntry = _repositoryContext.Set<TEntity>().Update(entity);
+        entityEntry.Property("IsDelete").CurrentValue = true;
+
         return await _repositoryContext.SaveChangesAsync() > 0;
     }
 }
