@@ -2,6 +2,7 @@
 using DataAccessLayer.Dao;
 using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Abstractions;
 
 namespace Repository.Repositories;
@@ -25,4 +26,10 @@ public class TicketRepository : ITicketRepository
     public Task<bool> Update(Ticket entity) => _ticketDao.Update(entity);
 
     public Task<bool> Delete(Ticket entity) => _ticketDao.Delete(entity);
+    public async Task<Ticket?> GetTicketByRegisterFormIdAsync(Guid registerFormId)
+    {
+        return await _ticketDao
+            .FindByCondition(d => d.RegisterFormId == registerFormId, false)
+            .FirstOrDefaultAsync();
+    }
 }

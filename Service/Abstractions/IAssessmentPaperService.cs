@@ -10,5 +10,5 @@ public interface IAssessmentPaperService
     Task<bool> Create(AssessmentPaper entity);
     Task<bool> Update(AssessmentPaper entity);
     Task<bool> Delete(AssessmentPaper entity);
-
+    Task<AssessmentPaper?> GetAssessmentPaperByTicketId(Guid ticketId);
 }

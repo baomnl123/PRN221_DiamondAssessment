@@ -3,13 +3,13 @@
 @model DiamondAssessment.Pages.Guest.SearchForm.SearchForm
 
 @{
-    ViewData["Title"] = "SearchForm Guest";
-    Layout = "Shared/_Layout";
+ViewData["Title"] = "SearchForm Guest";
+Layout = "Shared/_Layout";
 }
 
 @section Styles
 {
-    <link href="~/css/create-form.css" rel="stylesheet" />
+<link href="~/css/create-form.css" rel="stylesheet" />
 }
 <h1 class="content-body-header">Lookup Register Form</h1>
 <form method="post" asp-page="./SearchForm">
@@ -17,23 +17,22 @@
         <input asp-for="EmailOrPhone" placeholder="Enter your Email or Phone" class="form-control" required />
         <button type="submit" class="btn btn-primary btn-search">Search</button>
     </div>
-    
 </form>
 
-@if (Model.RegisterForm != null)
+@if (Model.Ticket != null)
 {
-    <div class="container mt-5">
-    <h1>REGISTER DETAIL: </h1>
+<div class="container mt-5">
+    <h1>Ticket DETAIL: </h1>
     <div class="row border py-3">
         <div class="col-md-6">
             <div class="d-flex justify-content-between">
-                <p><strong>Name:</strong> <span>@Model.RegisterForm.Name</span></p>
+                <p><strong>Name:</strong> <span>@Model.Ticket.Name</span></p>
             </div>
             <div class="d-flex justify-content-between">
-                <p><strong>Phone Number:</strong> <span>@Model.RegisterForm.PhoneNumber</span></p>
+                <p><strong>Phone Number:</strong> <span>@Model.Ticket.PhoneNumber</span></p>
             </div>
             <div class="d-flex justify-content-between">
-                <p><strong>Email:</strong> <span>@Model.RegisterForm.Email</span></p>
+                <p><strong>Email:</strong> <span>@Model.Ticket.Email</span></p>
             </div>
         </div>
         <div class="col-md-6">
@@ -43,17 +42,17 @@
             </div>
         </div>
     </div>
-    <div class="row border mt-2  py-3">
-        <h1>Status:</h1>
-        @if (Model.RegisterForm.RegisterFormStatus != 0)
+    <div class="row border mt-2 py-3">
+        @if (Model.Ticket.TicketStatus != 0)
         {
-            <p class="alert-danger bx-bold">Wait for approving</p>
+        <h1>Status: COMPLETED!</h1>
+        <a asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@Model.Ticket.Id">View Assessment Paper</a>
         }
     </div>
-    </div>
+</div>
 }
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <partial name="_ValidationScriptsPartial" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<partial name="_ValidationScriptsPartial" />
 }

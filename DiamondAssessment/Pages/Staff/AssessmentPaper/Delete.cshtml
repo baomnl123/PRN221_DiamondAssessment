@@ -1,21 +1,89 @@
 ﻿@page
 @model DiamondAssessment.Pages.Staff.AssessmentPaper.Delete
-
 @{
-    Layout = "Shared/_Layout";
-    var role = HttpContext.Session.GetString("Role");
-    if (role is not "Staff") Response.Redirect("/Error");
+ViewData["Title"] = "Delete Assessment Paper";
+var role = HttpContext.Session.GetString("Role");
+if (role is not "Staff") Response.Redirect("/Error");
 }
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h1 class="h3">Delete Assessment Paper</h1>
+        </div>
+        <div class="card-body">
+            <h3>Are you sure you want to delete this?</h3>
+            <div class="mt-4">
+                <h4>Paper Details</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Paper.PaperCode)
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Paper.PaperCode)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Staff Name
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Paper.Staff.Name)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Ticket Name
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Paper.Ticket.Name)
+                    </dd>
+                </dl>
+                <h4>Diamond Details</h4>
+                <hr />
+                <dl class="row">
 
-<!DOCTYPE html>
+                    <dt class="col-sm-3">Origin</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Origin)</dd>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+                    <dt class="col-sm-3">Carat Weight</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.CaratWeight)</dd>
+
+                    <dt class="col-sm-3">Clarity</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Clarity)</dd>
+
+                    <dt class="col-sm-3">Cut</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Cut)</dd>
+
+                    <dt class="col-sm-3">Proportions</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Proportions)</dd>
+
+                    <dt class="col-sm-3">Color</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Color)</dd>
+
+                    <dt class="col-sm-3">Polish</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Polish)</dd>
+
+                    <dt class="col-sm-3">Symmetry</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Symmetry)</dd>
+
+                    <dt class="col-sm-3">Fluorescence</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Paper.Fluorescence)</dd>
+                </dl>
+                <form method="post" class="mt-4">
+                    <input type="hidden" asp-for="Paper.Id" />
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-x-circle"></i> Delete
+                        </button>
+                        <a class="btn btn-secondary" asp-page="/Staff/RegisterForm/FormPage">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-</body>
-</html>
+
+@section Scripts {
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

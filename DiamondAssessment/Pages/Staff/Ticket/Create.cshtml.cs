@@ -60,7 +60,7 @@ public class Create : PageModel
         {
             return Page();
         }
-        return RedirectToPage($"../RegisterForm/FormPage");
+        return RedirectToPage($"./Index");
     }
     
 }

@@ -34,4 +34,8 @@ public class TicketService : ITicketService
         entity.IsDelete = true;
         return _ticketRepository.Update(entity);
     }
+    public Task<Ticket?> GetTicketByRegisterFormId(Guid registerFormId)
+    {
+        return _ticketRepository.GetTicketByRegisterFormIdAsync(registerFormId);
+    }
 }

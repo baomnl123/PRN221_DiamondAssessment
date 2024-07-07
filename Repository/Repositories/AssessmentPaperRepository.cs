@@ -30,5 +30,10 @@ public class AssessmentPaperRepository : IAssessmentPaperRepository
     public async Task<bool> Update(AssessmentPaper entity) => await _assessmentPaperDao.Update(entity);
 
     public async Task<bool> Delete(AssessmentPaper entity) => await _assessmentPaperDao.Delete(entity);
-    
+    public async Task<AssessmentPaper?> GetAssessmentPaperByTicketIdAsync(Guid ticketId)
+    {
+        return await _assessmentPaperDao
+            .FindByCondition(d => d.TicketId == ticketId, false)
+            .FirstOrDefaultAsync();
+    }
 }

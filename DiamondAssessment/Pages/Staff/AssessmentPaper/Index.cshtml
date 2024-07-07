@@ -9,9 +9,9 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Register Form Manager</h1>
-        <a class="btn btn-primary" asp-page="/Staff/RegisterForm/CreateForm">
-            <i class="bi bi-plus-lg"></i> Create Form
+        <h1>Assessment Paper Manager</h1>
+        <a class="btn btn-primary" asp-page="/Staff/AssessmentPaper/Create">
+            <i class="bi bi-plus-lg"></i> Create Paper
         </a>
     </div>
 
@@ -33,7 +33,7 @@
                         <td>@Html.DisplayFor(modelItem => item.Ticket.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-info" asp-page="/Staff/AssessmentPaper/Detail" asp-route-id="@item.Id">
+                            <a class="btn btn-sm btn-info" asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@item.TicketId">
                                 <i class="bi bi-eye"></i> Detail
                             </a>
                         </td>

@@ -49,6 +49,14 @@
         </div>
     </div>
 </div>
+@if (Model.havePaper)
+{
+<a class="btn btn-primary" asp-page="../AssessmentPaper/Detail" asp-route-ticketId="@Model.Diamond.TicketId">View Assessment Paper</a>
+}
+else
+{
+<a class="btn btn-primary" asp-page="../AssessmentPaper/Create" asp-route-diamondId="@Model.Diamond.Id" asp-route-ticketId="@Model.Diamond.TicketId">Create Assessment Paper</a>
+}
 
 <div class="mt-3 text-center">
     <a asp-page="/Staff/Diamond/Index" class="btn btn-secondary">Back to List</a>
