@@ -25,7 +25,7 @@ public static class DiamondDetailGenerator
                 assessmentPaper => assessmentPaper.Fluorescence,
                 f => f.PickRandom<GlowStrength>()
             )
-            .RuleFor(assessmentPaper => assessmentPaper.IsDelete, f => f.Random.Bool())
+            .RuleFor(assessmentPaper => assessmentPaper.IsDelete, f => f.Equals(false))
             .Generate(50)
             .ToArray();
     }

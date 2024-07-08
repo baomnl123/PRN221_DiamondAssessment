@@ -84,7 +84,7 @@ namespace DiamondAssessment.Pages.Staff.Diamond
                     if (!isDiamondCreated)
                     {
                         ModelState.AddModelError("Error", "Error creating diamond");
-                        ticket.TicketStatus = TicketStatus.Pending;
+                        ticket.TicketStatus = TicketStatus.InProgress;
                         await _ticketService.Update(ticket);
                     }
                 }

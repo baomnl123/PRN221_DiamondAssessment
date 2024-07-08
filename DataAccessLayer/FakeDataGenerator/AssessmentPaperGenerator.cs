@@ -12,6 +12,7 @@ public static class AssessmentPaperGenerator
     )
     {
         var usedTicketIds = new HashSet<Guid>();
+        int paperCode = 1;
 
         return new Faker<AssessmentPaper>()
             .UseSeed(1)
@@ -30,9 +31,9 @@ public static class AssessmentPaperGenerator
                 }
             )
             .RuleFor(assessmentPaper => assessmentPaper.StaffId, f => f.PickRandom(staffs).Id)
-            .RuleFor(assessmentPaper => assessmentPaper.PaperCode, f => f.Lorem.Paragraph())
+            .RuleFor(assessmentPaper => assessmentPaper.PaperCode, f => $"P{paperCode++}")
             .RuleFor(assessmentPaper => assessmentPaper.CreatedAt, f => f.Date.Past())
-            .RuleFor(assessmentPaper => assessmentPaper.Origin, f => f.Lorem.Paragraph())
+            .RuleFor(assessmentPaper => assessmentPaper.Origin, f => f.Lorem.Sentences(3))
             .RuleFor(assessmentPaper => assessmentPaper.CaratWeight, f => f.Random.Float(0, 5))
             .RuleFor(assessmentPaper => assessmentPaper.Clarity, f => f.PickRandom<Quality>())
             .RuleFor(assessmentPaper => assessmentPaper.Cut, f => f.PickRandom<Quality>())
@@ -44,7 +45,7 @@ public static class AssessmentPaperGenerator
                 assessmentPaper => assessmentPaper.Fluorescence,
                 f => f.PickRandom<GlowStrength>()
             )
-            .RuleFor(assessmentPaper => assessmentPaper.IsDelete, f => f.Random.Bool())
+            .RuleFor(assessmentPaper => assessmentPaper.IsDelete, f => f.Equals(false))
             .Generate(50)
             .ToArray();
     }

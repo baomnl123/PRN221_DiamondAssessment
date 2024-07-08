@@ -1,7 +1,6 @@
 ﻿using IronPdf.Razor.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
@@ -40,11 +39,24 @@ public class Detail : PageModel
         }
 
         Paper = paper;
+        ViewData["Paper"] = Paper;
         return Page();
     }
 
-    public async Task<IActionResult> OnPost()
+    public async Task<IActionResult> OnPost(Guid id)
     {
+        var paper = _assessmentPaperService
+            .FindByCondition(p => p.Id == id, false)
+            .Include(p => p.Staff)
+            .Include(p => p.Ticket)
+            .FirstOrDefault();
+        if (paper == null)
+        {
+            return NotFound();
+        }
+
+        Paper = paper;
+        ViewData["Paper"] = Paper;
         ChromePdfRenderer renderer = new ChromePdfRenderer();
         // Render Razor Page to PDF document
         PdfDocument pdf = renderer.RenderRazorToPdf(this);

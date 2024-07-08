@@ -28,7 +28,7 @@ namespace DataAccessLayer.FakeDataGenerator
                     }
                 )
                 .RuleFor(sealingReport => sealingReport.CreatedAt, f => f.Date.Past())
-                .RuleFor(sealingReport => sealingReport.IsDelete, f => f.Random.Bool())
+                .RuleFor(sealingReport => sealingReport.IsDelete, f => f.Equals(false))
                 .Generate(50)
                 .ToArray();
         }

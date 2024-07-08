@@ -28,7 +28,7 @@ namespace DataAccessLayer.FakeDataGenerator
                     }
                 )
                 .RuleFor(commitmentForm => commitmentForm.CreatedAt, f => f.Date.Past())
-                .RuleFor(commitmentForm => commitmentForm.IsDelete, f => f.Random.Bool())
+                .RuleFor(commitmentForm => commitmentForm.IsDelete, f => f.Equals(false))
                 .Generate(50)
                 .ToArray();
         }

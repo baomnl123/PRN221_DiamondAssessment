@@ -15,7 +15,7 @@ public static class TicketGenerator
             .RuleFor(ticket => ticket.Name, f => f.Name.FullName())
             .RuleFor(ticket => ticket.PhoneNumber, f => f.Phone.PhoneNumber())
             .RuleFor(ticket => ticket.Email, f => f.Internet.Email())
-            .RuleFor(ticket => ticket.IsDelete, f => f.Random.Bool())
+            .RuleFor(ticket => ticket.IsDelete, f => f.Equals(false))
             .Generate(50)
             .ToArray();
     }
