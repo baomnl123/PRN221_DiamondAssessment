@@ -1,14 +1,8 @@
 ﻿using IronPdf.Razor.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Service.Abstractions;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DiamondAssessment.Pages.Staff.AssessmentPaper
 {

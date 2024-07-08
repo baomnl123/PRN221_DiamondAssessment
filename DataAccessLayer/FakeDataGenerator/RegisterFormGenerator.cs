@@ -15,7 +15,7 @@ public static class RegisterFormGenerator
             .RuleFor(registerForm => registerForm.PhoneNumber, f => f.Phone.PhoneNumber())
             .RuleFor(registerForm => registerForm.Email, f => f.Internet.Email())
             .RuleFor(registerForm => registerForm.StaffId, f => f.PickRandom(staffs).Id)
-            .RuleFor(registerForm => registerForm.IsDelete, f => f.Random.Bool())
+            .RuleFor(registerForm => registerForm.IsDelete, f => f.Equals(false))
             .Generate(50)
             .ToArray();
     }
