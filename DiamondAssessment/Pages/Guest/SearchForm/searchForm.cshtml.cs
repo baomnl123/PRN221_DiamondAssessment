@@ -14,7 +14,7 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
         [BindProperty]
         public RegisterForm RegisterForm { get; set; }
         
-        public Ticket Ticket { get; set; }
+        public List<Ticket> Tickets { get; set; }
 
         [BindProperty]
         public string EmailOrPhone { get; set; }
@@ -30,6 +30,11 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
             if (!string.IsNullOrEmpty(emailOrPhone))
             {
                 RegisterForm = await _registerFormService.FindByEmailOrPhone(emailOrPhone);
+                Tickets = await _ticketService.FindTicketByEmailOrPhone(emailOrPhone);
+                if (Tickets == null || !Tickets.Any())
+                {
+                    ModelState.AddModelError(string.Empty, "No tickets found.");
+                }
 
                 if (RegisterForm == null)
                 {
@@ -49,7 +54,12 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
                 return Page();
             }
             
-            Ticket = await _ticketService.GetTicketByRegisterFormId(RegisterForm.Id);
+            Tickets = await _ticketService.FindTicketByEmailOrPhone(EmailOrPhone);
+            if (Tickets == null || !Tickets.Any())
+            {
+                ModelState.AddModelError(string.Empty, "No tickets found.");
+                return Page();
+            }
 
             return Page();
         }

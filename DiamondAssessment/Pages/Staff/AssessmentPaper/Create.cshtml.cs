@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.Abstractions;
 using System;
 using System.Threading.Tasks;
+using Entities.Models.Enum;
 
 namespace DiamondAssessment.Pages.Staff.AssessmentPaper
 {
@@ -68,6 +69,15 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             Paper.Fluorescence = DiamondDetail.Fluorescence;
             
             await _assessmentPaperService.Create(Paper);
+
+            var ticket = _ticketService
+                .FindByCondition(d => d.Id == Paper.TicketId, false)
+                .FirstOrDefault();
+            if (ticket != null)
+            {
+                ticket.TicketStatus = TicketStatus.Done;
+                await _ticketService.Update(ticket);
+            }
 
             return RedirectToPage("/Staff/AssessmentPaper/Index");
 

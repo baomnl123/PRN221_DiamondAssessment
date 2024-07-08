@@ -1,5 +1,6 @@
 @page
 @using Entities.Models
+@using Entities.Models.Enum
 @model DiamondAssessment.Pages.Guest.SearchForm.SearchForm
 
 @{
@@ -19,40 +20,61 @@ Layout = "Shared/_Layout";
     </div>
 </form>
 
-@if (Model.Ticket != null)
+@if (Model.RegisterForm != null)
 {
-<div class="container mt-5">
-    <h1>Ticket DETAIL: </h1>
-    <div class="row border py-3">
-        <div class="col-md-6">
-            <div class="d-flex justify-content-between">
-                <p><strong>Name:</strong> <span>@Model.Ticket.Name</span></p>
+    <div class="container mt-5">
+        <h1>Form: </h1>
+        <div class="row border py-3">
+            <div class="col-md-6">
+                <div class="d-flex justify-content-between">
+                    <p><strong>Name:</strong> <span>@Model.RegisterForm.Name</span></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p><strong>Phone Number:</strong> <span>@Model.RegisterForm.PhoneNumber</span></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p><strong>Email:</strong> <span>@Model.RegisterForm.Email</span></p>
+                </div>
             </div>
-            <div class="d-flex justify-content-between">
-                <p><strong>Phone Number:</strong> <span>@Model.Ticket.PhoneNumber</span></p>
-            </div>
-            <div class="d-flex justify-content-between">
-                <p><strong>Email:</strong> <span>@Model.Ticket.Email</span></p>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="border-left pl-3">
-                <p><strong>Description:</strong></p>
-                <p>@Model.RegisterForm.Description</p>
+            <div class="col-md-6">
+                <div class="border-left pl-3">
+                    <p><strong>Description:</strong></p>
+                    <p>@Model.RegisterForm.Description</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row border mt-2 py-3">
-        @if (Model.Ticket.TicketStatus != 0)
+@if (@Model.Tickets != null)
+    {
+        <h1 class="mt-3">Your Diamond:</h1>
+        @foreach (var ticket in Model.Tickets)
         {
-        <h1>Status: COMPLETED!</h1>
-        <a asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@Model.Ticket.Id">View Assessment Paper</a>
+            <div class="row border mb-3">
+                <div class="col-md-6">
+
+                    <div class="col-12">
+                        <p><strong>Name:</strong> <span>@ticket.TicketName</span></p>
+                    </div>
+                    @if (ticket.TicketStatus == TicketStatus.Done)
+                    {
+                        <h2>Status: Completed</h2>
+                        <a asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@ticket.Id">View Assessment Paper</a>
+                    }
+                    else if (ticket.TicketStatus == TicketStatus.Pending)
+                    {
+                        <h2>Status: Pending</h2>
+                    }
+                    else
+                    {
+                        <h2>Status: In Progress</h2>
+                    }
+                </div>
+            </div>
         }
-    </div>
-</div>
+    }
 }
 
 @section Scripts {
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <partial name="_ValidationScriptsPartial"/>
 }

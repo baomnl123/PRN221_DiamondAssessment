@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Abstractions;
 using Service.Abstractions;
 
@@ -37,5 +38,14 @@ public class TicketService : ITicketService
     public Task<Ticket?> GetTicketByRegisterFormId(Guid registerFormId)
     {
         return _ticketRepository.GetTicketByRegisterFormIdAsync(registerFormId);
+    }
+    public async Task<List<Ticket>> FindTicketByEmailOrPhone(string emailOrPhone)
+    {
+        // Define a predicate to match either email or phone number
+        Expression<Func<Ticket, bool>> predicate = 
+            t => t.Email == emailOrPhone || t.PhoneNumber == emailOrPhone;
+
+        // Call repository method to find by condition
+        return await _ticketRepository.FindByCondition(predicate, trackChanges: false).ToListAsync();
     }
 }

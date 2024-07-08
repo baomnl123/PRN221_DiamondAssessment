@@ -11,4 +11,5 @@ public interface ITicketService
     Task<bool> Update(Ticket entity);
     Task<bool> Delete(Ticket entity);
     Task<Ticket?> GetTicketByRegisterFormId(Guid registerFormId);
+    Task<List<Ticket>> FindTicketByEmailOrPhone(string emailOrPhone);
 }
