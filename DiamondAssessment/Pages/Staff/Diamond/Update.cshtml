@@ -1,15 +1,13 @@
 @page
-@model DiamondAssessment.Pages.Staff.Diamond.Create
-
+@model DiamondAssessment.Pages.Staff.Diamond.Update
 @{
-    ViewData["Title"] = "Create Diamond";
+    ViewData["Title"] = "Update Diamond";
     Layout = "Shared/_Layout";
-    var staffId = HttpContext.Session.GetString("AccountId");
     var role = HttpContext.Session.GetString("Role");
     if (role is not "Staff") Response.Redirect("/Error");
 }
 
-<h1 class="my-4">Create <strong class="text-warning">Diamond</strong></h1>
+<h1 class="my-4">Update <strong class="text-warning">Diamond</strong></h1>
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -83,8 +81,7 @@
                     </div>
 
                     <div class="form-group text-center">
-                        <input type="hidden" asp-for="DiamondDetail.StaffId" value="@staffId" />
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>

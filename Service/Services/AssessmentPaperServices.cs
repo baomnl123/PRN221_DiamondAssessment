@@ -28,8 +28,8 @@ namespace Service.Services
 
         public Task<bool> Create(AssessmentPaper entity)
         {
-            throw new NotImplementedException();
-        }
+            return _assessmentPaperRepository.Create(entity);
+        } 
 
         public Task<bool> Update(AssessmentPaper entity)
         {
@@ -40,6 +40,10 @@ namespace Service.Services
         {
             entity.IsDelete = true;
             return _assessmentPaperRepository.Update(entity);
+        }
+        public Task<AssessmentPaper?> GetAssessmentPaperByTicketId(Guid ticketId)
+        {
+            return _assessmentPaperRepository.GetAssessmentPaperByTicketIdAsync(ticketId);
         }
     }
 }

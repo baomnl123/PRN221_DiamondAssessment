@@ -94,6 +94,9 @@ namespace DiamondAssessment.Pages.Staff.Diamond
                 }
             }
 
+            DiamondDetail.Ticket.TicketStatus = TicketStatus.InProgress;
+            await _ticketService.Update(DiamondDetail.Ticket);
+
             return RedirectToPage("./Index");
         }
 

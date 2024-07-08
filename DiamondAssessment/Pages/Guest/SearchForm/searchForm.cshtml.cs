@@ -9,16 +9,20 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
     public class SearchForm : PageModel
     {
         private readonly IRegisterFormService _registerFormService;
+        private readonly ITicketService _ticketService;
 
         [BindProperty]
         public RegisterForm RegisterForm { get; set; }
+        
+        public Ticket Ticket { get; set; }
 
         [BindProperty]
         public string EmailOrPhone { get; set; }
         
-        public SearchForm(IRegisterFormService registerFormService)
+        public SearchForm(IRegisterFormService registerFormService, ITicketService ticketService)
         {
             _registerFormService = registerFormService;
+            _ticketService = ticketService;
         }
 
         public async Task<IActionResult> OnGetAsync(string emailOrPhone)
@@ -39,11 +43,13 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
         public async Task<IActionResult> OnPostAsync()
         {
             RegisterForm = await _registerFormService.FindByEmailOrPhone(EmailOrPhone);
-
             if (RegisterForm == null)
             {
                 ModelState.AddModelError(string.Empty, "Register form not found.");
+                return Page();
             }
+            
+            Ticket = await _ticketService.GetTicketByRegisterFormId(RegisterForm.Id);
 
             return Page();
         }
