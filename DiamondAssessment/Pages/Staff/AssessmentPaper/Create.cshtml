@@ -25,7 +25,7 @@ if (role is not "Staff") Response.Redirect("/Error");
         </div>
         <div class="form-group">
             <label for="caratWeight">Carat Weight</label>
-            <input type="number" id="caratWeight" name="CaratWeight" class="form-control" value="@Model.DiamondDetail.CaratWeight" readonly/>
+            <input type="text" id="caratWeight" name="CaratWeight" class="form-control" value="@Model.DiamondDetail.CaratWeight" readonly/>
         </div>
         <div class="form-group">
             <label for="clarity">Clarity</label>

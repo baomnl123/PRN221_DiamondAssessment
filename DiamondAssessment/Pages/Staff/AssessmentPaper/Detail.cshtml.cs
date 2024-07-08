@@ -15,16 +15,10 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
     public class Detail : PageModel
     {
         private readonly IAssessmentPaperService _assessmentPaperService;
-        private readonly ICompositeViewEngine _viewEngine;
-        private readonly ITempDataProvider _tempDataProvider;
-        private readonly IServiceProvider _serviceProvider;
 
-        public Detail(IAssessmentPaperService assessmentPaperService, ICompositeViewEngine viewEngine, ITempDataProvider tempDataProvider, IServiceProvider serviceProvider)
+        public Detail(IAssessmentPaperService assessmentPaperService)
         {
             _assessmentPaperService = assessmentPaperService;
-            _viewEngine = viewEngine;
-            _tempDataProvider = tempDataProvider;
-            _serviceProvider = serviceProvider;
         }
         
         [BindProperty]
@@ -46,11 +40,14 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(Guid ticketId)
         {
-            ChromePdfRenderer renderer = new ChromePdfRenderer();
-            PdfDocument pdf = renderer.RenderRazorToPdf(this);
-            Response.Headers.Add("Content-Disposition", "inline");
+            // ChromePdfRenderer renderer = new ChromePdfRenderer();
+            // PdfDocument pdf = renderer.RenderRazorToPdf(this);
+            // Response.Headers.Append("Content-Disposition", "inline");
+            // return File(pdf.BinaryData, "application/pdf", "razorPageToPdf.pdf");
+            var renderer = new ChromePdfRenderer();
+            var pdf = await renderer.RenderUrlAsPdfAsync($"http://localhost:5241/Staff/AssessmentPaper/Print/{ticketId}");
             return File(pdf.BinaryData, "application/pdf", "razorPageToPdf.pdf");
         }
     }

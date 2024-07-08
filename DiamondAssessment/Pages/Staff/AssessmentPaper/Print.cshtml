@@ -1,16 +1,12 @@
 ﻿@page "{ticketId:guid}"
-@model DiamondAssessment.Pages.Staff.AssessmentPaper.Detail
+@model DiamondAssessment.Pages.Staff.AssessmentPaper.Print
 
 @{
-Layout = "Shared/_Layout";
-}
-
-@section Styles
-{
-<link href="~/css/detail-AP.css" rel="stylesheet" />
-<!-- Ensure Bootstrap is included -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    Layout = null;
+    <link href="~/css/detail-AP.css" rel="stylesheet" />
+    <!-- Ensure Bootstrap is included -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
 }
 
 <div class="ap-container">
@@ -67,14 +63,10 @@ Layout = "Shared/_Layout";
             </div>
             <div class="text-center fw-bold" style="font-size: x-large">Chi tiết kiểm định</div>
             <div class="flex-column m-1 justify-content-around">
-                <div class="row">
-                    <div class="col-6 text-left">
-                        <strong>Origin: </strong>
-                        </div>
-                    <div class="col-6 text-right">
-                        <text>@Html.DisplayFor(model => model.Paper.Origin)</text>
-                    </div>
-                    </div>
+                <div>
+                    <strong>Origin: </strong>
+                    <text>@Html.DisplayFor(model => model.Paper.Origin)</text>
+                </div>
                 <div class="row">
                     <div class="col-6 text-left">
                         <strong>Carat Weight: </strong>
@@ -144,6 +136,3 @@ Layout = "Shared/_Layout";
             
         </div>
     </div>
-<form method="post">
-    <button class="btn btn-primary btn-lg">Print to PDF</button>
-</form>
