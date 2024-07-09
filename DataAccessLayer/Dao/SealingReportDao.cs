@@ -1,11 +1,12 @@
 ﻿using DataAccessLayer.Context;
+using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
 
 namespace DataAccessLayer.Dao;
 
-public class SealingReportDao : DaoBase<SealingReport>
+public class SealingReportDao : DaoBase<SealingReport> , ISealingReportDao
 {
-    protected SealingReportDao(RepositoryContext repositoryContext) : base(repositoryContext)
+    public SealingReportDao(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }
 }

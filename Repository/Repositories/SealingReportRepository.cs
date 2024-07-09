@@ -1,33 +1,36 @@
 ﻿using System.Linq.Expressions;
+using DataAccessLayer.Dao;
+using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Abstractions;
 
 namespace Repository.Repositories;
 
 public class SealingReportRepository : ISealingReportRepository
 {
-    public IQueryable<SealingReport> FindAll()
+    private readonly ISealingReportDao _sealingReportDao;
+
+    public SealingReportRepository(ISealingReportDao sealingReportDao)
     {
-        throw new NotImplementedException();
+        _sealingReportDao = sealingReportDao;
     }
+
+    public IQueryable<SealingReport> FindAll()
+        => _sealingReportDao
+                .FindAll()
+                .Where(f => f.IsDelete == false)
+                .Include(f => f.AssessmentPaper);
 
     public IQueryable<SealingReport> FindByCondition(Expression<Func<SealingReport, bool>> expression, bool trackChanges)
-    {
-        throw new NotImplementedException();
-    }
+    => _sealingReportDao.FindByCondition(expression, trackChanges);
 
-    public Task<bool> Create(SealingReport entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<bool> Create(SealingReport entity)
+    => await _sealingReportDao.Create(entity);
 
-    public Task<bool> Update(SealingReport entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<bool> Update(SealingReport entity)
+    => await _sealingReportDao.Update(entity);
 
-    public Task<bool> Delete(SealingReport entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<bool> Delete(SealingReport entity)
+    => await _sealingReportDao.Delete(entity);
 }

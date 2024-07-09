@@ -67,7 +67,7 @@ public class Login : PageModel
                     Response.Redirect("/Admin/Account/Index");
                     break;
                 case Role.Manager:
-                    Response.Redirect("/Manager/AssessmentPaper/Index");
+                    Response.Redirect("/Index");
                     break;
                 case Role.Staff:
                     Response.Redirect("/Staff/RegisterForm/FormPage");

@@ -15,22 +15,9 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="CommitmentForm.Id" class="form-control" hidden />
-                <span asp-validation-for="CommitmentForm.Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CommitmentForm.PaperId" class="control-label"></label>
-                <input asp-for="CommitmentForm.PaperId" class="form-control" />
-                <span asp-validation-for="CommitmentForm.PaperId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="CommitmentForm.CreatedAt" class="control-label"></label>
                 <input asp-for="CommitmentForm.CreatedAt" class="form-control" />
                 <span asp-validation-for="CommitmentForm.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="CommitmentForm.IsDelete" class="form-control" value="false" hidden />
-                <span asp-validation-for="CommitmentForm.IsDelete" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

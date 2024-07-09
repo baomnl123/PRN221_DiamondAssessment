@@ -1,33 +1,36 @@
 ﻿using System.Linq.Expressions;
+using DataAccessLayer.Dao;
+using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Abstractions;
 
 namespace Repository.Repositories;
 
 public class CommitmentFormRepository : ICommitmentFormRepository
 {
-    public IQueryable<CommitmentForm> FindAll()
+    private readonly ICommitmentFormDao _commitmentFormDao;
+
+    public CommitmentFormRepository(ICommitmentFormDao commitmentFormDao)
     {
-        throw new NotImplementedException();
+        _commitmentFormDao = commitmentFormDao;
     }
+
+    public IQueryable<CommitmentForm> FindAll()
+    => _commitmentFormDao
+                .FindAll()
+                .Where(f => f.IsDelete == false)
+                .Include(f => f.AssessmentPaper);
 
     public IQueryable<CommitmentForm> FindByCondition(Expression<Func<CommitmentForm, bool>> expression, bool trackChanges)
-    {
-        throw new NotImplementedException();
-    }
+    => _commitmentFormDao.FindByCondition(expression, trackChanges);
 
-    public Task<bool> Create(CommitmentForm entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<bool> Create(CommitmentForm entity)
+    => await _commitmentFormDao.Create(entity);
 
-    public Task<bool> Update(CommitmentForm entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<bool> Update(CommitmentForm entity)
+    => await _commitmentFormDao.Update(entity);
 
-    public Task<bool> Delete(CommitmentForm entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<bool> Delete(CommitmentForm entity)
+    => await _commitmentFormDao.Delete(entity);
 }

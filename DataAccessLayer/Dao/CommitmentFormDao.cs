@@ -4,9 +4,9 @@ using Entities.Models;
 
 namespace DataAccessLayer.Dao;
 
-public class CommitmentFormDao : DaoBase<CommitmentForm>
+public class CommitmentFormDao : DaoBase<CommitmentForm> , ICommitmentFormDao
 {
-    protected CommitmentFormDao(RepositoryContext repositoryContext) : base(repositoryContext)
+    public CommitmentFormDao(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }
 }

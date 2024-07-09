@@ -29,5 +29,8 @@ public static class DependencyInjection
         services.AddScoped<IDiamondDetailDao, DiamondDetailDao>();
         services.AddScoped<IStaffDao, StaffDao>();
         services.AddScoped<ITicketDao, TicketDao>();
+        services.AddScoped<ITicketDao, TicketDao>();
+        services.AddScoped<ISealingReportDao, SealingReportDao>();
+        services.AddScoped<ICommitmentFormDao, CommitmentFormDao>();
     }
 }

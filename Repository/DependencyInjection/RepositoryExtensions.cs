@@ -13,5 +13,7 @@ public static class RepositoryExtensions
         services.AddScoped<IRegisterFormRepository, RegisterFormRepository>();
         services.AddScoped<IStaffRepository, StaffRepository>();
         services.AddScoped<ITicketRepository, TicketRepository>();
+        services.AddScoped<ISealingReportRepository, SealingReportRepository>();
+        services.AddScoped<ICommitmentFormRepository, CommitmentFormRepository>();
     }
 }
