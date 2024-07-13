@@ -18,6 +18,7 @@ public static class ServiceExtensions
         services.AddScoped<ITicketService, TicketService>();
         services.AddScoped<ISealingReportService, SealingReportServices>();
         services.AddScoped<ICommitmentFormService, CommitmentFormServices>();
+        services.AddScoped<IEmailService, EmailService>();
     }
 
     //public static void ConfigureServiceManager(this IServiceCollection services) =>

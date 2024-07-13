@@ -2,9 +2,9 @@
 @using Entities.Models.Enum
 @model DiamondAssessment.Pages.FormPageModel
 @{
-ViewData["Title"] = "Register Form Manager";
-var role = HttpContext.Session.GetString("Role");
-if (role is not "Staff") Response.Redirect("/Error");
+    ViewData["Title"] = "Register Form Manager";
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not "Staff") Response.Redirect("/Error");
 }
 
 <div class="container mt-4">
@@ -42,35 +42,46 @@ if (role is not "Staff") Response.Redirect("/Error");
             <tbody>
             @foreach (var item in Model.Forms)
             {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td class="text-center">
-                    @if (item.RegisterFormStatus == RegisterFormStatus.Approved)
-                    {
-                    <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm" asp-route-id="@item.Id.ToString()">
-                        <i class="bi bi-x-circle"></i> Delete
-                    </a>
-                    }
-                    else if (item.RegisterFormStatus == RegisterFormStatus.Registered)
-                    {
-                    <a class="btn btn-sm btn-warning" asp-page="/Staff/RegisterForm/UpdateForm" asp-route-id="@item.Id.ToString()">
-                        <i class="bi bi-pencil-square"></i> Approve
-                    </a>
-                    }
-                    else
-                    {
-                    <span>-</span>
-                    }
-                </td>
-                <td class="text-center">
-                    <a class="btn btn-sm btn-info" asp-page="/Staff/RegisterForm/DetailForm" asp-route-id="@item.Id.ToString()">
-                        <i class="bi bi-eye"></i> Detail
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td class="text-center">
+                        @if (item.RegisterFormStatus == RegisterFormStatus.Approved)
+                        {
+                            <div class="btn-group" role="group">
+                            <a class="btn btn-sm btn-info" asp-page="/Staff/RegisterForm/DetailForm" asp-route-id="@item.Id.ToString()">
+                                <i class="bi bi-pencil-square"></i> Detail
+                            </a>
+                            <a class="btn btn-sm btn-warning" asp-page="/Staff/RegisterForm/UpdateForm" asp-route-id="@item.Id.ToString()">
+                                <i class="bi bi-pencil-square"></i> Update
+                            </a>
+                            <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm" asp-route-id="@item.Id.ToString()">
+                                <i class="bi bi-x-circle"></i> Delete
+                            </a>
+                            </div>
+                        }
+                        else if (item.RegisterFormStatus == RegisterFormStatus.Registered)
+                        {
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-sm btn-info" asp-page="/Staff/RegisterForm/DetailForm" asp-route-id="@item.Id.ToString()">
+                                    <i class="bi bi-eye"></i> Detail
+                                </a>
+                                <a class="btn btn-sm btn-success" asp-page-handler="Approve" asp-route-id="@item.Id.ToString()">
+                                    <i class="bi bi-check-circle"></i> Approve
+                                </a>
+                                <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm" asp-route-id="@item.Id.ToString()">
+                                    <i class="bi bi-x-circle"></i> Reject
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
+                </tr>
             }
             </tbody>
         </table>
@@ -84,7 +95,7 @@ if (role is not "Staff") Response.Redirect("/Error");
         <div>
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
-            <a asp-page="./FormPage" asp-route-PageNumber="@i" class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
+                <a asp-page="./FormPage" asp-route-PageNumber="@i" class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
             }
         </div>
         <a asp-page="./FormPage" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
@@ -95,7 +106,7 @@ if (role is not "Staff") Response.Redirect("/Error");
 </div>
 
 @section Scripts {
-@{
-await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

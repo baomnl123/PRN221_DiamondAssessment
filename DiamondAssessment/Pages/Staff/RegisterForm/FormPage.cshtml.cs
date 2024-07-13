@@ -2,6 +2,7 @@ using Entities.Models;
 using Entities.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Service.Abstractions;
 
 namespace DiamondAssessment.Pages
@@ -54,6 +55,18 @@ namespace DiamondAssessment.Pages
                 .ToList();
 
             return Page();
+        }
+        public async Task<IActionResult> OnPostApproveAsync(string id)
+        {
+            var form = await _registerFormService
+                .FindByCondition(f => f.Id == Guid.Parse(id), trackChanges: true)
+                .FirstOrDefaultAsync();
+
+            var staffId = HttpContext.Session.GetString("AccountId"); // Assuming you have staff ID in session
+
+            await _registerFormService.ApproveForm(form, staffId);
+
+            return RedirectToPage();
         }
     }
 }

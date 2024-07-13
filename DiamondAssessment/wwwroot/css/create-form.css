@@ -66,3 +66,22 @@ body {
     color: #0a58ca;
     font-size: 2.5em;
 }
+.status-completed {
+    color: green;
+}
+.status-pending {
+    color: orange;
+}
+.status-inprogress {
+    color: red;
+}
+.form-divider {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.ticket-divider {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}

@@ -11,34 +11,30 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
         private readonly IRegisterFormService _registerFormService;
         private readonly ITicketService _ticketService;
 
-        [BindProperty]
-        public RegisterForm RegisterForm { get; set; }
-        
+        [BindProperty(SupportsGet = true)]
+        public List<RegisterForm> RegisterForms { get; set; }
+
         public List<Ticket> Tickets { get; set; }
 
         [BindProperty]
-        public string EmailOrPhone { get; set; }
-        
+        public string phone { get; set; }
+
         public SearchForm(IRegisterFormService registerFormService, ITicketService ticketService)
         {
             _registerFormService = registerFormService;
             _ticketService = ticketService;
         }
 
-        public async Task<IActionResult> OnGetAsync(string emailOrPhone)
+        public async Task<IActionResult> OnGetAsync(string phone)
         {
-            if (!string.IsNullOrEmpty(emailOrPhone))
+            if (!string.IsNullOrEmpty(phone))
             {
-                RegisterForm = await _registerFormService.FindByPhone(emailOrPhone);
-                Tickets = await _ticketService.FindTicketByPhone(emailOrPhone);
-                if (Tickets == null || !Tickets.Any())
-                {
-                    ModelState.AddModelError(string.Empty, "No tickets found.");
-                }
+                RegisterForms = await _registerFormService.FindRegisterFormByPhone(phone);
+                Tickets = await _ticketService.FindTicketByPhone(phone);
 
-                if (RegisterForm == null)
+                if (RegisterForms == null || !RegisterForms.Any())
                 {
-                    ModelState.AddModelError(string.Empty, "Register form not found.");
+                    ModelState.AddModelError(string.Empty, "No register forms found for the provided phone number.");
                 }
             }
 
@@ -47,18 +43,12 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
 
         public async Task<IActionResult> OnPostAsync()
         {
-            RegisterForm = await _registerFormService.FindByPhone(EmailOrPhone);
-            if (RegisterForm == null)
+            RegisterForms = await _registerFormService.FindRegisterFormByPhone(phone);
+            Tickets = await _ticketService.FindTicketByPhone(phone);
+
+            if (RegisterForms == null || !RegisterForms.Any())
             {
-                ModelState.AddModelError(string.Empty, "Register form not found.");
-                return Page();
-            }
-            
-            Tickets = await _ticketService.FindTicketByPhone(EmailOrPhone);
-            if (Tickets == null || !Tickets.Any())
-            {
-                ModelState.AddModelError(string.Empty, "No tickets found.");
-                return Page();
+                ModelState.AddModelError(string.Empty, "No register forms found for the provided phone number.");
             }
 
             return Page();

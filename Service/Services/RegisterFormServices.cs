@@ -18,10 +18,12 @@ namespace Service.Services
     public class RegisterFormServices : IRegisterFormService
     {
         private readonly IRegisterFormRepository _registerFormRepository;
+        private readonly IEmailService _emailService;
 
-        public RegisterFormServices(IRegisterFormRepository registerFormRepository)
+        public RegisterFormServices(IRegisterFormRepository registerFormRepository, IEmailService emailService)
         {
             _registerFormRepository = registerFormRepository;
+            _emailService = emailService;
         }
 
         public List<RegisterForm> FindAll() 
@@ -65,15 +67,30 @@ namespace Service.Services
 
             return Update(entity);
         }
-        public async Task<RegisterForm> FindByPhone(string phone)
+        public async Task<List<RegisterForm>> FindRegisterFormByPhone(string phone)
         {
             // Define a predicate to match either email or phone number
             Expression<Func<RegisterForm, bool>> predicate = 
                 form => form.PhoneNumber == phone && !form.IsDelete;
 
             // Call repository method to find by condition
-            return await _registerFormRepository.FindByCondition(predicate, trackChanges: false).FirstOrDefaultAsync();
+            return await _registerFormRepository.FindByCondition(predicate, trackChanges: false).ToListAsync();
         }
-        
+
+        public async Task<bool> ApproveForm(RegisterForm entity, string staffId)
+        {
+            entity.StaffId = Guid.Parse(staffId);
+            entity.RegisterFormStatus = RegisterFormStatus.Approved;
+            entity.IsDelete = false;
+
+            bool updated = await Update(entity);
+
+            if (updated)
+            {
+                await _emailService.SendEmailAsync(entity.Email, "Form Approval Notification", "Your form has been approved.");
+            }
+
+            return updated;
+        }
     }
 }
