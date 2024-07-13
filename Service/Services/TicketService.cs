@@ -39,11 +39,11 @@ public class TicketService : ITicketService
     {
         return _ticketRepository.GetTicketByRegisterFormIdAsync(registerFormId);
     }
-    public async Task<List<Ticket>> FindTicketByEmailOrPhone(string emailOrPhone)
+    public async Task<List<Ticket>> FindTicketByPhone(string phone)
     {
         // Define a predicate to match either email or phone number
         Expression<Func<Ticket, bool>> predicate = 
-            t => t.Email == emailOrPhone || t.PhoneNumber == emailOrPhone;
+            t => t.PhoneNumber == phone && !t.IsDelete;
 
         // Call repository method to find by condition
         return await _ticketRepository.FindByCondition(predicate, trackChanges: false).ToListAsync();

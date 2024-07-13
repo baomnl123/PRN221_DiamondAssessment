@@ -29,8 +29,8 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
         {
             if (!string.IsNullOrEmpty(emailOrPhone))
             {
-                RegisterForm = await _registerFormService.FindByEmailOrPhone(emailOrPhone);
-                Tickets = await _ticketService.FindTicketByEmailOrPhone(emailOrPhone);
+                RegisterForm = await _registerFormService.FindByPhone(emailOrPhone);
+                Tickets = await _ticketService.FindTicketByPhone(emailOrPhone);
                 if (Tickets == null || !Tickets.Any())
                 {
                     ModelState.AddModelError(string.Empty, "No tickets found.");
@@ -47,14 +47,14 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
 
         public async Task<IActionResult> OnPostAsync()
         {
-            RegisterForm = await _registerFormService.FindByEmailOrPhone(EmailOrPhone);
+            RegisterForm = await _registerFormService.FindByPhone(EmailOrPhone);
             if (RegisterForm == null)
             {
                 ModelState.AddModelError(string.Empty, "Register form not found.");
                 return Page();
             }
             
-            Tickets = await _ticketService.FindTicketByEmailOrPhone(EmailOrPhone);
+            Tickets = await _ticketService.FindTicketByPhone(EmailOrPhone);
             if (Tickets == null || !Tickets.Any())
             {
                 ModelState.AddModelError(string.Empty, "No tickets found.");

@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service.Abstractions;
@@ -13,16 +14,32 @@ namespace DiamondAssessment.Pages
         {
             _registerFormService = registerFormService;
         }
+
         public IList<RegisterForm> Forms { get; set; }
+        
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; } = 1;
+
         public int TotalPages { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string StatusFilter { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
-            var totalForms = _registerFormService.FindAll().Count;
+            var formsQuery = _registerFormService.FindAll().AsQueryable();
+
+            if (!string.IsNullOrEmpty(StatusFilter))
+            {
+                if (Enum.TryParse(StatusFilter, out RegisterFormStatus status))
+                {
+                    formsQuery = formsQuery.Where(f => f.RegisterFormStatus == status);
+                }
+            }
+
+            var totalForms = formsQuery.Count();
             TotalPages = (int)Math.Ceiling(totalForms / 5.0);
 
-            
             if (PageNumber < 1)
             {
                 PageNumber = 1;
@@ -32,10 +49,9 @@ namespace DiamondAssessment.Pages
                 PageNumber = TotalPages;
             }
 
-            Forms = _registerFormService.FindAll()
-                                         .Skip((PageNumber - 1) * 5)
-                                         .Take(5)
-                                         .ToList();
+            Forms = formsQuery.Skip((PageNumber - 1) * 5)
+                .Take(5)
+                .ToList();
 
             return Page();
         }

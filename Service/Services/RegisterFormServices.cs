@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataAccessLayer.Dao;
 using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using Repository.Abstractions;
@@ -64,14 +65,15 @@ namespace Service.Services
 
             return Update(entity);
         }
-        public async Task<RegisterForm> FindByEmailOrPhone(string emailOrPhone)
+        public async Task<RegisterForm> FindByPhone(string phone)
         {
             // Define a predicate to match either email or phone number
             Expression<Func<RegisterForm, bool>> predicate = 
-                form => form.Email == emailOrPhone || form.PhoneNumber == emailOrPhone;
+                form => form.PhoneNumber == phone && !form.IsDelete;
 
             // Call repository method to find by condition
             return await _registerFormRepository.FindByCondition(predicate, trackChanges: false).FirstOrDefaultAsync();
         }
+        
     }
 }
