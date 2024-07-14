@@ -8,13 +8,6 @@
 }
 
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Assessment Paper Manager</h1>
-        <a class="btn btn-primary" asp-page="/Staff/AssessmentPaper/Create">
-            <i class="bi bi-plus-lg"></i> Create Paper
-        </a>
-    </div>
-
     <div class="table-responsive">
         <table class="table table-hover table-bordered">
             <thead class="table-dark">
@@ -33,12 +26,14 @@
                         <td>@Html.DisplayFor(modelItem => item.Ticket.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-info" asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@item.TicketId">
+                            <a class="btn btn-sm btn-info" asp-page="/Staff/AssessmentPaper/Detail"
+                                asp-route-ticketId="@item.TicketId">
                                 <i class="bi bi-eye"></i> Detail
                             </a>
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-danger" asp-page="/Staff/AssessmentPaper/Delete" asp-route-id="@item.Id">
+                            <a class="btn btn-sm btn-danger" asp-page="/Staff/AssessmentPaper/Delete"
+                                asp-route-id="@item.Id">
                                 <i class="bi bi-x-circle"></i> Delete
                             </a>
                         </td>
@@ -50,17 +45,18 @@
 
     <div class="d-flex justify-content-between">
         <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber - 1)" class="btn btn-outline-secondary"
-           disabled="@(Model.PageNumber == 1)">
+            disabled="@(Model.PageNumber == 1)">
             Previous
         </a>
         <div>
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
-                <a asp-page="./Index" asp-route-PageNumber="@i" class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
+                <a asp-page="./Index" asp-route-PageNumber="@i"
+                    class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
             }
         </div>
         <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
-           disabled="@(Model.PageNumber == Model.TotalPages)">
+            disabled="@(Model.PageNumber == Model.TotalPages)">
             Next
         </a>
     </div>
