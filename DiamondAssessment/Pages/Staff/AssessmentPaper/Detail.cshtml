@@ -152,7 +152,7 @@ Layout = "Shared/_Layout";
 </form>
 @if (Model.SealingReportId == null)
 {
-    <a class="btn btn-primary mb-3" asp-page="/Manager/SealingReport/Create" asp-route-paperId="@Model.Paper.Id.ToString()">
+    <a class="btn btn-primary my-3" asp-page="/Manager/SealingReport/Create" asp-route-paperId="@Model.Paper.Id.ToString()">
         <i class="bi bi-plus-lg"></i> Create Sealing Report
     </a>
 }

@@ -35,6 +35,9 @@ namespace DiamondAssessment.Pages.Manager.SealingReport
             }
             
             SealingReport.ModifiedAt = DateTime.UtcNow;
+            SealingReport.CreatedAt = DateTime.UtcNow;
+            SealingReport.IsDelete = false;
+            SealingReport.PaperId = paperId;
             SealingReport.SealingReportStatus = SealingReportStatus.Pending;
             await _sealingReportService.Create(SealingReport);
 
