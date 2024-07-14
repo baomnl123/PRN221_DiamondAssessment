@@ -1,13 +1,12 @@
 ﻿@page "{paperId:guid}"
 @using Entities.Models.Enum
-@model DiamondAssessment.Pages.Manager.SealingReport.CreateModel
+@model DiamondAssessment.Pages.Manager.SealingReport.Create
 @{
 ViewData["Title"] = "Create";
 Layout = "Shared/_Layout";
 var role = HttpContext.Session.GetString("Role");
 if (role != "Manager" && role != "Staff") Response.Redirect("/Error");
 }
-
 <h1>Do you want to create Sealing Report for this Paper</h1>
 
 <div class="row">
