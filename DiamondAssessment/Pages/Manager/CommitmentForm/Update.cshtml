@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Update";
 }
-<h1>Edit</h1>
+<h1>Approve</h1>
 
 <h4>Commitment Form</h4>
 <hr />
@@ -14,16 +14,16 @@
             <input type="hidden" asp-for="CommitmentForm.Id" />
             <div class="form-group">
                 <label asp-for="CommitmentForm.PaperId" class="control-label"></label>
-                <input asp-for="CommitmentForm.PaperId" class="form-control" />
+                <input asp-for="CommitmentForm.PaperId" class="form-control" readonly />
                 <span asp-validation-for="CommitmentForm.PaperId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CommitmentForm.CreatedAt" class="control-label"></label>
-                <input asp-for="CommitmentForm.CreatedAt" class="form-control" />
+                <input asp-for="CommitmentForm.CreatedAt" class="form-control" readonly />
                 <span asp-validation-for="CommitmentForm.CreatedAt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Approve" class="btn btn-primary" />
             </div>
         </form>
     </div>
