@@ -1,6 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Service.Abstractions;
 
 namespace DiamondAssessment.Pages;
@@ -28,15 +29,17 @@ public class DetailForm : PageModel
         }
         Form = form;
         Tickets = _ticketService
-            .FindByCondition(t => t.RegisterFormId == Guid.Parse(id) 
-                                  && t.IsDelete == false, false)
+            .FindByCondition(t => t.RegisterFormId == Guid.Parse(id) && t.IsDelete == false, false)
             .ToList();
         return Page();
     }
 
     private RegisterForm? FormIsExist(string id)
     {
-        var form = _registerFormService.FindByCondition(f => f.Id == Guid.Parse(id), false).FirstOrDefault();
+        var form = _registerFormService
+            .FindByCondition(f => f.Id == Guid.Parse(id), false)
+            .Include(f => f.Staff)
+            .FirstOrDefault();
         return form;
     }
 }
