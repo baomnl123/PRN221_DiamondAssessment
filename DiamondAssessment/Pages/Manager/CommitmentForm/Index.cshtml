@@ -5,42 +5,78 @@
     var role = HttpContext.Session.GetString("Role");
     if (role is not "Manager") Response.Redirect("/Error");
 }
-<a class="btn btn-sm btn-secondary" asp-page="/Manager/CommitmentForm/Create">Create Commitment Form</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Commitments[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Commitments[0].CreatedAt)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Commitments)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-primary" asp-page="/Manager/CommitmentForm/Detail"
-                       asp-route-id="@item.Id.ToString()">Detail</a>
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-warning" asp-page="/Manager/CommitmentForm/Update"
-                       asp-route-id="@item.Id.ToString()">Update</a>
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-danger" asp-page="/Manager/CommitmentForm/Delete"
-                       asp-route-id="@item.Id.ToString()">Reject</a>
-                </td>
-            </tr>
-        }
-    </tbody>
 
-</table>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Commitment Form</h1>
+        <a class="btn btn-primary" asp-page="/Manager/CommitmentForm/Create">
+            <i class="bi bi-plus-lg"></i> Create Commitment Form
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Created At</th>
+                    <th class="text-center" colspan="3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Commitments)
+                {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-info" asp-page="/Manager/CommitmentForm/Detail"
+                                    asp-route-id="@item.Id.ToString()">
+                                    <i class="bi bi-eye"></i> Detail
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-warning" asp-page="/Manager/CommitmentForm/Update"
+                                    asp-route-id="@item.Id.ToString()">
+                                    <i class="bi bi-pencil-square"></i> Update
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" asp-page="/Manager/CommitmentForm/Delete"
+                                    asp-route-id="@item.Id.ToString()">
+                                    <i class="bi bi-x-circle"></i> Reject
+                                </a>
+                            </td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber - 1)" class="btn btn-outline-secondary"
+            disabled="@(Model.PageNumber == 1)">
+            Previous
+        </a>
+
+        <div>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                    <a asp-page="./Index" asp-route-PageNumber="@i"
+                        class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
+            }
+        </div>
+
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
+            disabled="@(Model.PageNumber == Model.TotalPages)">
+            Next
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -15,9 +15,24 @@ public class Index : PageModel
 
     public IList<Entities.Models.Ticket> Tickets { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public int PageNumber { get; set; } = 1;
+    public int TotalPages { get; set; }
+
     public async Task<IActionResult> OnGetAsync()
     {
-        Tickets = _ticketService.FindAll();
+        var tickets = _ticketService.FindAll();
+        var totalTicket = tickets.Count;
+        TotalPages = (int)Math.Ceiling(totalTicket / 5.0);
+
+        if (PageNumber < 1)
+            PageNumber = 1;
+
+        if (PageNumber > TotalPages)
+            PageNumber = TotalPages;
+
+        Tickets = tickets.Skip((PageNumber - 1) * 5).Take(5).ToList();
+
         return Page();
     }
 }

@@ -16,16 +16,26 @@ public class TicketRepository : ITicketRepository
         _ticketDao = ticketDao;
     }
 
-    public IQueryable<Ticket> FindAll() => _ticketDao.FindAll().Where(e => e.IsDelete == false);
+    public IQueryable<Ticket> FindAll() =>
+        _ticketDao
+            .FindAll()
+            .Where(e => e.IsDelete == false)
+            .OrderByDescending(e => e.ModifiedAt > e.CreatedAt ? e.ModifiedAt : e.CreatedAt);
 
-    public IQueryable<Ticket> FindByCondition(Expression<Func<Ticket, bool>> expression, bool trackChanges)
-        => _ticketDao.FindByCondition(expression, trackChanges);
+    public IQueryable<Ticket> FindByCondition(
+        Expression<Func<Ticket, bool>> expression,
+        bool trackChanges
+    ) =>
+        _ticketDao
+            .FindByCondition(expression, trackChanges)
+            .OrderByDescending(e => e.ModifiedAt > e.CreatedAt ? e.ModifiedAt : e.CreatedAt);
 
     public Task<bool> Create(Ticket entity) => _ticketDao.Create(entity);
 
     public Task<bool> Update(Ticket entity) => _ticketDao.Update(entity);
 
     public Task<bool> Delete(Ticket entity) => _ticketDao.Delete(entity);
+
     public async Task<Ticket?> GetTicketByRegisterFormIdAsync(Guid registerFormId)
     {
         return await _ticketDao

@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using DataAccessLayer.Dao;
 using DataAccessLayer.Dao.Abstractions;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,21 +15,24 @@ public class SealingReportRepository : ISealingReportRepository
         _sealingReportDao = sealingReportDao;
     }
 
-    public IQueryable<SealingReport> FindAll()
-        => _sealingReportDao
-                .FindAll()
-                .Where(f => f.IsDelete == false)
-                .Include(f => f.AssessmentPaper);
+    public IQueryable<SealingReport> FindAll() =>
+        _sealingReportDao
+            .FindAll()
+            .Where(f => f.IsDelete == false)
+            .Include(f => f.AssessmentPaper)
+            .OrderByDescending(f => f.ModifiedAt > f.CreatedAt ? f.ModifiedAt : f.CreatedAt);
 
-    public IQueryable<SealingReport> FindByCondition(Expression<Func<SealingReport, bool>> expression, bool trackChanges)
-    => _sealingReportDao.FindByCondition(expression, trackChanges);
+    public IQueryable<SealingReport> FindByCondition(
+        Expression<Func<SealingReport, bool>> expression,
+        bool trackChanges
+    ) =>
+        _sealingReportDao
+            .FindByCondition(expression, trackChanges)
+            .OrderByDescending(f => f.ModifiedAt > f.CreatedAt ? f.ModifiedAt : f.CreatedAt);
 
-    public async Task<bool> Create(SealingReport entity)
-    => await _sealingReportDao.Create(entity);
+    public async Task<bool> Create(SealingReport entity) => await _sealingReportDao.Create(entity);
 
-    public async Task<bool> Update(SealingReport entity)
-    => await _sealingReportDao.Update(entity);
+    public async Task<bool> Update(SealingReport entity) => await _sealingReportDao.Update(entity);
 
-    public async Task<bool> Delete(SealingReport entity)
-    => await _sealingReportDao.Delete(entity);
+    public async Task<bool> Delete(SealingReport entity) => await _sealingReportDao.Delete(entity);
 }

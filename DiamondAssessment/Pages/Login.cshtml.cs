@@ -26,7 +26,10 @@ public class Login : PageModel
         {
             var loginAccount = _staffService
                 .FindByCondition(
-                    x => (x.Email == Email || x.PhoneNumber == Email) && x.Password == Password,
+                    x =>
+                        (x.Email == Email || x.PhoneNumber == Email)
+                        && x.Password == Password
+                        && x.IsDelete == false,
                     false
                 )
                 .FirstOrDefault();

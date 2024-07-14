@@ -5,21 +5,36 @@
     var role = HttpContext.Session.GetString("Role");
     if (role is not "Manager") Response.Redirect("/Error");
 }
-<dl class="row">
-    <dt class="col-sm-2">Id</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.CommitmentForm.Id)
-    </dd>
-    <dt class="col-sm-2">PaperId</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.CommitmentForm.PaperId)
-    </dd>
-    <dt class="col-sm-2">CreatedAt</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.CommitmentForm.CreatedAt)
-    </dd>
-    <dt class="col-sm-2">Status</dt>
-    <dd class="col-sm-10"><span class="badge bg-primary">Is Active</span></dd>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Commitment Form</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Id</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CommitmentForm.Id)</dd>
+
+                <dt class="col-sm-3">PaperId</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CommitmentForm.PaperId)</dd>
+
+                <dt class="col-sm-3">Created At</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CommitmentForm.CreatedAt)</dd>
+
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9"><span class="badge bg-primary">Is Active</span></dd>
+            </dl>
+        </div>
+    </div>
+</div>
 
 
-</dl>
+<div class="mt-3 text-center">
+    <a asp-page="/Manager/CommitmentForm/Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
