@@ -35,6 +35,8 @@ namespace DiamondAssessment.Pages.Manager.CommitmentForm
             CommitmentForm.IsDelete = false;
             CommitmentForm.PaperId = Guid.Parse(paperId);
             CommitmentForm.CommitmentFormStatus = CommitmentFormStatus.Pending;
+            CommitmentForm.CreatedAt = DateTime.Now;
+            CommitmentForm.ModifiedAt = DateTime.Now;
             await _commitmentFormService.Create(CommitmentForm);
             return RedirectToPage("/Staff/AssessmentPaper/Index");
 

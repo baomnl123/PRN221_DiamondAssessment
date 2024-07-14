@@ -53,7 +53,7 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             // return File(pdf.BinaryData, "application/pdf", "razorPageToPdf.pdf");
             var renderer = new ChromePdfRenderer();
             var pdf = await renderer.RenderUrlAsPdfAsync($"http://localhost:5241/Staff/AssessmentPaper/Print/{ticketId}");
-            return File(pdf.BinaryData, "application/pdf", $"{Paper.PaperCode}.pdf");
+            return File(pdf.BinaryData, "application/pdf", "AssessmentPaper.pdf");
         }
     }
 }
