@@ -18,27 +18,24 @@ public class Detail : PageModel
     public Entities.Models.DiamondDetail Diamond { get; set; } = default!;
     public Entities.Models.AssessmentPaper Paper { get; private set; }
     public bool havePaper { get; set; } = false;
-
+    
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
         if (id == Guid.Empty)
             return NotFound();
-        var diamondDetail = await _diamondDetailService.GetDiamondDetailAsync(id);
-
-        if (diamondDetail == null)
-            return NotFound();
-
+        
         var diamond = await _diamondDetailService.GetDiamondDetailAsync(id);
-        var ticketId = diamondDetail.TicketId;
+        if (diamond == null) return NotFound();
+        
+        Diamond = diamond;
+        
+        var ticketId = Diamond.TicketId;
         var paper = await _assessmentPaperService.GetAssessmentPaperByTicketId(ticketId);
         if (paper != null)
+        {
             havePaper = true;
-
-        if (diamond == null)
-            return NotFound();
-        
-        Paper = paper;
-        Diamond = diamond;
+            Paper = paper;
+        }
 
         return Page();
     }
