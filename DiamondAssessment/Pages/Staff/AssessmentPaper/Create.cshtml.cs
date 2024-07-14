@@ -85,30 +85,27 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             }
 
             var registerFormId = await _ticketService.GetRegisterFormIdByTicketIdAsync(Paper.TicketId);
-                if (registerFormId.HasValue)
+            if (registerFormId.HasValue)
+            {
+                var registerForm = await _registerFormService.GetRegisterFormByIdAsync(registerFormId.Value);
+
+                // Check if all tickets of the register form are Done
+                var allTicketsDone = registerForm.Tickets.All(t => t.TicketStatus == TicketStatus.Done);
+
+                if (allTicketsDone)
                 {
-                    var registerForm = await _registerFormService.GetRegisterFormByIdAsync(registerFormId.Value);
-
-                    // Check if all tickets of the register form are Done
-                    var allTicketsDone = registerForm.Tickets.All(t => t.TicketStatus == TicketStatus.Done);
-
-                    if (allTicketsDone)
-                    {
-                        var receiver = registerForm.Email; // Adjust to get the appropriate receiver
-                        var subject = "[PPBQ] Register Form Completion";
-                        var comeToStoreDate = Paper.CreatedAt.AddDays(7).ToString("dddd, MMMM dd, yyyy");
-                        var message = $"Dear {registerForm.Name},<br><br>" +
-                                      $"All tickets associated with your register form have been completed successfully.<br><br>" +
-                                      $"Please come to the store to retrieve your diamond and assessment paper before {comeToStoreDate}.<br><br>" +
-                                      $"If you do not arrive by then, we will seal your assessment paper.<br><br>" +
-                                      $"Thank you,<br>PPBQ";
-                        await _emailService.SendEmailAsync(receiver, subject, message);
-                    }
+                    var receiver = registerForm.Email; // Adjust to get the appropriate receiver
+                    var subject = "[PPBQ] Register Form Completion";
+                    var comeToStoreDate = Paper.CreatedAt.AddDays(7).ToString("dddd, MMMM dd, yyyy");
+                    var message = $"Dear {registerForm.Name},<br><br>" +
+                                  $"All tickets associated with your register form have been completed successfully.<br><br>" +
+                                  $"Please come to the store to retrieve your diamond and assessment paper before {comeToStoreDate}.<br><br>" +
+                                  $"If you do not arrive by then, we will seal your assessment paper.<br><br>" +
+                                  $"Thank you,<br>PPBQ";
+                    await _emailService.SendEmailAsync(receiver, subject, message);
                 }
-
-            
+            }
             return RedirectToPage("/Staff/AssessmentPaper/Index");
-
         }
     }
 }
