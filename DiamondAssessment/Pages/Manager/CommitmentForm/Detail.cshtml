@@ -1,9 +1,8 @@
-﻿@page
+﻿@page "{id:guid}"
 @model DiamondAssessment.Pages.Manager.CommitmentForm.DetailModel
 @{
     ViewData["Title"] = "Detail";
-    var role = HttpContext.Session.GetString("Role");
-    if (role is not "Manager") Response.Redirect("/Error");
+    Layout = "Shared/_Layout";
 }
 
 <div class="container mt-4">

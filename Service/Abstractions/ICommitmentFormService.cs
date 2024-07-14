@@ -15,5 +15,6 @@ namespace Service.Abstractions
         Task<bool> Create(CommitmentForm entity);
         Task<bool> Update(CommitmentForm entity);
         Task<bool> Delete(CommitmentForm entity);
+        Task<Guid?> GetCommitFormIdByPaperIdAsync(Guid paperId);
     }
 }

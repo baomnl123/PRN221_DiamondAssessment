@@ -7,6 +7,6 @@ public class Logout : PageModel
     public void OnPost()
     {
         HttpContext.Session.Clear();
-        Response.Redirect("/Login");
+        Response.Redirect("/Index");
     }
 }
