@@ -12,6 +12,7 @@ public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiam
         return await diamondDetailDao
             .FindAll()
             .Where(e => e.IsDelete == false)
+            .OrderByDescending(e => e.ModifiedAt > e.CreatedAt ? e.ModifiedAt : e.CreatedAt)
             .ToListAsync();
     }
 

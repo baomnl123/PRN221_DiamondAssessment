@@ -16,21 +16,27 @@ public class CommitmentFormRepository : ICommitmentFormRepository
         _commitmentFormDao = commitmentFormDao;
     }
 
-    public IQueryable<CommitmentForm> FindAll()
-    => _commitmentFormDao
-                .FindAll()
-                .Where(f => f.IsDelete == false)
-                .Include(f => f.AssessmentPaper);
+    public IQueryable<CommitmentForm> FindAll() =>
+        _commitmentFormDao
+            .FindAll()
+            .Where(f => f.IsDelete == false)
+            .Include(f => f.AssessmentPaper)
+            .OrderByDescending(f => f.ModifiedAt > f.CreatedAt ? f.ModifiedAt : f.CreatedAt);
 
-    public IQueryable<CommitmentForm> FindByCondition(Expression<Func<CommitmentForm, bool>> expression, bool trackChanges)
-    => _commitmentFormDao.FindByCondition(expression, trackChanges);
+    public IQueryable<CommitmentForm> FindByCondition(
+        Expression<Func<CommitmentForm, bool>> expression,
+        bool trackChanges
+    ) =>
+        _commitmentFormDao
+            .FindByCondition(expression, trackChanges)
+            .OrderByDescending(f => f.ModifiedAt > f.CreatedAt ? f.ModifiedAt : f.CreatedAt);
 
-    public async Task<bool> Create(CommitmentForm entity)
-    => await _commitmentFormDao.Create(entity);
+    public async Task<bool> Create(CommitmentForm entity) =>
+        await _commitmentFormDao.Create(entity);
 
-    public async Task<bool> Update(CommitmentForm entity)
-    => await _commitmentFormDao.Update(entity);
+    public async Task<bool> Update(CommitmentForm entity) =>
+        await _commitmentFormDao.Update(entity);
 
-    public async Task<bool> Delete(CommitmentForm entity)
-    => await _commitmentFormDao.Delete(entity);
+    public async Task<bool> Delete(CommitmentForm entity) =>
+        await _commitmentFormDao.Delete(entity);
 }
