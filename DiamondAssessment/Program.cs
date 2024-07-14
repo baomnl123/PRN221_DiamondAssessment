@@ -18,7 +18,8 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 
 builder.Services.ConfigureDaos();
 builder.Services.ConfigureRepositories();
-builder.Services.ConfigureServices();
+
+builder.Services.ConfigureServices(builder.Configuration); // Pass IConfiguration here
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();

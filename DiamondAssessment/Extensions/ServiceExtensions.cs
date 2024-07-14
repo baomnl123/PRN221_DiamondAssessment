@@ -1,3 +1,5 @@
+using System.Configuration;
+using Entities.Models;
 using Service.Abstractions;
 using Service.Services;
 
@@ -9,7 +11,7 @@ public static class ServiceExtensions
     //    services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 
-    public static void ConfigureServices(this IServiceCollection services)
+    public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IAssessmentPaperService, AssessmentPaperServices>();
         services.AddScoped<IDiamondDetailService, DiamondDetailService>();
@@ -18,7 +20,8 @@ public static class ServiceExtensions
         services.AddScoped<ITicketService, TicketService>();
         services.AddScoped<ISealingReportService, SealingReportServices>();
         services.AddScoped<ICommitmentFormService, CommitmentFormServices>();
-        services.AddScoped<IEmailService, EmailService>();
+        services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+        services.AddTransient<IEmailService, EmailService>();
     }
 
     //public static void ConfigureServiceManager(this IServiceCollection services) =>

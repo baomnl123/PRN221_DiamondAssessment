@@ -61,16 +61,22 @@
             </div>
             @if (ticket.TicketStatus == TicketStatus.Done)
             {
-            <div class="status-completed">Status: Completed</div>
+                <div class="status-completed">Status:
+                    <span class="badge bg-success">Completed</span>
+                </div>
             <a asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@ticket.Id">View Assessment Paper</a>
             }
             else if (ticket.TicketStatus == TicketStatus.Pending)
             {
-            <div class="status-pending">Status: Pending</div>
+                <div class="status-completed">Status:
+                    <span class="badge bg-warning">Pending</span>
+                </div>
             }
             else
             {
-            <div class="status-inprogress">Status: In Progress</div>
+                <div class="status-completed">Status:
+                    <span class="badge bg-primary">In Progess</span>
+                </div>
             }
         </div>
     </div>
