@@ -8,10 +8,24 @@ namespace DiamondAssessment.Pages.Staff.Ticket;
 public class Delete : PageModel
 {
     private readonly ITicketService _ticketService;
+    private readonly IDiamondDetailService _diamondService;
+    private readonly IAssessmentPaperService _assessmentPaperService;
+    private readonly ICommitmentFormService _commitmentFormService;
+    private readonly ISealingReportService _sealingReportService;
 
-    public Delete(ITicketService ticketService)
+    public Delete(
+        ITicketService ticketService,
+        IDiamondDetailService diamondService,
+        IAssessmentPaperService assessmentPaperService,
+        ICommitmentFormService commitmentFormService,
+        ISealingReportService sealingReportService
+    )
     {
         _ticketService = ticketService;
+        _diamondService = diamondService;
+        _assessmentPaperService = assessmentPaperService;
+        _commitmentFormService = commitmentFormService;
+        _sealingReportService = sealingReportService;
     }
 
     [BindProperty]
@@ -38,7 +52,7 @@ public class Delete : PageModel
         }
         return Page();
     }
-    
+
     public async Task<IActionResult> OnPostAsync(string? id)
     {
         if (id == null)
@@ -46,12 +60,14 @@ public class Delete : PageModel
             return NotFound();
         }
 
-        var staff = await _ticketService
+        var ticket = await _ticketService
             .FindByCondition(e => e.Id == Guid.Parse(id), false)
             .FirstOrDefaultAsync();
-        if (staff != null)
+
+        if (ticket != null)
         {
-            Ticket = staff;
+            Ticket = ticket;
+
             var isDeleted = await _ticketService.Delete(Ticket);
             if (!isDeleted)
             {
