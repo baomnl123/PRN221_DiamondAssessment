@@ -11,6 +11,8 @@ public class Ticket
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public TicketStatus TicketStatus { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime ModifiedAt { get; set; }
     public bool IsDelete { get; set; }
 
     // Relationships

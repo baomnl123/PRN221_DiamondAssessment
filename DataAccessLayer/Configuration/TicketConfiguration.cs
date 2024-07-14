@@ -1,5 +1,6 @@
 using DataAccessLayer.Constants;
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -23,7 +24,13 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
 
         builder.Property(c => c.Email).IsRequired();
 
-        builder.Property(c => c.TicketStatus).IsRequired();
+        builder
+            .Property(c => c.TicketStatus)
+            .HasConversion(
+                v => v.ToString(),
+                v => (TicketStatus)Enum.Parse(typeof(TicketStatus), v)
+            )
+            .IsRequired();
 
         builder.Property(c => c.IsDelete).IsRequired();
 

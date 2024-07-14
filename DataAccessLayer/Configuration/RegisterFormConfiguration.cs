@@ -1,5 +1,6 @@
 using DataAccessLayer.Constants;
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -23,7 +24,13 @@ public class RegisterFormConfiguration : IEntityTypeConfiguration<RegisterForm>
 
         builder.Property(c => c.Email).IsRequired();
 
-        builder.Property(c => c.RegisterFormStatus).IsRequired();
+        builder
+            .Property(c => c.RegisterFormStatus)
+            .HasConversion(
+                v => v.ToString(),
+                v => (RegisterFormStatus)Enum.Parse(typeof(RegisterFormStatus), v)
+            )
+            .IsRequired();
 
         builder.Property(c => c.IsDelete).IsRequired();
 

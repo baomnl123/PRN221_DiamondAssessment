@@ -2,6 +2,7 @@ namespace DataAccessLayer.FakeDataGenerator
 {
     using Bogus;
     using Entities.Models;
+    using Entities.Models.Enum;
 
     public static class SealingReportGenerator
     {
@@ -27,7 +28,12 @@ namespace DataAccessLayer.FakeDataGenerator
                         return ticketId;
                     }
                 )
+                .RuleFor(
+                    sealingReport => sealingReport.SealingReportStatus,
+                    f => f.PickRandom<SealingReportStatus>()
+                )
                 .RuleFor(sealingReport => sealingReport.CreatedAt, f => f.Date.Past())
+                .RuleFor(sealingReport => sealingReport.ModifiedAt, f => f.Date.Recent())
                 .RuleFor(sealingReport => sealingReport.IsDelete, f => f.Equals(false))
                 .Generate(50)
                 .ToArray();

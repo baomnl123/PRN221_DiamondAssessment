@@ -16,6 +16,8 @@ public class DiamondDetail
     public Quality Polish { get; set; }
     public Quality Symmetry { get; set; }
     public GlowStrength Fluorescence { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime ModifiedAt { get; set; }
     public bool IsDelete { get; set; }
 
     // Relationships

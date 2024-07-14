@@ -1,5 +1,6 @@
 using DataAccessLayer.Constants;
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,6 +15,14 @@ public class CommitmentFormConfiguration : IEntityTypeConfiguration<CommitmentFo
         builder.HasKey(c => c.Id);
 
         builder.Property(c => c.PaperId).IsRequired();
+
+        builder
+            .Property(c => c.CommitmentFormStatus)
+            .HasConversion(
+                v => v.ToString(),
+                v => (CommitmentFormStatus)Enum.Parse(typeof(CommitmentFormStatus), v)
+            )
+            .IsRequired();
 
         builder.Property(c => c.CreatedAt).IsRequired();
 
