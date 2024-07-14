@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Service.Services
 {
@@ -34,5 +35,14 @@ namespace Service.Services
 
         public Task<bool> Update(SealingReport entity)
         => _sealingReportRepository.Update(entity);
+        
+        public async Task<Guid?> GetSealingReportIdByPaperIdAsync(Guid paperId)
+        {
+            var sr = await _sealingReportRepository
+                .FindByCondition(t => t.PaperId == paperId, trackChanges: false)
+                .FirstOrDefaultAsync();
+
+            return sr?.Id;
+        }
     }
 }

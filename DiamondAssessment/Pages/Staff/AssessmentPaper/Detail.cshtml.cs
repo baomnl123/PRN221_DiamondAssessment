@@ -9,16 +9,21 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
     public class Detail : PageModel
     {
         private readonly IAssessmentPaperService _assessmentPaperService;
+        private readonly ISealingReportService _sealingReportService;
 
-        public Detail(IAssessmentPaperService assessmentPaperService)
+        public Detail(IAssessmentPaperService assessmentPaperService, ISealingReportService sealingReportService)
         {
             _assessmentPaperService = assessmentPaperService;
+            _sealingReportService = sealingReportService;
         }
         
         [BindProperty]
         public Entities.Models.AssessmentPaper Paper { get; private set; }
-
-        public IActionResult OnGet(Guid ticketId)
+        
+        [BindProperty]
+        public Guid? SealingReportId { get; private set; }
+        
+        public async Task<IActionResult> OnGet(Guid ticketId)
         {
             var paper = _assessmentPaperService
                 .FindByCondition(p => p.TicketId == ticketId, false)
@@ -31,6 +36,10 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             }
 
             Paper = paper;
+
+            // Fetch the sealing report ID
+            SealingReportId = await _sealingReportService.GetSealingReportIdByPaperIdAsync(Paper.Id);
+
             return Page();
         }
 

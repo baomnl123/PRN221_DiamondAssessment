@@ -1,27 +1,207 @@
-﻿@page
+﻿@page "{id:guid}"
 @model DiamondAssessment.Pages.Manager.SealingReport.DetailModel
+
 @{
-    ViewData["Title"] = "Detail";
-    var role = HttpContext.Session.GetString("Role");
-    if (role is not "Manager") Response.Redirect("/Error");
+ViewData["Title"] = "Sealing Report";
+Layout = "Shared/_Layout";
 }
-<dl class="row">
-    <dt class="col-sm-2">Id</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.SealingReport.Id)
-    </dd>
-    <dt class="col-sm-2">PaperId</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.SealingReport.PaperId)
-    </dd>
-    <dt class="col-sm-2">CreatedAt</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.SealingReport.CreatedAt)
-    </dd>
-    <dt class="col-sm-2">Status</dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.SealingReport.IsDelete)
-    </dd>
 
+@section Styles
+{
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+<style>
+    .sealing-report-container {
+        border: 2px solid #333;
+        padding: 20px;
+        margin-top: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+    .header-section {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .header-section h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        color: #333;
+    }
+    .header-section h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #666;
+    }
+    .details-section {
+        margin-bottom: 20px;
+    }
+    .details-section strong {
+        font-size: 1.2rem;
+    }
+    .details-section .value {
+        font-size: 1.2rem;
+        color: #555;
+    }
+    .signature-section {
+        margin-top: 40px;
+    }
+    .signature-box {
+        border: 1px solid #333;
+        height: 100px;
+        width: 200px;
+        text-align: center;
+        line-height: 100px;
+    }
+</style>
+}
 
-</dl>
+<div class="sealing-report-container">
+    <div class="header-section">
+        <h1>Sealing Report</h1>
+        <h2>Diamond Assessment</h2>
+        <h3>Report ID: @Model.SealingReport.Id</h3>
+    </div>
+
+    <div class="details-section">
+        <div class="row">
+            <div class="col-6">
+                <strong>Paper ID:</strong>
+            </div>
+            <div class="col-6 value">
+                @Model.SealingReport.PaperId
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Created At:</strong>
+            </div>
+            <div class="col-6 value">
+                @Model.SealingReport.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Modified At:</strong>
+            </div>
+            <div class="col-6 value">
+                @Model.SealingReport.ModifiedAt.ToString("yyyy-MM-dd HH:mm:ss")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Status:</strong>
+            </div>
+            <div class="col-6 value">
+                @Model.SealingReport.SealingReportStatus
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Is Deleted:</strong>
+            </div>
+            <div class="col-6 value">
+                @(Model.SealingReport.IsDelete ? "Yes" : "No")
+            </div>
+        </div>
+    </div>
+
+    <div class="diamond-details-section">
+        <h4>Diamond Details</h4>
+        <div class="row">
+            <div class="col-6">
+                <strong>Origin:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Carat Weight:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Clarity:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Cut:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Proportions:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Color:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Polish:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Symmetry:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Fluorescence:</strong>
+            </div>
+            <div class="col-6 value">
+                1
+            </div>
+        </div>
+    </div>
+
+    <div class="signature-section row">
+        <div class="col-6 text-center">
+            <strong>Assessor Signature</strong>
+            <div class="signature-box">
+                <!-- Placeholder for signature -->
+                Sign Here
+            </div>
+        </div>
+        <div class="col-6 text-center">
+            <strong>Customer Signature</strong>
+            <div class="signature-box">
+                <!-- Placeholder for signature -->
+                Sign Here
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Manager/SealingReport/Index">Back to List</a>
+</div>
+
+@section Scripts {
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+}

@@ -15,5 +15,6 @@ namespace Service.Abstractions
         Task<bool> Create(SealingReport entity);
         Task<bool> Update(SealingReport entity);
         Task<bool> Delete(SealingReport entity);
+        Task<Guid?> GetSealingReportIdByPaperIdAsync(Guid paperId);
     }
 }

@@ -150,3 +150,15 @@ Layout = "Shared/_Layout";
 <form method="post">
     <button class="btn btn-primary btn-lg">Print to PDF</button>
 </form>
+@if (Model.SealingReportId == null)
+{
+    <a class="btn btn-primary mb-3" asp-page="/Manager/SealingReport/Create" asp-route-paperId="@Model.Paper.Id.ToString()">
+        <i class="bi bi-plus-lg"></i> Create Sealing Report
+    </a>
+}
+else
+{
+    <a class="btn btn-secondary my-3" asp-page="/Manager/SealingReport/Detail" asp-route-sealingReportId="@Model.SealingReportId.ToString()">
+        <i class="bi bi-eye"></i> View Sealing Report
+    </a>
+}
