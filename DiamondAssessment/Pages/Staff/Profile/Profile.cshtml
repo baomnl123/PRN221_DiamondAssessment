@@ -1,0 +1,41 @@
+﻿@page
+@model DiamondAssessment.Pages.Staff.Profile.Profile
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "Shared/_Layout";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">User Profile</h1>
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h2 class="card-title">Detail</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">                
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9">@Model.Staff.Name</dd>
+
+                <dt class="col-sm-3">Phone Number</dt>
+                <dd class="col-sm-9">@Model.Staff.PhoneNumber</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.Staff.Email</dd>
+
+                <dt class="col-sm-3">Password</dt>
+                <dd class="col-sm-9">********</dd>                         
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-warning" asp-page="/Staff/Profile/Update" asp-route-id="@Model.Staff.Id.ToString()">Edit Profile</a>
+            @* <a class="btn btn-secondary" asp-page="/ChangePassword" asp-route-id="@Model.Staff.Id">Change Password</a>
+            <a class="btn btn-danger" asp-page="/DeleteAccount" asp-route-id="@Model.Staff.Id">Delete Account</a> *@
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
