@@ -46,3 +46,11 @@
     color: black;
     margin-left: 20px;
 }
+.table-fee{
+    width: 50vw;
+}
+.content-table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
