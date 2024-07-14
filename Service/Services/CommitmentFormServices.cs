@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Abstractions;
 using Repository.Repositories;
 using Service.Abstractions;
@@ -14,6 +15,7 @@ namespace Service.Services
     public class CommitmentFormServices : ICommitmentFormService
     {
         private readonly ICommitmentFormRepository _commitmentFormRepository;
+
 
         public CommitmentFormServices(ICommitmentFormRepository commitmentFormRepository)
         {
@@ -34,5 +36,13 @@ namespace Service.Services
 
         public Task<bool> Update(CommitmentForm entity)
         => _commitmentFormRepository.Update(entity);
+        public async Task<Guid?> GetCommitFormIdByPaperIdAsync(Guid paperId)
+        {
+            var sr = await _commitmentFormRepository
+                .FindByCondition(t => t.PaperId == paperId, trackChanges: false)
+                .FirstOrDefaultAsync();
+
+            return sr?.Id;
+        }
     }
 }

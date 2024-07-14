@@ -10,11 +10,13 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
     {
         private readonly IAssessmentPaperService _assessmentPaperService;
         private readonly ISealingReportService _sealingReportService;
+        private readonly ICommitmentFormService _commitmentFormService;
 
-        public Detail(IAssessmentPaperService assessmentPaperService, ISealingReportService sealingReportService)
+        public Detail(IAssessmentPaperService assessmentPaperService, ISealingReportService sealingReportService , ICommitmentFormService commitmentFormService)
         {
             _assessmentPaperService = assessmentPaperService;
             _sealingReportService = sealingReportService;
+            _commitmentFormService = commitmentFormService;
         }
         
         [BindProperty]
@@ -22,7 +24,7 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
         
         [BindProperty]
         public Guid? SealingReportId { get; private set; }
-        
+        public Guid? CommitmentId { get; private set; }
         public async Task<IActionResult> OnGet(Guid ticketId)
         {
             var paper = _assessmentPaperService
@@ -39,7 +41,7 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
 
             // Fetch the sealing report ID
             SealingReportId = await _sealingReportService.GetSealingReportIdByPaperIdAsync(Paper.Id);
-
+            CommitmentId = await _commitmentFormService.GetCommitFormIdByPaperIdAsync(Paper.Id);
             return Page();
         }
 
