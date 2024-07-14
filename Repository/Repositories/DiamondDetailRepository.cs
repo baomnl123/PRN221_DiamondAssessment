@@ -26,7 +26,7 @@ public class DiamondDetailRepository(IDiamondDetailDao diamondDetailDao) : IDiam
     public async Task<DiamondDetail?> GetDiamondDetailByTicketIdAsync(Guid ticketId)
     {
         return await diamondDetailDao
-            .FindByCondition(d => d.TicketId == ticketId, false)
+            .FindByCondition(d => d.TicketId == ticketId && d.IsDelete == false, false)
             .FirstOrDefaultAsync();
     }
 

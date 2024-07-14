@@ -9,10 +9,12 @@ namespace Service.Services;
 public class TicketService : ITicketService
 {
     private readonly ITicketRepository _ticketRepository;
+    private readonly IDiamondDetailRepository _diamondDetailRepository;
 
-    public TicketService(ITicketRepository ticketRepository)
+    public TicketService(ITicketRepository ticketRepository, IDiamondDetailRepository diamondDetailRepository)
     {
         _ticketRepository = ticketRepository;
+        _diamondDetailRepository = diamondDetailRepository;
     }
 
     public List<Ticket> FindAll() => _ticketRepository.FindAll().ToList();
@@ -30,10 +32,16 @@ public class TicketService : ITicketService
         return _ticketRepository.Update(entity);
     }
 
-    public Task<bool> Delete(Ticket entity)
+    public async Task<bool> Delete(Ticket entity)
     {
+        var diamond = await _diamondDetailRepository.GetDiamondDetailByTicketIdAsync(entity.Id);
+        if (diamond != null)
+        {
+            diamond.IsDelete = true;
+            await _diamondDetailRepository.UpdateAsync(diamond);
+        }
         entity.IsDelete = true;
-        return _ticketRepository.Update(entity);
+        return await _ticketRepository.Update(entity);
     }
     public Task<Ticket?> GetTicketByRegisterFormId(Guid registerFormId)
     {

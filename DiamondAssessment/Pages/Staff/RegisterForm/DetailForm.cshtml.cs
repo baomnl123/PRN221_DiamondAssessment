@@ -30,6 +30,7 @@ public class DetailForm : PageModel
         Form = form;
         Tickets = _ticketService
             .FindByCondition(t => t.RegisterFormId == Guid.Parse(id) && t.IsDelete == false, false)
+            .Where(t => t.IsDelete == false)
             .ToList();
         return Page();
     }
