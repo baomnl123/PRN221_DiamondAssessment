@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Identity.Client;
 using Service.Abstractions;
 
-namespace DiamondAssessment.Pages.Staff;
+namespace DiamondAssessment.Pages.Staff.Profile;
 
 public class Profile : PageModel
 {
