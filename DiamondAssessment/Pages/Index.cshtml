@@ -4,53 +4,69 @@
     ViewData["Title"] = "Home page";
 }
 @section Styles {
-<link href="~/css/home-page.css" rel="stylesheet" />
+    <link href="~/css/home-page.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 }
-<div>
-    <h1 class="display-4 content-body-header">Kiểm định kim cương và các thông tin mà bạn nên biết</h1>
-    <p>Kim cương là trang sức quý hiếm và có giá trị cao nhất hiện nay. Muốn sở hữu kim cương thật, chính hãng bạn sẽ phải trả một số tiền tương đối lớn. Vậy làm thế nào để xác định được kim cương giả thật, kim cương nhân tạo hay tự nhiên. Trung tâm kiểm định GIA sẽ làm nhiệm vụ này. Mời bạn đọc cùng theo dõi một số nội dung liên quan đến quá trình thẩm định kim cương GIA qua bài viết sau.</p>
-    <h1 class="display-4 content-body-header">Nội dung ghi trên giấy kiểm định</h1>
-    <div>
-        <div class="report-item">
-            <strong>GIA Report Number:</strong> <span> mã số được khắc lên cạnh viên kim cương để chứng nhận.</span>
-        </div>
-        <div class="report-item">
-            <strong>Shape and Cutting Style:</strong> <span>Hình dạng mặt cắt viên kim cương.</span>
-        </div>
-        <div class="report-item">
-            <strong>Measurement:</strong> <span>Kích thước viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Carat Weight:</strong> <span>trọng lượng viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Color Grade:</strong> <span> màu sắc viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Clarity Grade:</strong> <span>độ tinh khiết</span>
-        </div>
-        <div class="report-item">
-            <strong>Cut Grade:</strong> <span>chất lượng chế tác</span>
-        </div>
-        <div class="report-item">
-            <strong>Polish:</strong> <span>độ hoàn thiện của viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Symmetry:</strong> <span>Độ bóng viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Fluorescence:</strong> <span>độ phát sáng của viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Clarity Characteristics:</strong> <span>đặc điểm nhận dạng riêng của viên kim cương</span>
-        </div>
-        <div class="report-item">
-            <strong>Security Features:</strong> <span>các thông số đảm bảo của viên kim cương</span>
-        </div>
+<div class="container mt-5">
+    <div class="jumbotron text-center bg-info text-white">
+        <h1 class="display-4">Kiểm định kim cương và các thông tin mà bạn nên biết</h1>
+        <p class="lead">Kim cương là trang sức quý hiếm và có giá trị cao nhất hiện nay. Muốn sở hữu kim cương thật, chính hãng bạn sẽ phải trả một số tiền tương đối lớn. Vậy làm thế nào để xác định được kim cương giả thật, kim cương nhân tạo hay tự nhiên. Trung tâm kiểm định GIA sẽ làm nhiệm vụ này. Mời bạn đọc cùng theo dõi một số nội dung liên quan đến quá trình thẩm định kim cương GIA qua bài viết sau.</p>
     </div>
-    <div>
-        <a class="btn btn-sm btn-primary btn-create-form" asp-page="./Guest/CreateForm/createForm">Tạo đơn thẩm định kim cương</a>
-        <a class="btn btn-sm btn-primary btn-search-form" asp-page="./Guest/SearchForm/searchForm">Tra cứu đơn</a>
+
+    <section>
+        <h2 class="content-body-header mb-4">Nội dung ghi trên giấy kiểm định</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="report-item mb-3">
+                    <strong>GIA Report Number:</strong> <span> mã số được khắc lên cạnh viên kim cương để chứng nhận.</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Shape and Cutting Style:</strong> <span>Hình dạng mặt cắt viên kim cương.</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Measurement:</strong> <span>Kích thước viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Carat Weight:</strong> <span>trọng lượng viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Color Grade:</strong> <span> màu sắc viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Clarity Grade:</strong> <span>độ tinh khiết</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="report-item mb-3">
+                    <strong>Cut Grade:</strong> <span>chất lượng chế tác</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Polish:</strong> <span>độ hoàn thiện của viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Symmetry:</strong> <span>Độ bóng viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Fluorescence:</strong> <span>độ phát sáng của viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Clarity Characteristics:</strong> <span>đặc điểm nhận dạng riêng của viên kim cương</span>
+                </div>
+                <div class="report-item mb-3">
+                    <strong>Security Features:</strong> <span>các thông số đảm bảo của viên kim cương</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center mt-5">
+        <a class="btn btn-lg btn-outline-primary mx-2" asp-page="./Guest/CreateForm/createForm">Tạo đơn thẩm định kim cương</a>
+        <a class="btn btn-lg btn-outline-success mx-2" asp-page="./Guest/SearchForm/searchForm">Tra cứu đơn</a>
     </div>
-        
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}
