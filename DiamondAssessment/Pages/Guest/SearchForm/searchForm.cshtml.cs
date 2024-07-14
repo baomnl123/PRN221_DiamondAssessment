@@ -34,6 +34,7 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
 
                 if (RegisterForms == null || !RegisterForms.Any())
                 {
+                    ModelState.Clear(); // Clear any existing errors
                     ModelState.AddModelError(string.Empty, "No register forms found for the provided phone number.");
                 }
             }
@@ -48,6 +49,7 @@ namespace DiamondAssessment.Pages.Guest.SearchForm
 
             if (RegisterForms == null || !RegisterForms.Any())
             {
+                ModelState.Clear(); 
                 ModelState.AddModelError(string.Empty, "No register forms found for the provided phone number.");
             }
 

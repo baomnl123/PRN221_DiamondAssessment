@@ -4,13 +4,13 @@
 @model DiamondAssessment.Pages.Guest.SearchForm.SearchForm
 
 @{
-    ViewData["Title"] = "SearchForm Guest";
-    Layout = "Shared/_Layout";
+ViewData["Title"] = "SearchForm Guest";
+Layout = "Shared/_Layout";
 }
 
 @section Styles
 {
-    <link href="~/css/create-form.css" rel="stylesheet" />
+<link href="~/css/create-form.css" rel="stylesheet" />
 }
 
 <h1 class="content-body-header">Lookup Register Form</h1>
@@ -61,22 +61,22 @@
             </div>
             @if (ticket.TicketStatus == TicketStatus.Done)
             {
-                <div class="status-completed">Status:
-                    <span class="badge bg-success">Completed</span>
-                </div>
+            <div class="status-completed">Status:
+                <span class="badge bg-success">Completed</span>
+            </div>
             <a asp-page="/Staff/AssessmentPaper/Detail" asp-route-ticketId="@ticket.Id">View Assessment Paper</a>
             }
             else if (ticket.TicketStatus == TicketStatus.Pending)
             {
-                <div class="status-completed">Status:
-                    <span class="badge bg-warning">Pending</span>
-                </div>
+            <div class="status-completed">Status:
+                <span class="badge bg-warning">Pending</span>
+            </div>
             }
             else
             {
-                <div class="status-completed">Status:
-                    <span class="badge bg-primary">In Progess</span>
-                </div>
+            <div class="status-completed">Status:
+                <span class="badge bg-primary">In Progress</span>
+            </div>
             }
         </div>
     </div>
@@ -85,8 +85,14 @@
 </div>
 }
 }
+else if (Model.RegisterForms != null)
+{
+<div class="alert alert-warning mt-3">
+    No register forms found for the provided phone number.
+</div>
+}
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <partial name="_ValidationScriptsPartial"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<partial name="_ValidationScriptsPartial"/>
 }

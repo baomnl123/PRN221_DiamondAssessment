@@ -7,34 +7,35 @@ using Service.Services;
 
 namespace DiamondAssessment.Pages.Manager.SealingReport
 {
-    public class DetailModel : PageModel
+    public class Detail : PageModel
     {
         private readonly ISealingReportService _sealingReportService;
-        private readonly IDiamondDetailService _diamondDetailService;
+        private readonly IAssessmentPaperService _assessmentPaperService;
 
-        public DetailModel(ISealingReportService sealingReportService, IDiamondDetailService diamondDetailService)
+        public Detail(ISealingReportService sealingReportService, IAssessmentPaperService assessmentPaperService)
         {
             _sealingReportService = sealingReportService;
-            _diamondDetailService = diamondDetailService;
+            _assessmentPaperService = assessmentPaperService;
         }
 
-        [BindProperty]
-        public Entities.Models.SealingReport SealingReport { get; set; }
+        [BindProperty] public Entities.Models.SealingReport SealingReport { get; set; }
 
-        [BindProperty]
-        public DiamondDetail DiamondDetail { get; set; }
+        [BindProperty] public AssessmentPaper Paper { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            var report = await _sealingReportService.FindByCondition(r => r.Id == id, false).FirstOrDefaultAsync();
-            if (report == null)
+            SealingReport = await _sealingReportService.FindByCondition(r => r.Id == id, false).FirstOrDefaultAsync();
+            if (SealingReport == null)
             {
                 return NotFound();
             }
 
-            SealingReport = report;
-
-            
+            Paper = await _assessmentPaperService.FindByCondition(r => r.Id == SealingReport.PaperId, false)
+                .FirstOrDefaultAsync();
+            if (Paper == null)
+            {
+                return NotFound();
+            }
 
             return Page();
         }

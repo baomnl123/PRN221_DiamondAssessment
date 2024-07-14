@@ -1,5 +1,5 @@
 ﻿@page "{id:guid}"
-@model DiamondAssessment.Pages.Manager.SealingReport.DetailModel
+@model DiamondAssessment.Pages.Manager.SealingReport.Detail
 
 @{
 ViewData["Title"] = "Sealing Report";
@@ -8,8 +8,8 @@ Layout = "Shared/_Layout";
 
 @section Styles
 {
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
 <style>
     .sealing-report-container {
         border: 2px solid #333;
@@ -43,13 +43,10 @@ Layout = "Shared/_Layout";
     }
     .signature-section {
         margin-top: 40px;
+        margin-bottom: 40px;
     }
-    .signature-box {
-        border: 1px solid #333;
-        height: 100px;
-        width: 200px;
-        text-align: center;
-        line-height: 100px;
+    .content-left{
+        display: flex;
     }
 </style>
 }
@@ -64,10 +61,10 @@ Layout = "Shared/_Layout";
     <div class="details-section">
         <div class="row">
             <div class="col-6">
-                <strong>Paper ID:</strong>
+                <strong>Paper Code:</strong>
             </div>
             <div class="col-6 value">
-                @Model.SealingReport.PaperId
+                @Model.Paper.PaperCode
             </div>
         </div>
         <div class="row">
@@ -78,104 +75,80 @@ Layout = "Shared/_Layout";
                 @Model.SealingReport.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <strong>Modified At:</strong>
-            </div>
-            <div class="col-6 value">
-                @Model.SealingReport.ModifiedAt.ToString("yyyy-MM-dd HH:mm:ss")
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <strong>Status:</strong>
-            </div>
-            <div class="col-6 value">
-                @Model.SealingReport.SealingReportStatus
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <strong>Is Deleted:</strong>
-            </div>
-            <div class="col-6 value">
-                @(Model.SealingReport.IsDelete ? "Yes" : "No")
-            </div>
-        </div>
     </div>
 
     <div class="diamond-details-section">
-        <h4>Diamond Details</h4>
+        <h4> Sealing Diamond: </h4>
         <div class="row">
-            <div class="col-6">
-                <strong>Origin:</strong>
+            <div class="col-6 content-left">
+                <strong class="ms-5">Origin:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Origin
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Carat Weight:</strong>
+            <div class="col-6 content-left">
+                <strong class="ms-5">Carat Weight:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.CaratWeight
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Clarity:</strong>
+            <div class="col-6 content-left">
+                <strong class="ms-5">Clarity:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Clarity
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Cut:</strong>
+            <div class="col-6 content-left">
+                <strong class="ms-5">Cut:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Cut
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Proportions:</strong>
+            <div class="col-6 content-left">
+                <strong class="ms-5">Proportions:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Proportions
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Color:</strong>
+            <div class="col-6  content-left">
+                <strong class="ms-5">Color:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Color
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Polish:</strong>
+            <div class="col-6  content-left">
+                <strong class="ms-5">Polish:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Polish
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Symmetry:</strong>
+            <div class="col-6  content-left">
+                <strong class="ms-5">Symmetry:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Symmetry
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <strong>Fluorescence:</strong>
+            <div class="col-6 content-left">
+                <strong class="ms-5">Fluorescence:</strong>
             </div>
             <div class="col-6 value">
-                1
+                @Model.Paper.Fluorescence
             </div>
         </div>
     </div>
@@ -183,25 +156,13 @@ Layout = "Shared/_Layout";
     <div class="signature-section row">
         <div class="col-6 text-center">
             <strong>Assessor Signature</strong>
-            <div class="signature-box">
-                <!-- Placeholder for signature -->
-                Sign Here
-            </div>
         </div>
         <div class="col-6 text-center">
             <strong>Customer Signature</strong>
-            <div class="signature-box">
-                <!-- Placeholder for signature -->
-                Sign Here
-            </div>
         </div>
     </div>
 </div>
 
 <div>
-    <a asp-page="/Manager/SealingReport/Index">Back to List</a>
+    <a class="mt-5" asp-page="/Manager/SealingReport/Index">Back to List</a>
 </div>
-
-@section Scripts {
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-}

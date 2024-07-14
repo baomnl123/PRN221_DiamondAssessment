@@ -1,48 +1,94 @@
 ﻿@page
-@model DiamondAssessment.Pages.Manager.SealingReport.IndexModel
+@model DiamondAssessment.Pages.Manager.SealingReport.Index
 @{
+ViewData["Title"] = "Index";
+var role = HttpContext.Session.GetString("Role");
+if (role is not "Manager") Response.Redirect("/Error");
 }
-@{
-    ViewData["Title"] = "Index";
-    var role = HttpContext.Session.GetString("Role");
-    if (role is not "Manager") Response.Redirect("/Error");
-}
-<a class="btn btn-sm btn-secondary" asp-page="/Manager/SealingReport/Create">Create Sealing Report</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SealingReports[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SealingReports[0].CreatedAt)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.SealingReports)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-primary" asp-page="/Manager/SealingReport/Detail"
-                       asp-route-id="@item.Id.ToString()">Detail</a>
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-warning" asp-page="/Manager/SealingReport/Update"
-                       asp-route-id="@item.Id.ToString()">Update</a>
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-danger" asp-page="/Manager/SealingReport/Delete"
-                       asp-route-id="@item.Id.ToString()">Reject</a>
-                </td>
-            </tr>
-        }
-    </tbody>
 
-</table>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Sealing Report</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Created At</th>
+                <th>Status</th>
+                <th class="text-center" colspan="3">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.SR)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.SealingReportStatus)</td>
+                @{
+                if(item.SealingReportStatus == Entities.Models.Enum.SealingReportStatus.Approved)
+                {
+                <td class="text-center">
+                    <a class="btn btn-sm btn-info" asp-page="/Manager/SealingReport/Detail"
+                       asp-route-id="@item.Id.ToString()">
+                        <i class="bi bi-eye"></i> Detail
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-sm btn-danger" asp-page="/Manager/SealingReport/Delete"
+                       asp-route-id="@item.Id.ToString()">
+                        <i class="bi bi-x-circle"></i> Delete
+                    </a>
+                </td>
+                }
+                else
+                {
+                <td class="text-center">
+                    <a class="btn btn-sm btn-warning" asp-page="/Manager/SealingReport/Update"
+                       asp-route-id="@item.Id.ToString()">
+                        <i class="bi bi-pencil-square"></i> Approve
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-sm btn-danger" asp-page="/Manager/SealingReport/Delete"
+                       asp-route-id="@item.Id.ToString()">
+                        <i class="bi bi-x-circle"></i> Reject
+                    </a>
+                </td>
+                }
+                }
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber - 1)" class="btn btn-outline-secondary"
+           disabled="@(Model.PageNumber == 1)">
+            Previous
+        </a>
+
+        <div>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+            <a asp-page="./Index" asp-route-PageNumber="@i"
+               class="btn @(i == Model.PageNumber ? "btn-primary" : "btn-outline-secondary")">@i</a>
+            }
+        </div>
+
+        <a asp-page="./Index" asp-route-PageNumber="@(Model.PageNumber + 1)" class="btn btn-outline-secondary"
+           disabled="@(Model.PageNumber == Model.TotalPages)">
+            Next
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
