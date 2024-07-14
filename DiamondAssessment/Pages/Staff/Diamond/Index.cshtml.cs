@@ -17,7 +17,7 @@ public class IndexModel(IDiamondDetailService diamondService) : PageModel
     {
         var diamonds = await diamondService.GetAllDiamondDetailsAsync();
         var totalDiamonds = diamonds.Count();
-        TotalPages = (int)Math.Ceiling(totalDiamonds / 2.0);
+        TotalPages = (int)Math.Ceiling(totalDiamonds / 5.0);
 
         if (PageNumber < 1)
             PageNumber = 1;
@@ -25,7 +25,7 @@ public class IndexModel(IDiamondDetailService diamondService) : PageModel
         if (PageNumber > TotalPages)
             PageNumber = TotalPages;
 
-        Diamonds = diamonds.Skip((PageNumber - 1) * 2).Take(2).ToList();
+        Diamonds = diamonds.Skip((PageNumber - 1) * 5).Take(5).ToList();
 
         return Page();
     }

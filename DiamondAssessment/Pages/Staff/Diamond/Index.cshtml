@@ -19,10 +19,10 @@
         <table class="table table-hover table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
-                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
-                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
-                    <th>@Html.DisplayNameFor(model => model.Diamonds)</th>
+                    <th>Origin</th>
+                    <th>Carat Weight</th>
+                    <th>Clarity</th>
+                    @* <th>Staff</th> *@
                     <th class="text-center" colspan="3">Actions</th>
                 </tr>
             </thead>
@@ -33,20 +33,20 @@
                         <td>@Html.DisplayFor(modelItem => item.Origin)</td>
                         <td>@Html.DisplayFor(modelItem => item.CaratWeight)</td>
                         <td>@Html.DisplayFor(modelItem => item.Clarity)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td>
+                        @* <td>@Html.DisplayFor(modelItem => item.Staff.Name)</td> *@
 
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-info" asp-page="/Staff/Diamond/Detail"
-                                asp-route-id="@item.Id.ToString()">
-                                <i class="bi bi-eye"></i> Detail
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-warning" asp-page="/Staff/Diamond/Update"
-                                asp-route-id="@item.Id.ToString()">
-                                <i class="bi bi-pencil-square"></i> Update
-                            </a>
-                        </td>
+                        @* <td class="text-center">
+                    <a class="btn btn-sm btn-info" asp-page="/Staff/Diamond/Detail"
+                    asp-route-id="@item.Id.ToString()">
+                    <i class="bi bi-eye"></i> Detail
+                    </a>
+                    </td>
+                    <td class="text-center">
+                    <a class="btn btn-sm btn-warning" asp-page="/Staff/Diamond/Update"
+                    asp-route-id="@item.Id.ToString()">
+                    <i class="bi bi-pencil-square"></i> Update
+                    </a>
+                    </td> *@
                         <td class="text-center">
                             <a class="btn btn-sm btn-danger" asp-page="/Staff/Diamond/Delete"
                                 asp-route-id="@item.Id.ToString()">
