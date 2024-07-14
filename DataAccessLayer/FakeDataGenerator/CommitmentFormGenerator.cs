@@ -1,5 +1,6 @@
 using Bogus;
 using Entities.Models;
+using Entities.Models.Enum;
 
 namespace DataAccessLayer.FakeDataGenerator
 {
@@ -27,7 +28,12 @@ namespace DataAccessLayer.FakeDataGenerator
                         return ticketId;
                     }
                 )
+                .RuleFor(
+                    commitmentForm => commitmentForm.CommitmentFormStatus,
+                    f => f.PickRandom<CommitmentFormStatus>()
+                )
                 .RuleFor(commitmentForm => commitmentForm.CreatedAt, f => f.Date.Past())
+                .RuleFor(commitmentForm => commitmentForm.ModifiedAt, f => f.Date.Recent())
                 .RuleFor(commitmentForm => commitmentForm.IsDelete, f => f.Equals(false))
                 .Generate(50)
                 .ToArray();

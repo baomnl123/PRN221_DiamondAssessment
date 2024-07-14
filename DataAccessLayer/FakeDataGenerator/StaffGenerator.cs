@@ -16,6 +16,8 @@ public static class StaffGenerator
             .RuleFor(staff => staff.PhoneNumber, f => f.Phone.PhoneNumber())
             .RuleFor(staff => staff.Email, f => f.Internet.Email())
             .RuleFor(staff => staff.Password, f => f.Internet.Password())
+            .RuleFor(staff => staff.CreatedAt, f => f.Date.Past())
+            .RuleFor(staff => staff.ModifiedAt, f => f.Date.Recent())
             .RuleFor(staff => staff.IsDelete, f => f.Equals(false))
             .Generate(50)
             .ToArray();

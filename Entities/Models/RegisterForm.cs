@@ -11,6 +11,8 @@ public class RegisterForm
     public string? Email { get; set; }
     public Guid? StaffId { get; set; }
     public RegisterFormStatus RegisterFormStatus { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime ModifiedAt { get; set; }
     public bool IsDelete { get; set; }
 
     // Relationships

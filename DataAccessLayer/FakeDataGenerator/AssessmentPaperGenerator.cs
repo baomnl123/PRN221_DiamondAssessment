@@ -45,6 +45,8 @@ public static class AssessmentPaperGenerator
                 assessmentPaper => assessmentPaper.Fluorescence,
                 f => f.PickRandom<GlowStrength>()
             )
+            .RuleFor(assessmentPaper => assessmentPaper.CreatedAt, f => f.Date.Past())
+            .RuleFor(assessmentPaper => assessmentPaper.ModifiedAt, f => f.Date.Recent())
             .RuleFor(assessmentPaper => assessmentPaper.IsDelete, f => f.Equals(false))
             .Generate(50)
             .ToArray();

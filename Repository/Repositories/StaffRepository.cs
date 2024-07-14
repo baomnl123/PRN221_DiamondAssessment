@@ -14,11 +14,19 @@ public class StaffRepository : IStaffRepository
         _staffDao = staffDao;
     }
 
-    public IQueryable<Staff> FindAll() => _staffDao.FindAll().Where(e => e.IsDelete == false);
+    public IQueryable<Staff> FindAll() =>
+        _staffDao
+            .FindAll()
+            .Where(e => e.IsDelete == false)
+            .OrderByDescending(e => e.ModifiedAt > e.CreatedAt ? e.ModifiedAt : e.CreatedAt);
 
-    public IQueryable<Staff> FindByCondition(Expression<Func<Staff, bool>> expression,
-        bool trackChanges)
-        => _staffDao.FindByCondition(expression, trackChanges);
+    public IQueryable<Staff> FindByCondition(
+        Expression<Func<Staff, bool>> expression,
+        bool trackChanges
+    ) =>
+        _staffDao
+            .FindByCondition(expression, trackChanges)
+            .OrderByDescending(e => e.ModifiedAt > e.CreatedAt ? e.ModifiedAt : e.CreatedAt);
 
     public async Task<bool> Create(Staff entity) => await _staffDao.Create(entity);
 
