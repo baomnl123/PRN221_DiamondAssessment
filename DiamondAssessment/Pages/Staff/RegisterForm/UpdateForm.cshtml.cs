@@ -1,6 +1,8 @@
 using Entities.Models;
+using Entities.Models.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Service.Abstractions;
 
 namespace DiamondAssessment.Pages
@@ -9,20 +11,50 @@ namespace DiamondAssessment.Pages
     {
         private readonly IRegisterFormService _registerFormService;
 
+        [BindProperty]
+        public RegisterForm RegisterForm { get; set; } = default!;
+        public string? accId { get; set; }
         public UpdateFormModel(IRegisterFormService registerFormService)
         {
             _registerFormService = registerFormService;
         }
-
-        public RegisterForm registerForm { get; set; }
+        
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            var form = _registerFormService.FindByCondition(x => x.Id == id, true).FirstOrDefault();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            registerForm = (RegisterForm)form;
+            var form = await _registerFormService
+                .FindByCondition(e => e.Id == id, false)
+                .FirstOrDefaultAsync();
             
+            if (form == null)
+            {
+                return NotFound();
+            }
+            RegisterForm = form;
             return Page();
             
+        }
+        public async Task<IActionResult> OnPostAsync(Guid id)
+        {
+                var form = await _registerFormService
+                    .FindByCondition(e => e.Id == id, false)
+                    .FirstOrDefaultAsync();
+                accId = HttpContext.Session.GetString("AccountId");
+                RegisterForm.Id = form.Id;
+                RegisterForm.StaffId = Guid.Parse(accId);
+                RegisterForm.RegisterFormStatus = RegisterFormStatus.Approved;
+                RegisterForm.ModifiedAt = DateTime.Now;
+                RegisterForm.IsDelete = false;
+            
+                var isUpdated = await _registerFormService.Update(RegisterForm);
+                if (!isUpdated)
+                    ModelState.AddModelError("UpdateFailed", "Fail to update this form!");
+
+            return RedirectToPage("./FormPage");
         }
     }
 }

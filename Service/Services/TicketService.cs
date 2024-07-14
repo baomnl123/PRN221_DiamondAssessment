@@ -48,4 +48,12 @@ public class TicketService : ITicketService
         // Call repository method to find by condition
         return await _ticketRepository.FindByCondition(predicate, trackChanges: false).ToListAsync();
     }
+    public async Task<Guid?> GetRegisterFormIdByTicketIdAsync(Guid ticketId)
+    {
+        var ticket = await _ticketRepository
+            .FindByCondition(t => t.Id == ticketId, trackChanges: false)
+            .FirstOrDefaultAsync();
+
+        return ticket?.RegisterFormId;
+    }
 }

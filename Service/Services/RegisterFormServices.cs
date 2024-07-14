@@ -54,19 +54,7 @@ namespace Service.Services
             entity.IsDelete = true;
             return _registerFormRepository.Update(entity);
         }
-
-        public Task<bool> ApplyForm(RegisterForm entity, string staffId, bool isApproved)
-        {
-            if (!isApproved)
-            {
-                return Delete(entity);
-            }
-
-            entity.StaffId = Guid.Parse(staffId);
-            entity.IsDelete = true;
-
-            return Update(entity);
-        }
+        
         public async Task<List<RegisterForm>> FindRegisterFormByPhone(string phone)
         {
             // Define a predicate to match either email or phone number
@@ -76,6 +64,7 @@ namespace Service.Services
             // Call repository method to find by condition
             return await _registerFormRepository.FindByCondition(predicate, trackChanges: false).ToListAsync();
         }
+        
 
         public async Task<bool> ApproveForm(RegisterForm entity, string staffId)
         {
@@ -91,6 +80,12 @@ namespace Service.Services
             }
 
             return updated;
+        }
+        public async Task<RegisterForm> GetRegisterFormByIdAsync(Guid registerFormId)
+        {
+            return await _registerFormRepository
+                .FindByCondition(r => r.Id == registerFormId, trackChanges: false)
+                .FirstOrDefaultAsync();
         }
     }
 }

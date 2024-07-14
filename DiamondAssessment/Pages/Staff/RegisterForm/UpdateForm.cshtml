@@ -1,10 +1,18 @@
 ﻿@page
+@using Entities.Models.Enum
 @model DiamondAssessment.Pages.UpdateFormModel
 @{
     ViewData["Title"] = "UpdateForm";
 }
 
-<h1>Edit</h1>
+@if (Model.RegisterForm.RegisterFormStatus == RegisterFormStatus.Approved)
+{
+    <h1>Edit</h1>
+}
+else
+{
+    <h1>Approve</h1>
+}
 
 <h4>RegisterForm</h4>
 <hr />
@@ -12,29 +20,36 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="registerForm.Id" />
+            <input type="hidden" asp-for="RegisterForm.Id" />
             <div class="form-group">
-                <label asp-for="registerForm.Name" class="control-label"></label>
-                <input asp-for="registerForm.Name" class="form-control" />
-                <span asp-validation-for="registerForm.Name" class="text-danger"></span>
+                <label asp-for="RegisterForm.Name" class="control-label"></label>
+                <input asp-for="RegisterForm.Name" class="form-control" />
+                <span asp-validation-for="RegisterForm.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="registerForm.Description" class="control-label"></label>
-                <input asp-for="registerForm.Description" class="form-control" />
-                <span asp-validation-for="registerForm.Description" class="text-danger"></span>
+                <label asp-for="RegisterForm.Description" class="control-label"></label>
+                <input asp-for="RegisterForm.Description" class="form-control" />
+                <span asp-validation-for="RegisterForm.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="registerForm.PhoneNumber" class="control-label"></label>
-                <input asp-for="registerForm.PhoneNumber" class="form-control" />
-                <span asp-validation-for="registerForm.PhoneNumber" class="text-danger"></span>
+                <label asp-for="RegisterForm.PhoneNumber" class="control-label"></label>
+                <input asp-for="RegisterForm.PhoneNumber" class="form-control" />
+                <span asp-validation-for="RegisterForm.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="registerForm.Email" class="control-label"></label>
-                <input asp-for="registerForm.Email" class="form-control" />
-                <span asp-validation-for="registerForm.Email" class="text-danger"></span>
+                <label asp-for="RegisterForm.Email" class="control-label"></label>
+                <input asp-for="RegisterForm.Email" class="form-control" />
+                <span asp-validation-for="RegisterForm.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @if (Model.RegisterForm.RegisterFormStatus == RegisterFormStatus.Approved)
+                {
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                }
+                else
+                {
+                    <input type="submit" value="Approve" class="btn btn-primary"/>
+                }
             </div>
         </form>
     </div>

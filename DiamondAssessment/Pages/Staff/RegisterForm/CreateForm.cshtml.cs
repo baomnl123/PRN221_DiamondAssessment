@@ -27,9 +27,11 @@ namespace DiamondAssessment.Pages
         {
             accId = HttpContext.Session.GetString("AccountId");
             RegisterForm.Id = new Guid();
-            RegisterForm.RegisterFormStatus = RegisterFormStatus.Registered;
             RegisterForm.IsDelete = false;
             RegisterForm.StaffId = Guid.Parse(accId);
+            RegisterForm.RegisterFormStatus = RegisterFormStatus.Approved;
+            RegisterForm.CreatedAt = DateTime.Now;
+            RegisterForm.ModifiedAt = DateTime.Now;
             await _registerFormService.Create(RegisterForm);
 
             return RedirectToPage("/Staff/RegisterForm/FormPage");

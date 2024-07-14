@@ -14,14 +14,16 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
         private readonly IDiamondDetailService _diamondDetailService;
         private readonly ITicketService _ticketService;
         private readonly IEmailService _emailService;
+        private readonly IRegisterFormService _registerFormService; 
 
         public Create(IAssessmentPaperService assessmentPaperService, IDiamondDetailService diamondDetailService,
-            ITicketService ticketService, IEmailService emailService)
+            ITicketService ticketService, IEmailService emailService, IRegisterFormService registerFormService)
         {
             _assessmentPaperService = assessmentPaperService;
             _diamondDetailService = diamondDetailService;
             _ticketService = ticketService;
             _emailService = emailService;
+            _registerFormService = registerFormService;
         }
 
         [BindProperty(SupportsGet = true)] public Guid DiamondId { get; set; }
@@ -70,8 +72,9 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             Paper.Symmetry = DiamondDetail.Symmetry;
             Paper.Fluorescence = DiamondDetail.Fluorescence;
             Paper.CreatedAt = DateTime.UtcNow; // Assuming CreatedAt is set here
+            Paper.ModifiedAt = DateTime.UtcNow;
             await _assessmentPaperService.Create(Paper);
-
+            
             var ticket = _ticketService
                 .FindByCondition(d => d.Id == Paper.TicketId, false)
                 .FirstOrDefault();
@@ -79,19 +82,31 @@ namespace DiamondAssessment.Pages.Staff.AssessmentPaper
             {
                 ticket.TicketStatus = TicketStatus.Done;
                 await _ticketService.Update(ticket);
-                
-                var comeToStoreDate = Paper.CreatedAt.AddDays(7).ToString("dddd, MMMM dd, yyyy");
-
-                var receiver = ticket.Email;
-                var subject = "[PPBQ] Ticket Completion Notification";
-                var message = $"Dear {ticket.TicketName},<br><br>" +
-                              $"The assessment paper for your ticket has been successfully created and processed. " +
-                              $"Please come to the store to retrieve your diamond and assessment paper before {comeToStoreDate}.<br><br>" +
-                              $"If you do not arrive by then, we will seal your assessment paper.<br><br>" +
-                              $"Thank you,<br>PPBQ";
-                await _emailService.SendEmailAsync(receiver, subject, message);
             }
 
+            var registerFormId = await _ticketService.GetRegisterFormIdByTicketIdAsync(Paper.TicketId);
+                if (registerFormId.HasValue)
+                {
+                    var registerForm = await _registerFormService.GetRegisterFormByIdAsync(registerFormId.Value);
+
+                    // Check if all tickets of the register form are Done
+                    var allTicketsDone = registerForm.Tickets.All(t => t.TicketStatus == TicketStatus.Done);
+
+                    if (allTicketsDone)
+                    {
+                        var receiver = registerForm.Email; // Adjust to get the appropriate receiver
+                        var subject = "[PPBQ] Register Form Completion";
+                        var comeToStoreDate = Paper.CreatedAt.AddDays(7).ToString("dddd, MMMM dd, yyyy");
+                        var message = $"Dear {registerForm.Name},<br><br>" +
+                                      $"All tickets associated with your register form have been completed successfully.<br><br>" +
+                                      $"Please come to the store to retrieve your diamond and assessment paper before {comeToStoreDate}.<br><br>" +
+                                      $"If you do not arrive by then, we will seal your assessment paper.<br><br>" +
+                                      $"Thank you,<br>PPBQ";
+                        await _emailService.SendEmailAsync(receiver, subject, message);
+                    }
+                }
+
+            
             return RedirectToPage("/Staff/AssessmentPaper/Index");
 
         }

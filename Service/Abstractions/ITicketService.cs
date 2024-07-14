@@ -12,4 +12,5 @@ public interface ITicketService
     Task<bool> Delete(Ticket entity);
     Task<Ticket?> GetTicketByRegisterFormId(Guid registerFormId);
     Task<List<Ticket>> FindTicketByPhone(string phone);
+    Task<Guid?> GetRegisterFormIdByTicketIdAsync(Guid ticketId);
 }

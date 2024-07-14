@@ -29,6 +29,8 @@ public class CreateFormModel : PageModel
         RegisterForm.Id = new Guid();
         RegisterForm.RegisterFormStatus = RegisterFormStatus.Registered;
         RegisterForm.IsDelete = false;
+        RegisterForm.CreatedAt = DateTime.Now;
+        RegisterForm.ModifiedAt = DateTime.Now;
         //RegisterForm.StaffId=Guid.Parse(accId);
         await _registerFormService.Create(RegisterForm);
 

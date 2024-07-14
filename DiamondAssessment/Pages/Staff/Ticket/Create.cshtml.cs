@@ -54,6 +54,8 @@ public class Create : PageModel
         Ticket.RegisterFormId = form.Id;
         Ticket.TicketStatus = TicketStatus.Pending;
         Ticket.IsDelete = false;
+        Ticket.CreatedAt = DateTime.Now;
+        Ticket.CreatedAt = DateTime.Now;
 
         var isCreated = await _ticketService.Create(Ticket);
         if (!isCreated)

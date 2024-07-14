@@ -13,13 +13,7 @@ namespace Service.Services
             _assessmentPaperRepository = assessmentPaperRepository;
         }
 
-        public List<AssessmentPaper> FindAll()
-        {
-            var list = _assessmentPaperRepository
-                .FindAll()
-                .ToList();
-            return list;
-        }
+        public List<AssessmentPaper> FindAll() => _assessmentPaperRepository.FindAll().ToList();
 
         public IQueryable<AssessmentPaper> FindByCondition(Expression<Func<AssessmentPaper, bool>> expression, bool trackChanges)
         {

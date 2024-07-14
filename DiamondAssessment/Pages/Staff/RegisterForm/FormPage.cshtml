@@ -68,7 +68,7 @@
                                 <a class="btn btn-sm btn-info" asp-page="/Staff/RegisterForm/DetailForm" asp-route-id="@item.Id.ToString()">
                                     <i class="bi bi-eye"></i> Detail
                                 </a>
-                                <a class="btn btn-sm btn-success" asp-page-handler="Approve" asp-route-id="@item.Id.ToString()">
+                                <a class="btn btn-sm btn-success" asp-page="/Staff/RegisterForm/UpdateForm" asp-route-id="@item.Id.ToString()">
                                     <i class="bi bi-check-circle"></i> Approve
                                 </a>
                                 <a class="btn btn-sm btn-danger" asp-page="/Staff/RegisterForm/DeleteForm" asp-route-id="@item.Id.ToString()">

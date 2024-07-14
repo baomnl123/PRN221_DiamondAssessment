@@ -80,6 +80,8 @@ namespace DiamondAssessment.Pages.Staff.Diamond
                 var ticketUpdated = await _ticketService.Update(ticket);
                 if (ticketUpdated)
                 {
+                    DiamondDetail.CreatedAt = DateTime.Now;
+                    DiamondDetail.ModifiedAt = DateTime.Now;
                     var isDiamondCreated = await _diamondDetailService.CreateAsync(DiamondDetail);
                     if (!isDiamondCreated)
                     {
